@@ -1,5 +1,5 @@
-#Commandes essentielles
-##Evaluer et comparer les fonctionnalités et options de base du système de fichiers
+# Evaluer et comparer les fonctionnalités et options de base du système de fichiers
+
 Comprendre les avantages et les faiblesses de divers systèmes de fichiers est une compétence importante pour un administrateur système Linux.
 Nous examinerons de haut niveau les différents systèmes de fichiers disponibles pour Linux, y compris les systèmes de fichiers EXT , BTRFS , XFS et FAT.
 D'autres options disponibles et verrons quels avantages et inconvénients chaque offre.
