@@ -1,4 +1,4 @@
-#Gestion des conteneurs Docker
+# Gestion des conteneurs Docker
 Dans l'environnement moderne, maîtriser la gestion des conteneurs est une compétence essentielle.
 Vous utiliserez les compétences de gestion de conteneurs Docker pour démarrer et arrêter des conteneurs basés sur des images, ajouter et supprimer des images et des conteneurs et surveiller et mettre à jour des conteneurs.
 L'achèvement du laboratoire démontrera les compétences de base en gestion de conteneurs Docker
@@ -33,6 +33,7 @@ Si docker est installé et que docker.service est activé, un excellent moyen de
 L'image busybox est une autre image simple que nous allons extraire et runune commande.
 La sous-commande ps - est utile pour visualiser en cours d'exécution ou tous les conteneurs, et les images listeront les images dans le référentiel local.
 En utilisant la sous-commande rm -, nous pouvons supprimer des conteneurs et des rmiimages.
+
 ```bash
 sudo -i
 docker run hello-world
@@ -53,6 +54,7 @@ docker images
 - Créer un conteneur apache2 basé sur l'image httpd: 2.4 
 Mappage de l'hôte local: 8080 au port de conteneur 80
 Utilisez docker run pour créer un conteneur nommé apache2, basé sur l' httpd:2.4 image, et mapper le port HTTP avec -p 8080:80.
+
 ```bash
 docker run --name apache2 -p 8080:80 httpd:2.4 
 #Use CTRL+C to exit output from running container
@@ -66,6 +68,7 @@ lynx -dump http://localhost:8080
 ```
 
 - Dans le conteneur apache2, mettez à jour le fichier index.html par défaut, puis vérifiez et validez les modifications
+
 ```bash
 docker exec -it apache2 bash
 ls
@@ -77,6 +80,7 @@ docker commit -m 'Updated index.html' apache2
 ```
 
 - Redémarrez le conteneur apache2 et vérifiez que les modifications sont en vigueur
+
 ```bash
 docker ps
 docker stop apache2

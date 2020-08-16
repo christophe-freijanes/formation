@@ -1,5 +1,4 @@
-#Configuration de service
-##Restreindre l'accès aux serveurs proxy HTTP
+# Restreindre l'accès aux serveurs proxy HTTP
 Il est essentiel de protéger les systèmes pour assurer la sécurité de vos utilisateurs et de vos données, ainsi que de suivre les bonnes pratiques réseau.
 Nous allons jeter un œil à Squid et voir comment l'utiliser pour mettre en cache et filtrer les requêtes http pour des réseaux et des hôtes particuliers.
 Vous saurez où aller pour vérifier et mettre à jour votre configuration afin d'autoriser uniquement les connexions d'hôtes appropriées.
@@ -13,21 +12,25 @@ Squid est serveur proxy qui permet de filtrer les demandes vers un serveur.
     - refresh_pattern - valeur utilisée pour déterminer si un objet mis en cache est périmé et doit être actualisé
 
 - Répertoire Squid
+
 ```bash
 cd /etc/squid
 ls -alh
 ```
 
 - Vérifier la configuration de squid
+
 ```bash
 nano squid.conf
 #On peut analyser toutes les informations de notre proxy Squid avant de faire un changement
 ```
 
 - Vérifier la configuration de squid.conf.clean
+
 ```bash
 sudo nano squid.conf.clean
 ```
+
 Depuis ce fichier on peut constaté :
 - acl - local network sources
 Cette partie est générallement commenté
@@ -55,6 +58,7 @@ Si un objet répond aux critères, il sera considéré comme périmé et sera ra
 
 - Cas pratique
 Nous allons refusé à une adresse source l'accès à http
+
 ```bash
 # acl - local network sources
 acl target src 10.9.8.7

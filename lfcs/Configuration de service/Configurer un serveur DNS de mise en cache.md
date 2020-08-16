@@ -1,33 +1,37 @@
-#Configuration de service
-##Configurer un serveur DNS de mise en cache
+# Configurer un serveur DNS de mise en cache
 La résolution DNS est un élément clé d'un environnement réseau / serveur, et un serveur DNS de mise en cache peut aider à améliorer les performances.
-Nous verrons comment configurer un serveur DNS pour mettre en cache les réponses aux requêtes. 
+Nous verrons comment configurer un serveur DNS pour mettre en cache les réponses aux requêtes.
 Vous pourrez configurer vos serveurs pour utiliser également la mise en cache.
 
-#Configuration d'une zone de DNS basique
+## Configuration d'une zone de DNS basique
 
 - Installer BIND
-``bash
+
+```bash
 sudo apt install bind9 bind9utils bind9-doc
 ```
 
 - Vérifier named.conf
-``bash
+
+```bash
 cat /etc/bind/named.conf
 ```
 
 - Copier named.conf.options
-``bash
+
+```bash
 cd /etc/bind/
 sudo cp named.conf.options ~/backup
 ```
 
 - Editer named.conf
-``bash
+
+```bash
 sudo nano /etc/bind/named.conf.options
 ```
 - Ligne à remplacer
-``bash
+
+```bash
 # Effacer puis rajouter cette Configuration
 acl goodclients {
     192.168.0.0/24;
@@ -49,11 +53,13 @@ options {
 ```
 
 - Vérifier sa configuration
-``bash
+
+```bash
 sudo named-checkconf
 ```
 
 - Prise en compte de nos changements
-``bash
+
+```bash
 sudo systemctl restart bind9
 ```

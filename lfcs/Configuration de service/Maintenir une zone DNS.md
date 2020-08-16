@@ -1,15 +1,16 @@
-#Configuration de service
-##Maintenir une zone DNS
+# Maintenir une zone DNS
 DNS est la liste de contacts d'Internet, et si vous disposez d'un domaine, vous devrez peut-être créer les fichiers de zone appropriés pour votre serveur DNS.
 Nous allons passer en revue les types d'enregistrements et les procédures dont vous aurez besoin pour gérer votre propre zone DNS.
 Vous pourrez identifier tous les fichiers de configuration nécessaires pour exécuter une zone, décrire les différents types d'enregistrement (enregistrement SOA, A, MX, NS et CNAME) et gérer un bloc SOA pour votre zone.
 
 - Ajouter une nouvelle zone
+
 ```bash
 sudo nano named.conf.local
 ```
 
 - Editer le fichier named.conf.local
+
 ```bash
 zone "la.local" IN {
      type master;
@@ -24,6 +25,7 @@ zone "1.168.192.in-addr.arpa" IN {
 ```
 
 - Editer le forwader de votre zone dns
+
 ```bash
 nano /etc/bind/fwd.la.local.db
 ```
@@ -46,9 +48,11 @@ file1   IN  A   192.168.1.120 (Le serveur nommé file1 est lié A l'adresses IP)
 ftp     IN  CNAME  www.la.local. (Canonique Name permet de voir le nom de votre serveur comme  un alias, ceci permet de référencer un serveur existant avec un autre nom)
 
 - Editer le reverse de votre zone dns
+
 ```bash
 nano /etc/bind/rev.la.local.db
 ```
+
 - Explication du rev.la.local.db
 Les informations global @, serial, refresh... son similaire à celle de au-dessus
 ;Name Server Information #Information sur les serveurs DNS
@@ -63,21 +67,25 @@ PTR est un pointeur d'enregistrement
 120 IN  PTR file1.la.local.
 
 - Vérification de la configuration de la zone DNS
+
 ```bash
 sudo named-checkconf
 ```
 
 - Prise en compte des changements de la configuration
+
 ```bash
 sudo systemctl restart bind9
 ```
 
 - Vérification de votre zone actuelle
+
 ```bash
 sudo named-checkconf la.local /etc/bind/fwd.la.local.db
 ```
 
 - Vérification en détail d'un serveur fesant partie de notre zone dns
+
 ```bash
 dig @localhost www.la.local
 ```

@@ -1,4 +1,4 @@
-#Sécurisation du serveur de base de données MariaDB
+# Sécurisation du serveur de base de données MariaDB
 Il ne suffit pas qu'un administrateur système sache simplement comment installer et activer un service de serveur de base de données.
 Dans le monde actuel des menaces de cybersécurité, il est également très important de savoir comment sécuriser correctement le serveur de base de données.
 Il est même essentiel de savoir créer des bases de données, des utilisateurs de bases de données et accorder l'accès aux bases de données aux utilisateurs.
@@ -15,12 +15,14 @@ Pour vérifier que la configuration est terminée, nous tenterons d'obtenir un a
 
 - Installer les packages logiciels mariadb et mariadb-server
 Utilisez YUM pour installer mariadb-server et les packages de mariadb:
+
 ```bash
 sudo yum -y install mariadb-server mariadb
 ```
 
 - Assurez-vous que le service mariadb.service démarre et est activé pour démarrer au moment du démarrage
 Utilisez la commande systemctl pour activer et démarrer le mariadb.service, puis vérifiez son état:
+
 ```bash
 sudo systemctl enable mariadb.service --now
 sudo systemctl status mariadb.service
@@ -29,6 +31,7 @@ sudo systemctl status mariadb.service
 - Sécurisez le serveur de base de données mariadb en définissant le mot de passe root, en supprimant les utilisateurs anonymes, en n'autorisant pas les connexions racine à distance, en supprimant les bases de données de test et en rechargeant les privilèges
 Utilisez mysql_secure_installation pour définir le mot de passe root du serveur de base de données sur L12i3n4u5Xrocks.
 Suivez ensuite les instructions pour supprimer les utilisateurs anonymes, interdire les connexions root à distance , supprimer la base de données test et recharger immédiatement les tables de privilèges:
+
 ```bash
 sudo mysql_secure_installation
 ```
@@ -37,6 +40,7 @@ sudo mysql_secure_installation
 Utilisez la commande client de base de données de ligne de commande mysql pour vous connecter à la base de données en tant qu'utilisateur root avec le mot de passe L12i3n4u5Xrocks.
 Créez une base de données nommée people, un 'dbadmin'@'localhost'utilisateur identifié par le mot de passe SeQuel2001.
 Ensuite, accordez tous les droits sur la base de données people au nouvel utilisateur.
+
 ```bash
 mysql -u root -p  # Enter the password when prompted: L12i3n4u5Xrocks
 create database people;
@@ -48,6 +52,7 @@ quit
 - Vérifiez que l'utilisateur dbadmin dispose d'un accès complet à la base de données des personnes
 Utilisez mysql pour vous connecter en tant qu'utilisateur dbadmin et fournir le mot de passe SeQeuL2001.
 Utilisez la base de données people, créez et supprimez une table test minimale, pour vérifier les privilèges administratifs et quitter:
+
 ```bash
 mysql -u dbadmin -p
 use people;

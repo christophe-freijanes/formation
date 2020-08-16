@@ -1,4 +1,4 @@
-#Déploiement du serveur Web Apache sur RedHat ou CentOS
+# Déploiement du serveur Web Apache sur RedHat ou CentOS
 Les administrateurs système doivent savoir comment travailler avec des serveurs Web, car ils sont très courants.
 Dans cette activité, vous apprendrez comment dépanner un site Web hôte virtuel qui ne fonctionne pas et comment en créer un autre.
 
@@ -12,6 +12,7 @@ Jusqu'à ce qu'une entrée DNS soit ajoutée, nous mettrons à jour notre le fic
 - Vérifiez que le serveur Web Apache et le client Web Lynx sont installés et installez les packages si nécessaire
 À l'aide de la commande yum, répertoriez les packages httpd et lynx pour voir s'ils sont installés.
 S'ils ne sont pas installés, installez-les:
+
 ```bash
 sudo -i
 yum list httpd lynx
@@ -22,6 +23,7 @@ yum -y install lynx
 À l'aide de la commande systemctl, affichez l'état du httpd.service.
 S'il n'est pas activé, activez-le et démarrez le service.
 Vérifiez avec le navigateur lynx que http://site1.linuxacademy.com est disponible:
+
 ```bash
 systemctl status httpd.service
 systemctl enable httpd.service --now
@@ -33,6 +35,7 @@ lynx http://site1.linuxacademy.com
 - Configurer l'hôte virtuel pour site2
 Répertoriez les répertoires /var/www et /var/www/site1.
 Créez un répertoire pour le deuxième site que nous allons configurer:
+
 ```bash
 ls /var/www
 ls /var/www/site1
@@ -40,6 +43,7 @@ mkdir /var/www/site2
 ```
 
 - Utilisez sed pour éditer le fichier site1.conf et créer un fichier site2.conf:
+
 ```bash
 cd /etc/httpd/conf.d
 cat site1.conf
@@ -48,18 +52,21 @@ cat site2.conf
 ```
 
 Remplissez la page index.html pour le site2:
+
 ```bash
 echo site2 > /var/www/site2/index.html
 ```
 
 - Ajouter une entrée à /etc/hosts pour le site2.linuxacademy.com
 Ajoutez la ligne suivante à /etc/hosts:
+
 ```bash
 10.0.0.116 site2 site2.linuxacademy.com
 ```
 
 - Redémarrez httpd.service et vérifiez que site2 est en cours d'exécution
 À l'aide de la commande systemctl, redémarrez httpd.service et utilisez lynx pour afficher le site http://site2.linuxacademy.com : et le site http://site1.linuxacademy.com :
+
 ```bash
 systemctl restart httpd.service
 lynx http://site2.linuxacademy.com
@@ -67,6 +74,7 @@ lynx http://site2.linuxacademy.com
 ```
 
 Vérifiez que le site1 fonctionne toujours correctement.
+
 ```bash
 lynx http://site1.linuxacademy.com
 # Appuyez sur Maj + Q pour quitter lynx
