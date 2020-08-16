@@ -3,6 +3,7 @@ Voici les étapes nécessaires pour installer Flux et le configurer pour qu'il f
 Vous aurez besoin de votre propre compte GitHub pour créer un exemple de référentiel et cet atelier créera un cluster Kubernetes pour permettre à vous-même d'installer et de configurer un Flux.
 
 - Nous aurons besoin d'un serveur cloud `master-kube` ainsi que deux autres serveur cloud `node-kube1` et `node-kube2`
+- Toutes les manipulations suivantes sont à faire depuis le `master-kube`
 
 ## Créez un référentiel GitHub sous votre propre compte
 Pour créer un référentiel sur GitHub, vous devez vous connecter à votre propre compte, puis vous pouvez créer un référentiel avec les fichiers YAML dont vous avez besoin.
