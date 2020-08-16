@@ -1,12 +1,13 @@
-#Gestion du stockage
-##Gérer et configurer le stockage LVM, partie 2 - Étendre LVM
+# Gérer et configurer le stockage LVM, partie 2 - Étendre LVM
 Avec LVM, un administrateur système Linux contrôle le stockage disponible et peut étendre ou réduire le stockage disponible selon les besoins.
 Nous avons vu comment créer des volumes physiques, des groupes de volumes et des volumes logiques.
 Il est maintenant temps de récolter les fruits de ces connaissances.
 Nous examinerons comment étendre ou réduire les volumes logiques pour gérer l'espace de stockage disponible.
 
-#Manager LVM
+## Manager LVM
+
 - Création d'une nouvelle partition
+
 ```bash
 fdisk /dev/sdc
 p
@@ -23,6 +24,7 @@ w
 ```
 
 - Création d'un nouveau volumes 
+
 ```bash
 lsblk
 pvcreate /dev/sdc3
@@ -31,21 +33,25 @@ pvs
 ```
 
 - Vérifier en détail les informations de ses volumes
+
 ```bash
 pvdisplay
 ```
 
 - Vérifier les informations de ses volumes simplement
+
 ```bash
 vgs
 ```
 
 - Vérifier en détail les informations de ses groupes de volumes
+
 ```bash
 vgdisplay
 ```
  
 - Etendre son groupe de volumes en rajoutant sa nouvelle partition sdc3
+
 ```bash
 vgextend vg01 /dev/sdc3
 vgs
@@ -54,16 +60,19 @@ lvs
 ```
 
 - Afficher en détail les informations de votre partition LVM
+
 ```bash
 lvdisplay
 ```
 
 - Afficher en détail les informations de votre groupe
+
 ```bash
 vgdisplay
 ```
 
 - Etendre son volume logique en rajoutant 100 M de disponible
+
 ```bash
 vgdisplay
 # Le chiffre le 348 correspond à 248 + 100 des 124 Free PE / size de disponible
@@ -72,6 +81,7 @@ lvs
 ```
 
 - Redimensionnement du FS
+
 ```bash
 resizefs /dev/vg01/lv01
 df -h

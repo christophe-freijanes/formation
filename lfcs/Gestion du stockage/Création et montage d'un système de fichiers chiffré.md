@@ -1,5 +1,4 @@
-#Gestion du stockage
-##Création et montage d'un système de fichiers chiffré
+# Création et montage d'un système de fichiers chiffré
 
 L'un des développeurs de notre organisation va travailler sur un serveur avec des données sensibles qui est couvert par diverses réglementations de conformité.
 Notre politique de sécurité d'entreprise stipule que les informations utilisateur doivent se trouver sur des partitions chiffrées.
@@ -11,12 +10,13 @@ Il devra rester un processus de montage / démontage manuel.
 Le développeur a demandé que le point de montage soit un répertoire appelé `/mnt/keys`.
 Une fois que nous avons vérifié le travail de chiffrement et de déchiffrement et que nous avons protégé le système de fichiers, nous pouvons le remettre à l'équipe de développement.
 
-REMARQUE: 
+### REMARQUE: 
 le périphérique de bloc de laboratoire est devenu /dev/nvme1n1.
 Dans le laboratoire, la partition /dev/nvme1n1p1 est créée sur le périphérique bloc /dev/nvme1n1.
 
 - Installer le progiciel `cryptsetup`
 Utilisez yumpour installer le package `cryptsetup`:
+
 ```bash
 sudo -i
 yum -y install cryptsetup
@@ -24,6 +24,7 @@ yum -y install cryptsetup
 
 - Créer une partition en utilisant tout l'espace sur le périphérique / dev / xvdg
 Utilisez fdiskpour créer une nouvelle partition par défaut:
+
 ```bash
 fdisk /dev/nvme1n1
 ```
@@ -76,6 +77,7 @@ Utilisez touchpour créer un /mnt/keys/accessfichier et lspour l'afficher:
 ```bash
 cryptsetup luksOpen /dev/nvme1n1p1 cryptvol
 ```
+
 Utilisez la phrase secrète TALK3nkrpTED, puis:
 
 ```bash

@@ -1,17 +1,18 @@
-#Gestion du stockage
-##Répertorier, créer, supprimer et modifier des partitions de stockage physique
+# Répertorier, créer, supprimer et modifier des partitions de stockage physique
 Les systèmes modernes basés sur les données nécessitent aujourd'hui de plus en plus de stockage pour fournir les services pour lesquels ils ont été conçus, et c'est à l'administrateur système Linux de savoir quel stockage est disponible et comment le gérer.
 Nous allons utiliser `fdisk` et `parted` partitionner les périphériques de bloc dur et devenir familiers en repartitionnant les périphériques de stockage en bloc.
 Vous devriez être familiarisé avec le partitionnement et la modification du stockage par blocs, mais n'oubliez pas de toujours sauvegarder les données avant d'apporter des modifications.
 
-#LSBLK
+## LSBLK
 - Lister les blocs
+
 ```bash
 lsblk
 ```
 
-#FDISK
+## FDISK
 - Création d'une nouvelle partition
+
 ```bash
 sudo fdisk /dev/sdb
 # p permet de lister les partitions
@@ -19,6 +20,7 @@ sudo fdisk /dev/sdb
 ```
 
 - Supprimer une partition
+
 ```bash
 sudo fdisk /dev/sdb
 # d pour delete votre partition
@@ -27,8 +29,9 @@ sudo fdisk /dev/sdb
 lsblk
 ```
 
-#parted
+## parted
 - Création d'une nouvelle partition
+
 ```bash
 sudo parted /dev/sdb
 print
@@ -40,6 +43,7 @@ quit
 ```
 
 - Redimensionner une partition
+
 ```bash
 sudo parted /dev/sdb
 (parted)resizepart

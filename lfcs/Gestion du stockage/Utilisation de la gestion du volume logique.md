@@ -1,5 +1,4 @@
-#Gestion du stockage
-##Utilisation de la gestion du volume logique
+# Utilisation de la gestion du volume logique
 L'équipe de développement de notre organisation souhaite que l'une de ses stations de travail stocke environ 10 Go de données pour une nouvelle application Web.
 Bien qu'il dispose actuellement de 10 Go d'espace de stockage non alloué, il est disponible sur deux disques séparés de 5 Go, /dev/xvdb et /dev/xvdc.
 Nous avons décidé de tirer parti des fonctionnalités de Logical Volume Management (LVM) en combinant ces périphériques dans un groupe de volumes et en utilisant un volume logique nommé /dev/volgroup/datavol.

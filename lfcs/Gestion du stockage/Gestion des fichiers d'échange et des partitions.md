@@ -1,5 +1,4 @@
-#Gestion du stockage
-##Gestion des fichiers d'échange et des partitions
+# Gestion des fichiers d'échange et des partitions
 L'administrateur système principal a remarqué que nos applications se bloquaient en raison d'erreurs de mémoire insuffisante (MOO) causées par une mémoire disponible insuffisante.
 On nous a demandé de créer une partition d'échange de 1 Go et un fichier d'échange de 512 Mo qui persisteront après le redémarrage pour résoudre ce problème.
 Nous devrions utiliser `fdisk` pour créer une partition de type swap de 1 Go, la formater avec `mkswap`, ajouter une entrée `/etc/fstab` et l'utiliser `swapon` pour l'activer de manière persistante.
@@ -9,7 +8,7 @@ Ce fichier d'échange doit être appelé /root/extra.swp.
 Bien que les autorisations par défaut de 0644 fonctionnent sur ce fichier, nous devons changer l'autorisation avec chmod en 0600, comme recommandé par la commande swapon et pour de bonnes pratiques de sécurité.
 Ensuite, nous ajouterons une entrée `/etc/fstab` et utiliserons la commande `swapon` pour activer le fichier d'échange de manière persistante.
 
-# Créer une partition d'échange persistante de 1 Go
+## Créer une partition d'échange persistante de 1 Go
 À l'aide de fdisk, créez la partition d'échange:
 
 ```bash
@@ -35,6 +34,7 @@ mkswap /dev/xvdg1
 ```
 
 Ajoutez une entrée à /etc/fstab:
+
 ```bash
 /dev/xvdg1   none     swap    defaults        0 0
 ```
@@ -47,7 +47,7 @@ swapon -a
 swapon -s
 ```
 
-# Créer un fichier d'échange persistant de 512 Mo
+## Créer un fichier d'échange persistant de 512 Mo
 Utilisez la ddcommande pour créer un /root/extra.swpfichier de 512 Mo :
 
 ```bash
