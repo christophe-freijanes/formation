@@ -1,29 +1,32 @@
-#Fonctionnement et opérations du système
-##Scripting Condition et boucle
+# Scripting Condition et boucle
 La possibilité d'utiliser des évaluations conditionnelles dans un script augmentera votre script-fu et rendra vos scripts plus puissants et plus flexibles.
 Nous examinerons les opérateurs et utiliserons l' instruction if pour évaluer une condition, puis exécuterons une commande basée sur les résultats.
 Vous devriez avoir une idée de comment utiliser les opérateurs pour configurer des évaluations conditionnelles et comment utiliser if pour exécuter des commandes basées sur les résultats conditionnels.
 
-#Operation
+## Operation
 - Lister son repertoire de scripts
+
 ```bash
 ls -alh
 ```
 
 - Lire un script depuis son terminal
+
 ```bash
 cat script.sh | less
 ```
 
 - Exécuter un script depuis son terminal
+
 ```bash
 ./script.sh
 ```
-#if
+### if
 
 - Cas pratique
 
 exemple.sh
+
 ```bash
 #!/bin/bash
 
@@ -39,9 +42,10 @@ else
 fi
 ```
 
-#For/While/Until
-#for
+## For/While/Until
+### for
 - Création d'un script qui va checker les urls inscrite dans une liste avec for
+
 ```bash
 #!/bin/bash
 for url in $(cat listofurls.txt)
@@ -50,8 +54,9 @@ do
 done
 ```
 
-#while
+### while
 - Création d'un script qui va checker les urls inscrite dans une liste avec while
+
 ```bash
 #!/bin/bash
 while read url
@@ -60,7 +65,7 @@ do
 done < listofurls.txt
 ```
 
-#until
+### until
 - Création d'un script qui permettra d'augmenter la taille de 1KB
 
 #!/bin/bash
@@ -71,7 +76,7 @@ TARGET_FILE="./target"
 cat $FILENAME > $TARGET_FILE
 FILESIZE=0
 
-# Augmenter la taille des fichiers jusqu'à (until) 1KB
+## Augmenter la taille des fichiers jusqu'à (until) 1KB
 until [ $FILESIZE -gt 1024 ]
 do
     # Ajouter ce fichier au contenu du fichier cible (target)

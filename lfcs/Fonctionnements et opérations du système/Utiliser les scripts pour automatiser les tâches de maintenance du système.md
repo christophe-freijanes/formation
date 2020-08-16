@@ -1,8 +1,8 @@
-#Fonctionnement et opérations du système
-##Utiliser les scripts pour automatiser les tâches de maintenance du système
+# Utiliser les scripts pour automatiser les tâches de maintenance du système
 
 - Cas pratique
 exemple.sh
+
 ```bash
 #!/bin/bash
 echo
@@ -16,8 +16,10 @@ echo "Current Directory: " $(pwd)
 lsb_release -d
 echo
 ```
+
 - Privilèges d'exécution
 Avant tester votre script regarder si vous avec les droits d'exécution (rwx)
+
 ```bash
 ls -al
 ```
