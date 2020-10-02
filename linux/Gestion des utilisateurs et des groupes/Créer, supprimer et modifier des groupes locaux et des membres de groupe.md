@@ -124,7 +124,7 @@ usermod -U test1
 - Changer leur mot de passe à la prochaine connexion
 
 ```bash
-chage -d0 test1
+change -d0 test1
 ```
 
 - Vérifier un compte
