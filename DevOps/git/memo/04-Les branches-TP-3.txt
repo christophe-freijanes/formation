@@ -9,7 +9,7 @@ Ce deplacer dans une branche
 $ git checkout update_default_value
 
 Apres modification et/ou creation de fichiers 
-$ git add.
+$ git add .
 $ git commit -m "Update"
 
 Pour merger sur la branche master
