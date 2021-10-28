@@ -1,0 +1,25 @@
+GIT-Gestion des conflits
+Si devX creer une branche et un nouveau commit dans un fichier et que devY lui modifie directement depuis la branche MASTER ce meme fichier alors il y a conflit !
+
+Lorsque devX ou devY vont merger un message d'erreur va s'afficher;
+"Merge conflict in file.sh"
+
+Solution il faut modifier de nouveau le fichier
+$ vi file.sh
+
+<<< HEAD
+    read -s -p "Enter very strong password : " password
+============
+    read -s -p "Enter strong password : " password
+>>> password_linux
+
+Ici dans cet exemple on voit les deux modifications apporter par devX et devY.
+On va supprimer les modifications apporter depuis la branche password_linux
+    read -s -p "Enter very strong password : " password
+
+$ git add file.sh
+$ git commit -am "fix merge request"
+$ git log
+
+Supprimer la branche inutile
+$ git branch -d password_linux
