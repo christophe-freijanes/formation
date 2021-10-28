@@ -6,4 +6,21 @@ Creation d'une branche
 $ git checkout -b update_default_value
 
 Ce deplacer dans une branche 
-$ git checkout nombranch
+$ git checkout update_default_value
+
+Apres modification et/ou creation de fichiers 
+$ git add.
+$ git commit -m "Update"
+
+Pour merger sur la branche master
+$ git checkout master
+$ git merge update_default_value
+
+Pour verifier la log
+$ git log
+
+Pour supprimer une branche
+$ git branch -d update_default_value
+
+Verification des branches actif
+$ git branch 
