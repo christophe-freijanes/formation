@@ -1,0 +1,9 @@
+GIT-LES BRANCHES
+Savoir ou nous sommes
+$ git branch
+
+Creation d'une branche 
+$ git checkout -b update_default_value
+
+Ce deplacer dans une branche 
+$ git checkout nombranch
