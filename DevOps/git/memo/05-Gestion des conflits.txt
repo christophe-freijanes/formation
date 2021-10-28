@@ -1,4 +1,4 @@
-GIT-Gestion des conflits
+GIT-GESTION DES CONFLICTS
 Si devX creer une branche "password_linux" et un nouveau commit dans un fichier "file.sh" et que devY lui modifie directement depuis la branche "MASTER" ce meme fichier alors il y a un conflit !
 
 Lorsque devX ou devY vont merger un message d'erreur va s'afficher;

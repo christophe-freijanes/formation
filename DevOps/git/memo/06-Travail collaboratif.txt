@@ -1,0 +1,34 @@
+GIT-TRAVAIL COLLABORATIF
+============================================================================================================================================================
+WORKFLOW-CENTRALISE
+============================================================================================================================================================
+-Workflow ideal pour une petite equipe de 3 personnes par exemple
+  Shared repository
+  /       |       \
+ /        |        \
+DevX     DevY      DevZ
+============================================================================================================================================================
+WORKFLOW-Integration-Manager
+============================================================================================================================================================
+Integration manager -> Repository Proteger (Blessed)
+Developer Private -> Developer Public
+Developer Private -> Developer Public
+
+-Pour travailler sur un projet, les devs recuperes le repository blessed, ils publiront par la suite sur leur repository a personnel (developer public).
+-Par la suite ils proposent a l' integration manager qu'ils ont fait le necessaire pour l' amelioration du repository.
+
+Repository Proteger (Blessed) -> Developer Private -> Developer Public -> Integration manager -> Repository Proteger (Blessed)
+
+============================================================================================================================================================
+WORKFLOW-Dictateur et Lieutenants (Unix)
+============================================================================================================================================================
+-Chacun des developpeur recupere le blessed repository dans leur environnement public de developpement.
+-Il demande au Lieutenant de valider leurs modifications.
+-Le Lieutenant recupere le repository et test les modifications.
+-Le Lieutenant demande au Dictator de valider les modifications
+
+Repository Proteger (Blessed) -> Developer Public -> Lieutenant -> Dictator -> Repository Proteger (Blessed)
+             |---------------------------->|             |
+             |------------------------------------------>|
+
+-Ce Workflow est uniquement utile que si vous travaillez sous Unix
