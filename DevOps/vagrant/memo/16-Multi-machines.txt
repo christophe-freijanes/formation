@@ -1,0 +1,14 @@
+VAGRANT-MULTI-MACHINES 
+config.vm.define 
+Nous permettra de definir nos differentes ressources.
+
+Documentation : https://www.vagrantup.com/docs/multi-machine
+On peut faire par exemple avec le wildcard 
+# vagrant up web
+
+On peut choisir sa VM primaire (par defaut)
+On peut aussi gerer l'autostart
+
+LAB-5
+Une fois l'infrastructure deployer on pourra ce connecter avec la commande suivante :
+# vagrant ssh web1

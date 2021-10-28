@@ -1,0 +1,59 @@
+VAGRANT-CREATION D'UNE VBOX (Vagrant box)
+
+Creation de notre dossier :
+# mkdir H:\PROJETS\Training\VAGRANT-lab-2
+# cd H:\PROJETS\Training\VAGRANT-lab-2
+
+Recuperation de l' image systeme :
+# vagrant box add ubuntu/trusty64 --box-version=20190419.0.1
+
+Demarrage de la VM (VirtualBox doit etre demarrer)
+# vagrant up
+
+Connexion ssh
+# vagrant ssh
+
+Mettre a jour les packages
+# sudo apt-get update
+
+Installation de Nginx
+# sudo apt-get install nginx -y
+
+Mise en fonction du service Nginx
+# sudo service nginx start
+# sudo service nginx enable
+# sudo service nginx status
+
+Test du fonctionnement de Nginx la page Welcome to nginx! doit s'afficher
+# curl 127.0.0.1
+
+Creation du contenant
+-Creation d'un compte Vagrant Cloud https://app.vagrantup.com/
+-Depuis le Dashboard creation d'un repository pour creer notre image
+-Depuis Create new Vagrant Box
+    -Name : cfreijanes/nginx
+    -Short Description : Use to deploy VM ubuntu with nginx
+-New Box version
+    -Version : 1.0
+    -Description : Initial Release
+
+Creation du contenu
+-Creation du Provider
+New Box Provider
+    Provider : VirtualBox
+    File Hosting : Upload to Vagrand Cloud
+-Creation du fichier a uploader depuis sa machine
+# vagrant package --output nginx.box
+
+-Upload du vagrant box
+Depuis l'interface Web 
+Add Provider File 
+Upload File : nginx.box
+
+Faire la Release
+-Depuis l' interface web clic sur Version puis V1.0 unreleased cliquer sur Release
+La publication est officiellement en ligne
+
+
+
+

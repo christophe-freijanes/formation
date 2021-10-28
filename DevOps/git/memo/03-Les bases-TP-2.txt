@@ -1,0 +1,158 @@
+GIT-TP2
+==========================================================================================
+INITIALISATION
+==========================================================================================
+Initialisation d'un repo et premier commit
+Une fois le dossier cloner sur le Workspace du PC ou de la VM
+
+On ce deplace dans le dossier :
+$ cd deploy-users/
+
+Initialisation du dossier:
+$ git init
+
+Verification de l' initialisation du dossier:
+$ ls .git
+
+Creation et edition d' un fichier README.md 
+$ echo "This repository creation users" > README.md
+
+Verification du contenu
+$ cat README.md
+
+Verification du changement apporter a notre repositorie
+$ git status
+
+Ajouter le fichier ou les fichiers creer ou modifier dans notre repositorie
+$ git add .
+
+Faire le commit de notre changement 
+$ git commit -m "First commit"
+
+Verification du changement apres le commit
+$ git status
+==========================================================================================
+CREATION .gitignore
+==========================================================================================
+Definir le fichier .gitignore pour ignorer les fichiers de type *.log
+$ vi .gitignore
+*.log
+
+$ git status
+$ git add .
+$ git commit -m "Add .gitignore"
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+==========================================================================================
+VALIDATION .gitignore
+==========================================================================================
+Creation d' un fichier website.log
+$ echo "website start at 1:30am" >> website.log
+$ git status
+On branch master
+nothing to commit, working tree clean
+Remarque : Il n' est pas tracker
+
+==========================================================================================
+HISTORIQUE DES COMMIT
+==========================================================================================
+>> Voir tout l' historique <<
+$ git log
+commit 1c25dbe1307ea8b70884cd2fce049b8dd97b55f0 (HEAD -> master)
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:35:12 2021 +0200
+
+    Add .gitignore
+
+commit 3f21ab374120b368f2004c2c6786c35920db4e64
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:22:41 2021 +0200
+
+    Add bug.txt to track application issue
+
+commit 3011d2c6cee8ad72f723ea50d08e6e0c242f70c0
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:19:19 2021 +0200
+
+    First commit
+
+>> Voir le detail de l' historique des 2 derniers commit <<
+$ git log -p -2
+commit 1c25dbe1307ea8b70884cd2fce049b8dd97b55f0 (HEAD -> master)
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:35:12 2021 +0200
+
+    Add .gitignore
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..397b4a7
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1 @@
++*.log
+
+commit 3f21ab374120b368f2004c2c6786c35920db4e64
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:22:41 2021 +0200
+
+    Add bug.txt to track application issue
+
+diff --git a/README.md b/README.md
+index e842fdc..7620a1a 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,2 @@
+-This repository creation users
++This repository creation users using bash, powershell and html
++
+diff --git a/bug.txt b/bug.txt
+new file mode 100644
+index 0000000..7973da8
+--- /dev/null
++++ b/bug.txt
+@@ -0,0 +1 @@
+
+==========================================================================================
+TAG
+==========================================================================================
+Verification si un tag existe
+$ git tag
+
+Creation du tag et du message
+$ git tag -a 1.0.0 -m "initial version"
+
+Verification de la version du tag
+$ git tag
+1.0.0
+
+Verification des details de notre tag
+$ git show 1.0.0
+tag 1.0.0
+Tagger: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:53:11 2021 +0200
+
+initial version
+
+commit 1c25dbe1307ea8b70884cd2fce049b8dd97b55f0 (HEAD -> master, tag: 1.0.0)
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Thu Oct 28 15:35:12 2021 +0200
+
+    Add .gitignore
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..397b4a7
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1 @@
++*.log
+
+==========================================================================================
+CREATION D'ALIAS
+==========================================================================================
+$ git config --global alias.st status
+$ git config --global alias.br branch
+$ git config --global alias.co checkout

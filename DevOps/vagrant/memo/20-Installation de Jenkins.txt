@@ -1,0 +1,9 @@
+VAGRANT-INSTALL JENKINS
+
+OS > DOCKER > DOCKER COMPOSE = JENKINS
+
+-Les etapes Docker et Docker compose ont ete automatiser par un script
+L' installation de Docker ce fait par Ansible
+-Depuis notre vagrantfile on va provisionner notre systeme en executer le script fesant appel au script d' installation
+
+https://github.com/diranetafen/cursus-devops/tree/master/vagrant/jenkins

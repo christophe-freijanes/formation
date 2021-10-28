@@ -1,0 +1,11 @@
+VAGRANT- INSTALLATION
+Prerequis
+- VirtualBox
+- Vagrant 
+- Powershell
+- git
+
+Check installation de Vagrant depuis Powershell : 
+PS C:\Users\cfrei> vagrant --version
+Vagrant 2.2.18
+

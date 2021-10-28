@@ -1,0 +1,8 @@
+GIT-CONFIGURATION
+Example de configuration depuis le terminal hebergent Git
+$ git config --global user.email "name@email.com"
+$ git config --global core.editor vi
+$ git config --list
+
+Example pour trouver une commande
+$ git add -h

@@ -1,0 +1,5 @@
+VAGRANT-VERSION BOX
+On peut versionner ses images
+
+Pour recuperer une version
+# vagrant box add ubuntu/trusty64 --box-version=20190419.0.1

@@ -1,0 +1,52 @@
+VAGRANT-NETWORK
+========================================================================================================================================================================
+Port forward
+========================================================================================================================================================================
+LOCAL MACHINE -> VAGRANTFILE -> Virtual Box -> VM -> Parametrage de la translation de la VM, Definition du port local 2222 vers le port 22 de la VM
+Cela permet de ne pas avoir un acces direct a la VM
+Schema :
+OS -> TRANSLATION -> VM
+Exemple lors de l' utilisation de la commande 
+# vagrant ssh cela est egale a # ssh -p 2222 
+Une fois la TRANSLATION faite la commande sera rediriger vers le port 22 de la VM.
+
+Cette methode ne permet d' avoir un acces direct.
+*Pour configurer voir la documentation Vagrant
+
+========================================================================================================================================================================
+Private NETWORK
+========================================================================================================================================================================
+LOCAL MACHINE -> VAGRANTFILE -> Virtual Box -> VM
+Pour parametrer un acces direct vers la VM, il faudra assignee un reseau visible uniquement depuis ma machine local
+Creation d'un reseau local puis connexion depuis la LOCAL MACHINE via # ssh ip.de.la.vm -p 22
+
+On peut attribuee une adresse Static ou Dynamique depuis un serveur DHCP
+
+Exemple vagrantfile :
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+RAM = 2048
+CPU = 2
+IP = "10.0.0.10"
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "geerlingguy/centos7"
+  config.vm.network "private_network" , ip: IP
+  config.vm.provider "virtualbox" do |v|
+    v.memory = RAM
+    v.cpus = CPU
+  end 
+end
+
+-Pour ce connecter :
+# ssh vagrant@10.0.0.10
+
+========================================================================================================================================================================
+Public NETWORK
+========================================================================================================================================================================
+LOCAL MACHINE -> VAGRANTFILE -> Virtual Box -> VM <- MACHINE PHYSIQUE EXT <- VM COLABORATEUR EXT
+
+On va pouvoir depuis l'interface reseau de notre VM la BRIDGER au Lan de la MACHINE PHYSIQUE EXT par exemple.
+On pourra dans ce cas parametrer notre VM vers le DHCP EXT soit on lui donne une IP Static de notre reseau d' entreprise 
+(Attention il ne faut pas que l'IP soit pris ni dans l'un ni dans l'autre reseau EXT<->INT)

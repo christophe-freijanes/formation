@@ -1,0 +1,128 @@
+VAGRANT-VAGRANTFILE
+========================================================================================================================================================================
+========================================================================================================================================================================
+# vagrant init
+
+On peut creer un vagrantfile minimaliste depuis son dossier
+# vagrant init -m
+========================================================================================================================================================================
+ARBORESCENCE
+========================================================================================================================================================================
+Systeme de branche
+                                                               VM
+                                                                |
+                                                                |
+Branche principale >    DEVICE---------------STOCKAGE--------RESEAU--------------CPU------------RAM
+                           |                                    |                                |
+                       USB-|-CD                          PUBLIC-|-PRIVE                 RAM MINI-|-RAM MAXI
+                                                                |
+                                                         STATIC-|-DHCP
+
+VM.RESEAU.Prive=10.0.0.1
+VM.RAM.MAX=8192
+========================================================================================================================================================================
+CONFIGURE
+========================================================================================================================================================================
+Pour commencer la configuration ( |config| = Vagrant.configue("1")  )
+Vagrant.configue("1") do |config|
+  # v1 configs...
+end
+========================================================================================================================================================================
+CONFIG.VM
+========================================================================================================================================================================
+Pour parametrer la configuration de sa VM
+========================================================================================================================================================================
+CONFIG.SSH
+========================================================================================================================================================================
+Pour parametrer la connexion SSH
+========================================================================================================================================================================
+CONFIG.VAGRANT
+========================================================================================================================================================================
+La methode vagrant permet de : 
+config.vagrant.host : Permet de piloter d'autres machines qui ont vagrant sur different hyperviseur (VMWARE-VIRTUALBOX...)
+config.vagrant.sensitive : Permet de ne pas afficher certaines donnees sensible
+config.vagrant.plugins : Permet d'installer des plugins (scp...)
+========================================================================================================================================================================
+CONFIG.WINRM
+========================================================================================================================================================================
+Equivalent a ssh sous Linux
+Il permettra le parametrage de l' access a la machine virtuelle a distance
+========================================================================================================================================================================
+CONFIG.WINSSH
+========================================================================================================================================================================
+Permet depuis un terminal Linux on pourra ce connecter a une machine Windows grace a Win32-OpenSSH
+========================================================================================================================================================================
+VARIABLE
+========================================================================================================================================================================
+Pour reutiliser des variables
+Exemple de variables
+### configuration parameters ###
+# which host port to forward box SSH por to
+LOCAL_SSH_PORT = "22"
+# Vagrant base box to use
+BOX_BASE = "puppetlabs/centos-6.6.-64-nocm"
+# Amount of RAM for Vagrant box
+BOX_RAM_MB = "2048"
+
+Il existe des variables d' environnement propre a Vagrant : https://www.vagrantup.com/docs/other/environmental-variables
+========================================================================================================================================================================
+TP
+========================================================================================================================================================================
+> INITIALISATION DU VAGRANTFILE
+# Chercher une image de dispo sur Vagrant cloud
+# vagrant init geerlingguy/centos7 -m
+
+> DEFINITION DE LA RAM ET DU CPU DE LA VM
+https://www.vagrantup.com/docs
+Ouvrir la documentation Providers > VirtualBox > Configuration
+Ouvrir le Vagranfile avec son editeur favoris
+Puis copier/coller la confi avec 2 cpu et mettre 2048 RAM
+Exemple:
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "geerlingguy/centos7"
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+  end 
+end
+
+> VALIDATION DU VAGRANTFILE
+# vagrant validate
+
+Definir les variables
+
+Exemple:
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+RAM = 2048
+CPU = 2
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "geerlingguy/centos7"
+  config.vm.provider "virtualbox" do |v|
+    v.memory = RAM
+    v.cpus = CPU
+  end 
+end
+
+A chaque modifications il faut valider sa synthaxe avec : 
+# vagrant validate
+
+> CREATION VM
+Il suffit de demarrer la VM
+# vagrant up
+
+> VERIFICATION DE LA VM
+# vagrant ssh
+# sudo yum install nginx
+# sudo systemctl start nginx
+# sudo systemctl enable nginx
+# curl 127.0.0.1
+
+> SUPPRESSION DE LA VM
+Depuis le dossier de notre TP
+# vagrant destroy -f

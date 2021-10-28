@@ -1,0 +1,32 @@
+VAGRANT-GESTION DES FICHIERS
+
+1-BASIC SYNCING
+On cherche a mettre depuis un repertoire defini /src vers une destination sur notre VM /srv/destination
+# config.vm.synced_folder "src/", "/srv/destination"
+
+Pour plus de parametrage : https://www.vagrantup.com/docs/synced-folders/basic_usage
+
+2-NFS
+Le service nfs (autofs) doit fonctionner sur la machine
+Source = . Destination = /vagrant
+config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
+Particulariter : Le serveur NFS doit heberger l'hote vagrant.
+
+3-RSYNC
+Source = . Destination = /vagrant
+Comme pour le nfs, rsync doit etre installer sur  l'hote vagrant.
+config.vm.synced_folder ".", "/vagrant", type: "rsync",
+  rsync__exclude: ".git/"
+
+Particulariter : RSYNC dispose de bcp d'option
+
+4-UPLOAD FILE AND FOLDER 
+Pour copier un fichier dans la VM
+FILE
+config.vm.provision "file", source: "~/.gitconfig", destination: "$HOME/remote/.gitconfig"
+FOLDER
+config.vm.provision "file", source: "~/path/to/host/folder", destination: "$HOME/remote/newfolder"
+
+Particulariter : Le fichier ou dossier ne sera pas mis a jour automatiquement si il y a une modifications
+pour cela il faudra ou utiliser, BASIC SYNCING, NFS ou RSYNC. Cette commande fait uniquement un copier/coller

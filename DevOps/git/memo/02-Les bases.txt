@@ -1,0 +1,64 @@
+GIT-LES BASES
+========================================================================================================================
+CREATION REPOSITORY
+========================================================================================================================
+SCHEMA
+WORKSPACE << FOLDER << LOCAL REPOSITORY << REMOTE REPOSITORY
+
+INITIALIZE
+WORKSPACE << FOLDER << LOCAL REPOSITORY
+Si nouveau dossier creer et pour le suivre.
+# git init
+
+WORKSPACE << FOLDER << LOCAL REPOSITORY << REMOTE REPOSITORY
+Pour upload un repository existant depuis son Workfolder present sur son PC 
+# git clone ssh ou https://
+
+UPDATE
+WORKSPACE << REMOTE REPOSITORY
+# git pull 
+
+LOCAL REPOSITORY << REMOTE REPOSITORY
+# git fetch
+
+========================================================================================================================
+ETAT DES FICHIERS
+========================================================================================================================
+UNTRACKED       UNMODIFIED              MODIFIED              STAGED
+                            git add
+   |Add file >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|
+                    |Edit the file>>>>>>>>>>|   
+                                                git add
+                                            |Stage the file>>>>>|
+          git rm
+   |<<<<<<<<<<<<<<<<|Remove
+                            git commit -m "short description"
+                    |<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|Commit
+========================================================================================================================
+GESTION DES FICHIERS INDESIRABLES
+========================================================================================================================
+Depuis le fichier .gitignore
+Il peut contenir des informations d'authentification ou des logs que l'on ne veut pas que git gere
+Ce fichier est a creer a la racine de notre repository, il peut contenir par exemple :
+.alpackages/
+.vscode/
+*.app
+
+========================================================================================================================
+HISTORIQUE
+========================================================================================================================
+# git log
+# git log -p -2
+# git log --pretty=oneline
+# git log --graph
+
+========================================================================================================================
+TAGGING
+========================================================================================================================
+Creation d' un tag 
+# git tag v1.0 (creation tag)
+# git push tags (pushes tag to server)
+
+-Release
+-Version
+-Immuable

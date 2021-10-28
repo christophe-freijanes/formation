@@ -1,0 +1,6 @@
+VAGRANT-GLOBAL STATUS
+Check les environnements :
+# vagrant global-status
+
+Pour faire appel au sous-commandes:  
+# vagrant global-status -h

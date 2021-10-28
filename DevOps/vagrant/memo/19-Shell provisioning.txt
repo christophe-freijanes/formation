@@ -1,0 +1,45 @@
+VAGRANT-SHELL PROVISIONING
+========================================================================================================================================================
+FLUX DE PROVISIONING
+========================================================================================================================================================
+DEVELOPER > VAGRANT > PROVIDER (VirtualBox) > VM > PROVIONERS (Ansible, bash, puppet...Action sur la VM) > Connexion du DEVELOPER sur la VM
+
+========================================================================================================================================================
+FLUX DE l'OPERATION DE PROVISIONING
+========================================================================================================================================================
+# vagrant up ou # vagrant up --provision (a lancer uniquement si l' infra existe)
+
+Si on veut lancer un provisioning sans la recreation des VM
+# vagrant provision
+
+Apres avoir modifier des parametres on peut lancer la commande suivante:
+# vagrant reload --provision
+
+========================================================================================================================================================
+EXTERNAL SCRIPT
+========================================================================================================================================================
+Nous permet d' utiliser le provisioner "shell" par exemple pour executer un script.sh 
+Dans l'exemple ci-dessou on peut aller prendre un script heberger dans un Git via son url 
+
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", path: "https://github.com/provision/scipt.sh"
+end
+
+========================================================================================================================================================
+ARGUMENTS
+========================================================================================================================================================
+Dans cette exemple on va faire appel depuis un script a plusieurs variable
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell" do |s|
+    s.inline = script.sh
+    s.args  = ["VAR1, VAR2"]
+    end
+end
+
+========================================================================================================================================================
+AUTRES
+========================================================================================================================================================
+Par exemple apres l'installation de la VM on peut installer Ansible.
+Il y a deux methodes:
+- Soit Ansible est installer sur la meme hote que Vagrant (Ansible)
+- Soit en local sur la VM provisionner, Ansible sera installer par Vagrant grace a ses plugins (Ansible Local) Methode, executer sur le lab-9

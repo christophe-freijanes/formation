@@ -1,0 +1,4 @@
+VAGRANT-SUPPRESSION DE LA VM
+# vagrant destroy -f
+# rm .\nginx.box
+# ls

@@ -1,0 +1,6 @@
+VAGRANT-REMOVE VM
+Eteindre la VM (conseiller non obligatoire)
+# vagrant halt
+
+Supprimer la VM
+# vagrant destroy -f

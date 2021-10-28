@@ -1,0 +1,9 @@
+VAGRANT-CREATION D' UNE VM
+Creation d'un dossier
+# mkdir lab-1
+
+Creation de la VM
+# vagrant init ubuntu/trusty
+
+Demarrer la VM
+# vagrant up

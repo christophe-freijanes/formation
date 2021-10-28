@@ -1,0 +1,6 @@
+VAGRANT-LIST COMMAND
+Pour avoir le listing des commandes :
+# vagrant list-command
+
+Exemple pour lister les sous commandes cloud :
+# vagrant cloud --help

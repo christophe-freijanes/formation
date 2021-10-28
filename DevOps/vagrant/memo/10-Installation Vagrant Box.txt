@@ -1,0 +1,8 @@
+VAGRANT-INSTALL VAGRANT BOX
+Les deux methodes conseillees
+
+Depuis les catalogues cloud
+# vagrant box add ubuntu/trusty64
+
+Depuis un serveur d'entreprise 
+# vagrant box add https://app.vagrantup.com/ubuntu/boxes/trusty64

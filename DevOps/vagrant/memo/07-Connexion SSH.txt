@@ -1,0 +1,9 @@
+VAGRANT-CONNECT SSH
+Voir le status par rapport au dossier lab-1
+# vagrant status
+
+Voir les informations en details
+# vagrant global-status
+
+Connexion depuis le prompt powershell
+# vagrant ssh
