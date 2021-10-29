@@ -32,3 +32,65 @@ Repository Proteger (Blessed) -> Developer Public -> Lieutenant -> Dictator -> R
              |------------------------------------------>|
 
 -Ce Workflow est uniquement utile que si vous travaillez sous Unix
+
+============================================================================================================================================================
+TP-5
+============================================================================================================================================================
+> Creation des utilisateurs sur gitlab
+-Creation des l' utilisateurs "manager" "dev1" "dev2"
+Administration -> New Users 
+
+-Edition du mot de passe
+Admin Area -> Users -> manager -> Edit -> Save changes
+
+> Assignation des utilisateurs a un groupe
+Groups -> Your groups
+
+> Permission et Assignation
+Group -> Explore group -> eazytraining -> members -> Invite member 
+
+> Creation du projet
+-Ce connecter en tant que "manager"
+Group -> Explore group -> eazytraining -> New project -> Create blank project -> deploy-users -> Create project
+
+> Process si project /deploy-users a deja ete creer localement:
+$ cd /deploy-users
+$ echo "this is manager" > README.md
+$ git init
+### Si l' utilisateur n'a jamais configurer son git ###
+$ git config --global user.name "manager"
+$ git config --global user.email "manager@gmail.com"
+$ git commit -am "Initial commit"
+$ git status
+$ git add .
+$ git commit -am "First commit"
+$ git remote add origin http://172.28.128.4/eazytraining/deploy-users.git
+$ git push origin master
+
+> Process si project /deploy-users est cloner:
+$ git clone http://172.28.128.4/eazytraining/deploy-users.git
+$ cd deploy-users/
+### Si l' utilisateur n'a jamais configurer son git ###
+$ git config --global user.name "dev1"
+$ git config --global user.email "dev1@gmail.com"
+$ git checkout -b echo
+$ vi echo.sh
+echo "WELCOME"
+$ git status
+$ git add .
+$ git commit -am "add echo script"
+# Lister les repository sur lequels on peut travailler a distance
+$ git remote -v
+$ git push origin echo
+
+-Pour fusionner la branche "echo" il faut faire une merge request
+Merge Requests -> Create merge request -> New Merge Request
+-Verifier le nom des branches que From "echo" into "master"
+-Assignee vers le "manager"
+-Submit merge request
+
+> Process de validation du manager
+Merge Requests -> Changes (1) -> Analyse du changement -> Validation: Merge (Delete source branch)
+-Retourner sur le repository
+-Verification que la branche "echo" n'est plus presente.
+-Verification que le nouveau/modification du fichier est presente.
