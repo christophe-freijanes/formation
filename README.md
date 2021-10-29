@@ -1,1 +1,1 @@
-This repo is used for devops training by Christophe FREIJANES (cfreijanes@gmx.fr)
+This repository is used for my devops training and to keep track of my work - Christophe FREIJANES (cfreijanes@gmx.fr)
