@@ -1,0 +1,38 @@
+GITHUB
+============================================================================================================================================================
+TP-6
+============================================================================================================================================================
+> Contribution a un projet
+-Aller sur le projet concerner exemple: https://github.com/eazytrainingfr/webapp
+-Clic bouton Fork
+-Il doit etre visible dans votre Github: https://github.com/christophe-freijanes/webapp
+-Cloner le repo depuis votre machine
+$ git clone git@github.com:christophe-freijanes/webapp.git
+$ cd webapp/
+-Creation d' une branche
+$ git checkout -b christophef
+-Edition d' un fichier
+$ vi README.md
+$ git add .
+$ git commit -am "Add christophe-freijanes to webapp"
+$ git push origin christophef
+
+-Pour contribuer au projet, il faut faire une pull request de notre branche christophef vers le projet que l'on veut contribuer
+-Compare & pull request
+-Analyser le chemin de la pull request  " base repository:xxxxxxx base: master <- head repository:christophexxxxx compare:christophef "
+-Comment and clic to "Create pull request"
+
+-Mettre a jour la branche "master" de son repository forke (MAINSTREAM)
+$ git checkout master
+$ git branch -D christophef
+$ git remote add mainstream https://github.com/eazytrainingfr/webapp.git
+$ git fetch mainstream master
+
+-Faire git pull du mainstream et push sur l’origin
+$ git pull mainstream master (L'output doit indiquer la validation de changements si il y en a eu sur le repo distant)
+
+-Pour verifier le contenu de votre fichier
+$ cat README.md
+
+-Appilquer sur son repository les modifications valider
+$ git push origin master
