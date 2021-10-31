@@ -162,7 +162,7 @@ git config --global alias.d 'diff'
 git config --global alias.pull pull --prune
 git config --global alias.fe fetch
 git config --global alias.last 'log -1 HEAD --stat'
-git config --global alias.co commit -am
+git config --global alias.c commit -am
 git config --global alias.p 'push'
 
 > Lister les auteurs d'une branche
