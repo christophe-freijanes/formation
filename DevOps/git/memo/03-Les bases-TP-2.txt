@@ -153,10 +153,31 @@ index 0000000..397b4a7
 ==========================================================================================
 CREATION D'ALIAS
 ==========================================================================================
-$ git config --global alias.st status
-$ git config --global alias.br branch
-$ git config --global alias.ch checkout -b
-$ git config --global alias.sh show
-$ git config --global alias.pull pull --prune
-$ git config --global alias.fe fetch
-$ git config --global alias.co commit -am
+git config --global alias.gl 'config --global -l'
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.ch checkout -b
+git config --global alias.sh show
+git config --global alias.d 'diff'
+git config --global alias.pull pull --prune
+git config --global alias.fe fetch
+git config --global alias.last 'log -1 HEAD --stat'
+git config --global alias.co commit -am
+git config --global alias.p 'push'
+
+> Lister les auteurs d'une branche
+git config --global alias.list-branch "! git for-each-ref --format=' %(authorname) %09 %(refname)' --sort=authorname"
+
+> Renommer une branche avec GIT
+git config --global alias.rename "!f() { branch_name=$(git rev-parse --abbrev-ref HEAD); git branch -m $1; git push origin $1; git push origin --delete $branch_name; }; f"
+
+> Nettoyer ses branches merger
+git config --global alias.clean "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
+
+> log
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.plog "log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
+git config --global alias.tlog "log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative"
+
+> Rank by users
+git config --global alias.rank 'shortlog -sn --no-merges'
