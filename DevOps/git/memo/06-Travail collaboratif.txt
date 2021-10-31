@@ -107,3 +107,7 @@ $ git push origin update_script
 
 -Depuis la Webgui de Gitlab "Create merge request"
 Check branch -> Select branch 'update_script' -> Clic Create merge request -> Comment -> Assignee to manager -> Submit merge request
+
+> Process mettre son repo local a jour
+$ git fetch origin master
+$ git fetch && git pull --prune
