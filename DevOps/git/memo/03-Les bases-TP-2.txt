@@ -155,7 +155,8 @@ CREATION D'ALIAS
 ==========================================================================================
 $ git config --global alias.st status
 $ git config --global alias.br branch
-$ git config --global alias.co checkout -b
+$ git config --global alias.ch checkout -b
 $ git config --global alias.sh show
 $ git config --global alias.pull pull --prune
 $ git config --global alias.fe fetch
+$ git config --global alias.co commit -am
