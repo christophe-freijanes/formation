@@ -57,9 +57,10 @@ Group -> Explore group -> eazytraining -> New project -> Create blank project ->
 $ cd /deploy-users
 $ echo "this is manager" > README.md
 $ git init
-### Si l' utilisateur n'a jamais configurer son git ###
+# Si l' utilisateur n'a jamais configurer son git definir ses variables #
 $ git config --global user.name "manager"
 $ git config --global user.email "manager@gmail.com"
+#
 $ git commit -am "Initial commit"
 $ git status
 $ git add .
@@ -70,9 +71,10 @@ $ git push origin master
 > Process si project /deploy-users est cloner:
 $ git clone http://172.28.128.4/eazytraining/deploy-users.git
 $ cd deploy-users/
-### Si l' utilisateur n'a jamais configurer son git ###
+# Si l' utilisateur n'a jamais configurer son git definir ses variables ###
 $ git config --global user.name "dev1"
 $ git config --global user.email "dev1@gmail.com"
+#
 $ git checkout -b echo
 $ vi echo.sh
 echo "WELCOME"
@@ -94,3 +96,14 @@ Merge Requests -> Changes (1) -> Analyse du changement -> Validation: Merge (Del
 -Retourner sur le repository
 -Verification que la branche "echo" n'est plus presente.
 -Verification que le nouveau/modification du fichier est presente.
+
+> Process cloner le repo, le mettre a jour et faire une demande de fusion
+$ git checkout -b 'update_script'
+$ git status
+$ git add .
+$ git commit -am "Update script"
+$ git remote -v
+$ git push origin update_script
+
+-Depuis la Webgui de Gitlab "Create merge request"
+Check branch -> Select branch 'update_script' -> Clic Create merge request -> Comment -> Assignee to manager -> Submit merge request
