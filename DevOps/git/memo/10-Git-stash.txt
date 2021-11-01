@@ -1,0 +1,60 @@
+GIT-STASH
+Si on decide de laisser de coter le travail "Commit-1" et de commiter le prochain travail "Commit-2" alors on utilise la commande stash.
+
+                    Commit-2
+                   |--------|
+                   |        |
+   Commit-1 |------|--->    |------------->
+            |
+Fichier ----|--------------------------------------------> Master
+
+Cas pratique :
+Dev1
+-Analyse des logs, identification du dernier commit
+$ git log
+
+-Creation d'une branche
+$ git checkout -b test1
+
+-Edition d'un fichier
+$ vi index.html
+
+-Nous devons d'urgence travail sur un autre sujet "Commit-2"
+$ git stash 
+Il doit indiquer que notre travail est sauvegarder en work in progress "WIP"
+Il repare sur le dernier commit enregistrer
+
+-Verification du status
+$ git status
+Il doit indiquer que notre travail est propre
+
+-Travail sur notre autre sujet
+$ vi linux.sh
+
+-Appliquer les changements
+$ git add .
+$ git commit -am "Edition linux.sh"
+
+-Lister les stashs en cours
+$ git stash list
+
+> Possibilitees de stash
+-Appliquer son stash
+$ git stash apply stash@{0}
+
+-Pour le supprimer
+$ git stash drop stash@{0}
+
+-Pour appliquer et supprimer
+$ git stash pop
+
+-Validation de notre travail initial "Commit-1"
+$ git status
+$ git add .
+$ git commit -am "Edition index.html"
+
+-Maintenant on peut merger et push son repository
+-Pour merger sur la branche master
+$ git checkout master
+$ git merge test1
+$ git push
