@@ -1,6 +1,7 @@
 DOCKER-Intro-CONTENEURISATION
 
-L'architecture d'une application de type monolithique, contient toutes sa compilation qui doit etre provisionner dans une machine uniquement.
+L'architecture d'une application de type monolithique, contient toute la compilation de son application qui doit etre provisionnee dans une machine uniquement.
+Elle doit aussi utiliser le meme language de programmation.
 L'architecture microservice peut ce deployer sur plusieurs machines, elle offre la possibilitee de ne pas paralyser une application en cas 
 d'indisponibiliter d'un microservice, lors d' une mise a jour ou d' un service qui ne repond pas. Elle permet d'offrir au developpeur la possibilitee
 d' utiliser plusieurs differents language de programmation.
