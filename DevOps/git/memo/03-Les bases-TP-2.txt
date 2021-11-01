@@ -153,6 +153,8 @@ index 0000000..397b4a7
 ==========================================================================================
 CREATION D'ALIAS
 ==========================================================================================
+Example:
+
 git config --global alias.gl 'config --global -l'
 git config --global alias.st status
 git config --global alias.br branch
