@@ -1,0 +1,13 @@
+DOCKER-INSTALLATION
+Pour devenir expert Docker il faut installer l'edition CE (Community Edition)
+
+> Pour implementer Docker dans un datacenter
+- Linux serveur: Docker for Linux Distribution
+- Windows Serveur:
+    - 2016 Docker for Windows
+    - 2019 Installer depuis Role et Fonctionalitees
+
+> Docker-machine est un utilitaire qui permettra le deploiement des contenaires mais aussi de les piloter, si votre PC n'a pas Docker d'installer.
+
+> Pour installer Docker depuis une solution cloud.
+- Chaque fournisseur propose une solution d'herbergement de Docker on appel cela du Paas (Platform as service)
