@@ -1,0 +1,155 @@
+GIT-RESET
+Si on execute la commande $ git reset id_du_commit, HEAD et master seront concerner par ce retour en arriere. La commande reset dispose de 3 options principales.
+
+01-WD (Working Directory)
+|-------|              |---> Chaine des commits
+| HARD  |              |
+|-------|              |---> Commit-1
+    |                  |
+    |                  |
+02-INDEX               |---> Commit-2
+|-------|              |
+| MIXED |              |---> Commit-3
+|-------|              |
+    |                  |---> Commit-4 -|
+    |                  |               |- HEAD~ = Retour arriere de 1 commit dans l'historique
+03-HEAD-MASTER         |---> Commit-5 -| 
+|-------|              |              
+| SOFT  |------------->|
+|-------|              
+
+============================================================================================================================================================
+SOFT
+============================================================================================================================================================
+Commande pour revenir au precedent commit
+$ git reset --soft HEAD~
+Il se deplace uniquement sur l' historique des commits sans modifier son dossier local ( WD = Working Directory) et son Index.
+Il ne fera aucune modification sur le travail deja fait
+
+============================================================================================================================================================
+MIXED
+============================================================================================================================================================
+Il va faire la meme chose que soft sauf qu' il va retirer l'index (il supprime les git add .)
+$ git reset --mixed HEAD~
+
+============================================================================================================================================================
+HARD
+============================================================================================================================================================
+Il va faire le meme deplacement que le mixed, mais il va aussi restaurer les fichiers de son dossier local au commit preciser par la commande suivante:
+$ git reset --hard HEAD~
+
+============================================================================================================================================================
+TP
+============================================================================================================================================================
+> Cas pratique HARD
+============================================================================================================================================================
+-Verification de son positionnement
+$ git branch
+
+-Analyse des logs, identification des commits
+$ git log
+
+-Modification d'un fichier
+$ vi README.md
+test-hard
+
+-Validation du changement commit-4
+$ git status
+$ git add .
+$ git commit -am "Edition README.md test-hard"
+
+-Lister l'ensemble des fichiers
+$ git ls-files -s
+L'output va indiquer le SHA de notre fichier README.md
+
+-Verification de notre dernier commit
+$ git log
+
+-Modification d'un fichier
+$ vi README.md
+test-hard-now
+
+-Validation du changement commit-5
+$ git status
+$ git add .
+$ git commit -am "Edition README.md test-hard-now"
+
+-Faire un hard reset
+$ git status
+$ git reset --hard HEAD~
+
+-Verification du retour arriere
+$ cat README.md
+$ git log
+
+-L'option hard va nous permettre de tout nettoyer et de revenir dans etat souhaiter ici le HEAD~ (avt dernier commit).
+
+============================================================================================================================================================
+> Cas pratique MIXED
+============================================================================================================================================================
+-Modification d'un fichier
+$ vi README.md
+test-mixed
+
+-Validation du changement commit-4
+$ git status
+$ git add .
+$ git commit -am "Edition README.md test-mixed"
+
+-Modification d'un fichier
+$ vi README.md
+test-mixed-now
+
+-Validation du changement commit-5
+$ git status
+$ git add .
+$ git commit -am "Edition README.md test-mixed-now"
+
+-Faire un mixed reset
+$ git status
+$ git reset --mixed HEAD~
+
+-Verification de notre emplacement
+$ git log
+L' output nous indique qu' il est bien revenu en arriere mais il n'a pas toucher aux modifications faites depuis notre dossier local (WD)
+
+-Verification de la prise en compte de la derniere modification sans l' avoir supprimer:
+$ cat README.md
+
+-Valider son changement
+$ git status
+$ git add README.md
+
+-L'option mixed va nous permettre de faire un retour en arriere tout en gardant les fichiers modifier dans son dossier local (WD).
+
+============================================================================================================================================================
+> Cas pratique SOFT
+============================================================================================================================================================
+
+-Modification d'un fichier
+$ vi README.md
+test-soft
+
+-Validation du changement commit-4
+$ git status
+$ git add .
+$ git commit -am "Edition README.md test-soft"
+
+-Modification d'un fichier
+$ vi README.md
+test-soft-now
+
+-Validation du changement commit-5
+$ git status
+$ git add .
+$ git commit -am "Edition README.md test-soft-now"
+
+-Verification de notre emplacement
+$ git log
+
+-Faire un soft reset
+$ git status
+$ git reset --soft HEAD~
+
+-L'option soft va nous permettre de faire un retour en arriere sans supprimer les fichiers modifier en local et l'index mais en coupant les ponts avec 
+les deux derniers commits comme dans ce cas pratique.
