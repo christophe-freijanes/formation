@@ -1,0 +1,55 @@
+GIT-REBASE
+-La commande rebase va nous permettre d'integrer les modififcations de travail de Dev1 sans annuler le "Commit 1" qu' il vient de faire.
+Cela permettra d'avoir un historique comprehensible et nous permettre de recuperer au besoin les differentes modifications au cas ou.
+
+            Dev1
+            |------->| Commit 1
+Fichier ---------------------------------------------------> Master
+                     |--------Commit 2------->|
+                     Dev2
+
+-La commande "merge" au contraire n'affichera qu'uniquement le dernier commit fait par vous meme (Dev2).
+
+Cas pratique :
+Dev1
+-Creation d'une branche
+$ git checkout -b test1
+
+-Edition d'un fichier
+$ vi index.html
+
+-Appliquer les changements
+$ git status
+$ git add .
+$ git commit -am "Edition index.html"
+
+Dev2
+-Changement de branche
+$ git checkout master
+
+-Creation d'une branche
+$ git checkout -b test2
+
+-Edition d'un autre fichier
+$ vi linux.sh
+
+-Appliquer les changements
+$ git add .
+$ git commit -am "Edition linux.sh"
+
+-Verification des differents commit
+$ git log
+
+-Recuperation des changements fait par le Dev1
+$ git rebase test1
+$ git log
+
+-Verification du changement fait par Dev1
+$ cat index.html
+
+-Validation des changements sur la branche master
+$ git checkout master
+
+-Fusion de la branche
+$ git merge test2
+$ git log
