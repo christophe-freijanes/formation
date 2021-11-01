@@ -1,0 +1,54 @@
+GIT-CHERRY-PICK
+Cette commande va nous permettre de recuperer un commit en particulier sur la branche master ou autre.
+            
+Fichier ------------------------------------------------> Master
+                          |-----|--> Commit 3
+                       |------->| Commit 2
+                     |---Commit 1---->
+                     Dev1
+
+Ici sur cette frise on va recuperer le "Commit 2" sur notre branche master.
+
+Cas pratique :
+Dev1
+-Creation d'une branche
+$ git checkout -b test1
+
+-Edition d'un fichier
+$ vi index.html
+
+-Appliquer les changements
+$ git status
+$ git add .
+$ git commit -am "Edition index.html"
+
+-Edition d'un fichier
+$ vi linux.sh
+
+-Appliquer les changements
+$ git status
+$ git add .
+$ git commit -am "Edition linux.sh"
+
+-Analyse des logs
+$ git log
+
+En tant que manager nous voulons uniquement recuperer le changement fait sur le fichier linux.sh
+-Changement de branche
+$ git checkout master
+
+-Recuperation du numero de commit depuis notre log
+$ git log
+Example output :
+
+commit 8fcb2a2b48f137590357563484ac148ac15a37e4
+Author: christophe.freijanes <cfreijanes@gmx.fr>
+Date:   Sun Oct 31 11:42:59 2021 +0100
+
+    Edition linux.sh
+
+-Mise en place du commit qui nous interesse
+$ git cherry-pick 8fcb2a2b48f137590357563484ac148ac15a37e4
+
+-Verification de la log de notre branche master
+$ git log
