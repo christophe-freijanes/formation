@@ -29,7 +29,7 @@ squash 3e56556 Edition linux.sh
 Update files index.html and linux.sh
 # The first commit's message is:--------|
 Edition index.html                      |
-# This is the 2nd commit message:       |-------Ses lignes peuvent supprimees
+# This is the 2nd commit message:       |-------Ses lignes peuvent etre supprimees
 Edition linux.sh------------------------|
 
 -Verification du contenu du commit unifier
