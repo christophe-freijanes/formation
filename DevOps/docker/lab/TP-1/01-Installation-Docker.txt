@@ -26,13 +26,13 @@ $ docker ps
 -Version
 $ docker --version
 
--Lancement d' un conteneur pour verifier le daemon docker
+-Lancement d'un conteneur pour verifier le daemon docker
 $ docker run hello-world
 
--Lancement d' un conteneur Nginx
+-Lancement d'un conteneur Nginx
 $ docker run --name nginx -d -p 80:80 nginx
 
--Identification de l'ip
+-Identification de l'IP
 $ ip a
 
 - Depuis le navigateur j' utilise l' adresse suivante pour voir si Nginx est bien demarrer
