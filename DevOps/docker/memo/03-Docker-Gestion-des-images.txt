@@ -20,4 +20,5 @@ L'image Docker contient plusieurs couches qui sont :
 -CODE
 L'image d' un conteneur est en lecture seule
 On peut deployer avec la meme image sur plusieurs conteneurs
-Chaque conteneur deployer avec la meme image, va rajouter une couche (Layer), cela permet a chacun des conteneurs d'avoir leur propre espace de stockage.
+Chaque conteneur deployer avec la meme image, va rajouter une couche (Layer) a l'image, 
+cela permet a chacun des conteneurs d'avoir leur propre espace de stockage dans cette meme image.
