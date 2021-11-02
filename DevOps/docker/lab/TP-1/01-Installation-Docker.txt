@@ -40,4 +40,17 @@ http://172.28.128.6:80/
 
 -Arreter le service
 $ docker stop nginx
- 
+
+-Documentation docker
+https://docs.docker.com/
+
+> Variable d’environnement
+$ docker run --name web-color -e APP_COLOR="red" -d -p 8080:8080 kodekloud/webapp-color
+                       |       |                  |  |   |   |            |
+                       |      Variable d'env      | Port |   |       Image utiliser
+            Nom du microservice                   |      |   |
+                                             Backgroud   |   |
+                                                         |   |
+                                                         |  Interne
+                                                         |
+                                            Machine qui heberge docker
