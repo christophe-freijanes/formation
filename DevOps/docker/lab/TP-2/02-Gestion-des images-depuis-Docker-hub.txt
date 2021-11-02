@@ -1,0 +1,18 @@
+DOCKER-TP-2-2
+
+-Login depuis sa machine a Docker-hub
+$ docker login
+
+-Pousser son image vers le Docker-hub
+$ docker images
+REPOSITORY               TAG       IMAGE ID       CREATED          SIZE  
+webapp                   v1        49d075859225   15 minutes ago   502MB
+
+-Tag de l'image
+$ docker tag 49d075859225 cfreijanes/webapp:v1
+
+-Push de l'image
+docker push cfreijanes/webapp:v1
+
+-L'image doit etre presente dans le repositories personnel
+https://hub.docker.com/repositories

@@ -1,0 +1,30 @@
+DOCKER-TP-2-1
+> Creer une image d'un serveur web avec son api (site web)
+-Depuis sa VM-docker
+$ mkdir ~/webapp
+$ cd webapp/
+$ vi Dockerfile
+FROM centos
+MAINTAINER cfreijanes (cfreijanes@gmx.fr)
+RUN yum update -y
+RUN yum install -y nginx
+EXPOSE 80
+ADD static-website-example/ /usr/share/nginx/html/
+ENTRYPOINT [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+
+-Clone du repository
+$ git clone https://github.com/diranetafen/static-website-example.git
+
+-Build de l'image
+$ docker build -t webapp:v1 .
+Le "." indique le repertoire courant 
+
+> Tester l'image
+-Verifier la presence d'une image
+$ docker images
+REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
+webapp                   v1        49d075859225   2 minutes ago   502M
+
+-Demarrer l'image docker
+$ docker run --name webapp -d -p 80:80 webapp:v1
+89b3a15ad4afa21f43e964da619695fb70ced23eb1dd04509e5c5fbfbe435baf
