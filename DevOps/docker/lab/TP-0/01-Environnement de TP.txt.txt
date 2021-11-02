@@ -13,4 +13,3 @@ http://172.28.128.6:8080/
 
 -Arreter le service
 $ docker stop nginx
-
