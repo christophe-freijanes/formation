@@ -1,0 +1,43 @@
+DOCKER-TP-1
+> Installation de Docker sur Centos
+https://docs.docker.com/get-docker/
+
+Utilisation de la methode d' installation de Docker par script
+https://get.docker.com/
+
+> Tache de post Installation
+-Connexion depuis sa machine Linux 
+-Executer les commandes presente dans le script suivantes :
+# This script is meant for quick & easy install via:
+#   $ curl -fsSL https://get.docker.com -o get-docker.sh
+#   $ sh get-docker.sh
+
+-Il faut creer votre utilisateur dans le groupe docker:
+$ sudo usermod -aG docker centos
+
+-Activer le service docker
+$ sudo systemctl enable docker
+$ sudo systemctl start docker
+
+-Ce deconnecter puis ce reconnecter a sa session
+$ docker ps
+
+> Verification de l' Installation
+-Version
+$ docker --version
+
+-Lancement d' un conteneur pour verifier le daemon docker
+$ docker run hello-world
+
+-Lancement d' un conteneur Nginx
+$ docker run --name nginx -d -p 80:80 nginx
+
+-Identification de l'ip
+$ ip a
+
+- Depuis le navigateur j' utilise l' adresse suivante pour voir si Nginx est bien demarrer
+http://172.28.128.6:80/
+
+-Arreter le service
+$ docker stop nginx
+ 
