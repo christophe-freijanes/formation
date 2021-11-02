@@ -48,7 +48,7 @@ https://docs.docker.com/
 $ docker run --name web-color -e APP_COLOR="red" -d -p 8080:8080 kodekloud/webapp-color
                        |       |                  |  |   |   |            |
                        |      Variable d'env      | Port |   |       Image utiliser
-            Nom du microservice                   |      |   |
+            Nom de notre microservice             |      |   |
                                              Background  |   |
                                                          |   |
                                                          |  Interne
