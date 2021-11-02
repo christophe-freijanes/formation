@@ -1,0 +1,23 @@
+DOCKER-GESTION-DES-IMAGES
+> Le Dockerfile reuni toutes les installations requises pour le fonctionnement de notre microservice.
+> Workflow
+                                                           |------------|
+   Dev                                                    /|Docker image|
+    |                       Push             Pull image  / |------------|
+    |                        |                          /   Staging Env.
+Dockerfile --> Docker image --> Docker Hub --------------
+    |               |          (Stockage-Registry)      \
+    |               |                         Pull image \ |------------|
+    |         Docker Container                            \|Docker image|
+ Github                                                    |------------|
+                                                            Prod Env.
+
+> Anatomie d'une image
+L'image Docker contient plusieurs couches qui sont :
+-OS (Base image)
+-LIBRARY
+-DEPENDENCIES
+-CODE
+L'image d' un conteneur est en lecture seule
+On peut deployer avec la meme image sur plusieurs conteneurs
+Chaque conteneur deployer avec la meme image, va rajouter une couche (Layer), cela permet a chacun des conteneurs d'avoir leur propre espace de stockage.
