@@ -21,3 +21,12 @@ $ docker build -t webapp:v2 .
 
 -Nommage du conteneur
 $ docker run --name webapp2 -p 80:80 -d webapp:v2
+
+> Synchronisation de notre projet sur notre serveur vers Github
+-Creation depuis Github d'un nouveau rep "docker-webapp"
+echo "# docker-webapp"
+$ git init
+$ git add Dockerfile README.md
+$ git commit -am "first commit"
+$ git remote add origin https://github.com/christophe-freijanes/docker-webapp.git
+$ git push -u origin master
