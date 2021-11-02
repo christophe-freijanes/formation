@@ -1,0 +1,20 @@
+DOCKER-DOCKERFILE ET REGISTRE
+
+> DOCKERFILE
+FROM..........: OS de l'application
+MAINTAINER....: Metadata de qui est l'auteur de l'image
+RUN...........: Pour executer des commandes (apt-get etc...)
+ADD...........: Pour copier un script et/ou un fichier dans notre image
+VOLUME........: Permet de dire que l'on veut utiliser un volume persistant
+EXPOSE........: Ici on parametre les ports ouvert de notre image
+ENV...........: Creation de variable d'environnement
+CMD...........: Ici on determine la commande qui va demarrer le conteneur [ "python", "./script.py" ]
+
+> REGISTRE
+Le registre publique de Docker et Docker-hub.
+Le registre Docker-hub permet de stocker les images notamment.
+Le registre permet de Builder ses images en synchronisation avec Github.
+Docker-hub permet aussi de trouver des images systemes (Windows, RedHat, Apache, Wordpress, etc...)
+On peut aussi creer ses propres repositories.
+Il supporte aussi les Webhooks.
+Les Webhooks sont des actions, des evenements qui permettrons d'alerter un outil externe qui va enclencher des actions.
