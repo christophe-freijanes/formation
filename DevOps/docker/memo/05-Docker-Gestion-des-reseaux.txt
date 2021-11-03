@@ -1,5 +1,5 @@
 DOCKER-GESTION-DES-RESEAUX
-> Les differents types de reseaux
+> Les differents types de reseaux docker
 
 -Cas d'usage 1 - BRIDGE
 Depuis un host on heberge un contenaire, on souhaite que cette application soit disponible sur l'infrastructure interne ou internet.
