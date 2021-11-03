@@ -15,3 +15,12 @@ En resumer :
 -Flexibilite
 -Resilence
 -Scalabilite
+
+> Schema de conteneurisation d'une API
+
+API                                Microservice       Annuaire de service
+Menu------------------------------->Conteneur-1------>Conteneur-6 (consul/eureka)
+Categorie-------------------------->Conteneur-2--------| |  |  |
+Panier----------------------------->Conteneur-3----------|  |  |
+Facturation------------------------>Conteneur-4-------------|  |
+Gestion de compte------------------>Conteneur-5----------------|
