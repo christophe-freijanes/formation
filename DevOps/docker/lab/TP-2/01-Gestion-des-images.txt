@@ -13,6 +13,10 @@ EXPOSE 80
 ADD static-website-example/ /var/www/html/
 ENTRYPOINT [ "/usr/sbin/nginx", "-g", "daemon off;" ]
 
+- ADD or COPY
+ADD  => Dossier a copier ou URL 
+COPY => Un fichier
+
 -Clone du repository
 $ git clone https://github.com/diranetafen/static-website-example.git
 
