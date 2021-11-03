@@ -1,9 +1,9 @@
 DOCKER-AUTOMATISATION-AVEC-GITHUB
 
 -Workflow        
-Dockerfile |<------------>| Github
+Dockerfile |------------>| Github
 
--On va rendre dynamique notre build
+-On va rendre dynamique le build
 $ vi Dockerfile
 
 FROM ubuntu
@@ -30,3 +30,6 @@ $ git add Dockerfile README.md
 $ git commit -am "first commit"
 $ git remote add origin https://github.com/christophe-freijanes/docker-webapp.git
 $ git push -u origin master
+
+-Workflow        
+Dockerfile |<------------| Github

@@ -4,12 +4,13 @@ DOCKER-TP-2-1
 $ mkdir ~/webapp
 $ cd webapp/
 $ vi Dockerfile
-FROM centos
+
+FROM ubuntu
 MAINTAINER cfreijanes (cfreijanes@gmx.fr)
-RUN yum update -y
-RUN yum install -y nginx
+RUN apt-get update -y
+RUN apt-get install -y nginx
 EXPOSE 80
-ADD static-website-example/ /usr/share/nginx/html/
+ADD static-website-example/ /var/www/html/
 ENTRYPOINT [ "/usr/sbin/nginx", "-g", "daemon off;" ]
 
 -Clone du repository
