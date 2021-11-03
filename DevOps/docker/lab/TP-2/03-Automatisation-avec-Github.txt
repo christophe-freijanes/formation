@@ -32,4 +32,28 @@ $ git remote add origin https://github.com/christophe-freijanes/docker-webapp.gi
 $ git push -u origin master
 
 -Workflow        
-Dockerfile |<------------| Github
+Github |------------>| Dockerfile
+
+> Creation de la liaison entre Github et Docker-hub
+-Depuis l' interface Docker-hub 
+Username -> Account Settings -> Linked Accounts -> Github "Connect" -> Authorized
+
+-Automatiser son repositorie Docker-hub
+Repositories (docker-webapp) -> cfreijanes/webapp -> Builds -> Link to Github
+-Build configuration
+Definir la Source du repositorie puis Save and Build
+
+> Verification a la fin du build depuis Github
+Repositories (docker-webapp) -> Settings -> Webhooks
+Un lien doit etre visible en indiquant qu'un build est en cours
+
+-Workflow 
+                   Push                    Webhook         Build
+|LOCAL MACHINE |------------->| Github |-------------->| Docker-hub |<-- Download image by DEV
+                                                                       |
+                                                                       | 
+        -------                                                        |
+        | API |<--------------| Server |<------------ | DEV MACHINE |-->
+        -------
+           |
+           |<-----| USER |
