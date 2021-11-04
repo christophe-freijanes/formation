@@ -1,0 +1,67 @@
+DOCKER-TP-3 - GERER RESEAUX AVEC DOCKER
+
+> Creation d'un reseau de type bridge
+-Depuis son host
+$ docker network create --driver=bridge --subnet=192.168.2.0/24 sharenetwork
+
+-Liste des network disponible
+$ docker network ls
+NETWORK ID     NAME           DRIVER    SCOPE
+6366c8d755f4   bridge         bridge    local  <---- Reseau par defaut (La ou son placer les conteneurs creer par defaut)
+275b9a9fe017   host           host      local
+6b3cd09d466a   none           null      local
+0fb9ae0c1d03   sharenetwork   bridge    local  <---- Reseau bridge (Que je viens de creer)
+
+NB: -Tous ses reseaux present sur notre machine on un Scope "Local"
+    -Docker comprend un serveur DNS permettant la resolution de nom
+
+-Verification des images presentes dans le host
+$ docker images ls
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+-Lister les conteneurs 
+$ docker ps
+
+> Creation de deux conteneurs ubuntu dans le reseau precedement
+-Creation du premier conteneur
+$ docker run -it --name ubuntu1 --network sharenetwork -d ubuntu /bin/bash
+               |        |                   |             |         |
+            Permet      |                   |           Image   Commande a lancer au boot (Nous permettra de faire un ping)
+         Interaction    |                Nom du reseau
+                   Nom du conteneur        
+
+-Creation du second conteneur
+$ docker run -it --name ubuntu2 --network sharenetwork -d ubuntu /bin/bash
+
+-Verification de la creation
+$ docker ps -a
+CONTAINER ID   IMAGE           COMMAND                  CREATED         STATUS                        PORTS                               NAMES
+390e9e5025b5   ubuntu          "/bin/bash"              4 seconds ago   Up 3 seconds                                                      ubuntu2
+b77a01d41f39   ubuntu          "/bin/bash"              2 minutes ago   Up 2 minutes                                                      ubuntu1
+
+-Voir le detail de son conteneur (adresse IP, etc...)
+$ docker inspect ubuntu1
+
+-Voir la log d' un conteneur
+$ docker logs ubuntu1
+
+> Installation de la commande ping
+-Ce connecter a son conteneur
+$ docker exec -it ubuntu1 /bin/bash
+
+-Installation du paquet ping
+# apt-get update -y && apt-get install iputils-ping -y
+
+> Verification de la communication entre les deux conteneurs
+# ping ubuntu2
+PING ubuntu2 (192.168.2.3) 56(84) bytes of data.
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=1 ttl=64 time=0.187 ms
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=2 ttl=64 time=0.047 ms
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=3 ttl=64 time=0.047 ms
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=4 ttl=64 time=0.047 ms
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=5 ttl=64 time=0.042 ms
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=6 ttl=64 time=0.055 ms
+64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=7 ttl=64 time=0.048 ms
+--- ubuntu2 ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6018ms
+rtt min/avg/max/mdev = 0.042/0.067/0.187/0.048 ms
