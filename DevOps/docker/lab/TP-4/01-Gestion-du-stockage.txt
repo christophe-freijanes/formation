@@ -40,9 +40,35 @@ $ docker exec -it u1-restore /bin/bash
 C cool Docker
 
 ===============================================================================================================================================
-TYPE ....
+TYPE BIND MOUNT - Utilisation de volume pour charger une application
 ===============================================================================================================================================
+Schema 
+HOST -> CONTENEUR APACHE <- STATIC-WEBSITE
 
-===============================================================================================================================================
-TYPE ....
-===============================================================================================================================================
+-Depuis Docke-hub on va chercher notre image Apache "httpd"
+https://hub.docker.com/_/httpd
+
+-Depuis le host, Cloner le repo qui contient le website
+$ git clone https://github.com/diranetafen/static-website-example.git
+
+-Creation du conteneur webserver
+$ docker run --name webserver -p 80:80 -d -v ${PWD}/static-website-example/:/usr/local/apache2/htdocs httpd
+                                                 \   /                               \   /              |
+                                         Chemin src de notre web         Chemin destination Apache   image utiliser
+
+-Verification du fonctionnement de notre conteneur
+$  docker logs webserver
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.4. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.4. Set the 'ServerName' directive globally to suppress this message
+[Thu Nov 04 21:41:40.232217 2021] [mpm_event:notice] [pid 1:tid 140489580432704] AH00489: Apache/2.4.51 (Unix) configured -- resuming normal operations
+[Thu Nov 04 21:41:40.232328 2021] [core:notice] [pid 1:tid 140489580432704] AH00094: Command line: 'httpd -D FOREGROUND'        
+
+-Identification de l'adresse ip de notre host
+$ ip a
+
+-Depuis le navigateur
+http://172.28.128.7:80
+
+> Cas pratique
+- Suite a une mise a jour du fichie index.html par un Dev faire redemarrer le conteneur pour que les modifications soit visible.
+$ docker restart httpd
