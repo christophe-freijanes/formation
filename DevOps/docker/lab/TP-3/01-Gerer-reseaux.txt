@@ -53,7 +53,7 @@ $ docker exec -it ubuntu1 /bin/bash
 # apt-get update -y && apt-get install iputils-ping -y
 
 > Verification de la communication entre les deux conteneurs
-# ping ubuntu2
+# ping ubuntu2 -c7
 PING ubuntu2 (192.168.2.3) 56(84) bytes of data.
 64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=1 ttl=64 time=0.187 ms
 64 bytes from ubuntu2.sharenetwork (192.168.2.3): icmp_seq=2 ttl=64 time=0.047 ms
@@ -65,3 +65,17 @@ PING ubuntu2 (192.168.2.3) 56(84) bytes of data.
 --- ubuntu2 ping statistics ---
 7 packets transmitted, 7 received, 0% packet loss, time 6018ms
 rtt min/avg/max/mdev = 0.042/0.067/0.187/0.048 ms
+
+# ping 192.168.2.3 -c7
+PING 192.168.2.3 (192.168.2.3) 56(84) bytes of data.
+64 bytes from 192.168.2.3: icmp_seq=1 ttl=64 time=0.056 ms
+64 bytes from 192.168.2.3: icmp_seq=2 ttl=64 time=0.078 ms
+64 bytes from 192.168.2.3: icmp_seq=3 ttl=64 time=0.051 ms
+64 bytes from 192.168.2.3: icmp_seq=4 ttl=64 time=0.043 ms
+64 bytes from 192.168.2.3: icmp_seq=5 ttl=64 time=0.044 ms
+64 bytes from 192.168.2.3: icmp_seq=6 ttl=64 time=0.051 ms
+64 bytes from 192.168.2.3: icmp_seq=7 ttl=64 time=0.053 ms
+
+--- 192.168.2.3 ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6193ms
+rtt min/avg/max/mdev = 0.043/0.053/0.078/0.010 ms
