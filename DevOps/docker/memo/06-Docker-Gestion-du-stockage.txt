@@ -1,6 +1,4 @@
 DOCKER-GESTION-STOCKAGE
-Pour rendre une donnee persistante d'un conteneur
-$ docker run -d -v /host/data:/data --volume-driver=flocker --name=container-xyz app
 
 Docker offre 3 possibilitees de volume persistant
 

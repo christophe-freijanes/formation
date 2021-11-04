@@ -1,0 +1,48 @@
+DOCKER-TP-4 - GESTION-DU-STOCKAGE
+===============================================================================================================================================
+TYPE VOLUMES
+===============================================================================================================================================
+> Creer un volume de type volumes
+$ docker volume create --name share
+
+> Creation des conteneurs
+$ docker run -it --name u1 -v share:/tmp -d ubuntu /bin/bash
+$ docker run -it --name u2 -v share:/tmp -d ubuntu /bin/bash
+
+> Connexion au conteneur u1
+$ docker exec -it u1 /bin/bash
+
+> Creation d'un fichier
+# touch /tmp/test.txt
+
+> Connexion au conteneur u2
+$ docker exec -it u2 /bin/bash
+
+> Verification que notre machine u2 peut voir le fichier test.txt
+root@36f36149054e:/# ls -alh /tmp   
+-rw-r--r-- 1 root root    0 Nov  4 20:10 test.txt
+
+> Test d'ecriture depuis u2
+# echo 'C cool Docker' > /tmp/test.txt
+
+> Test de lecture depuis u1
+$ docker exec -it u1 /bin/bash
+# cat /tmp/test.txt
+C cool Docker
+
+> Suite a la suppression de u1 on nous demande de restaurer le conteneur u1 
+On lui donne le nom de u1-restore
+$ docker run -it --name u1-restore -v share:/tmp -d ubuntu /bin/bash
+$ docker exec -it u1-restore /bin/bash
+
+> Verification que ce conteneur a bien acces au volume et son contenu
+# cat /tmp/test.txt 
+C cool Docker
+
+===============================================================================================================================================
+TYPE ....
+===============================================================================================================================================
+
+===============================================================================================================================================
+TYPE ....
+===============================================================================================================================================
