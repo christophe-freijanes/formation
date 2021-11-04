@@ -1,1 +1,27 @@
 DOCKER-GESTION-STOCKAGE
+Pour rendre une donnee persistante d'un conteneur
+$ docker run -d -v /host/data:/data --volume-driver=flocker --name=container-xyz app
+
+Docker offre 3 possibilitees de volume persistant
+
+             ____ BIND MOUNT ____
+            /                    \
+           /                      FILESYSTEM
+CONTAINER / _____ VOLUME ________/
+          \           
+           \_____ TMPFS MOUNT____ MEMORY
+
+TYPE VOLUMES DE VOLUME
+On va rendre persistant l'ecriture de nos donnees en montant un volume securiser, ainsi plusieurs conteneur pourront ecrire leur donnee dans ce meme volume.
+Ce type de stockage est plus utiliser pour des donnees consistantes de type par exemple : BDD - bases donnees
+
+TYPE BINDMOUNT
+On va creer un point de montage classique depuis notre filesystem vers un dossier que l'on metrise dans notre conteneur. 
+FS -> /export/home/username 
+Conteneur -> /home/username
+
+Ce type de stockage est plus utiliser pour permettre la manipulation des dossiers et des fichiers
+
+TYPE TMPFS
+Pour permettre la securisation de l' authentification vers un conteneur Mysql qui a besoin de s'authentifier vers son Frontend par exemple on va creer un stockage contenant le secret.
+La duree de vie de donnee est courte. Le tmpfs est liee a tous les conteneurs installer sur votre host.
