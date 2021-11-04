@@ -14,9 +14,11 @@ Integration manager -> Repository Proteger (Blessed)
 Developer Private -> Developer Public
 Developer Private -> Developer Public
 
--Pour travailler sur un projet, les devs recuperes le repository blessed, ils publiront par la suite sur leur repository a personnel (developer public).
--Par la suite ils proposent a l' integration manager qu'ils ont fait le necessaire pour l' amelioration du repository.
+-Pour travailler sur un projet (repo), les devs recuperes le repository blessed sur leur machine local par exemple. Puis dans deuxieme temps, ils publiront 
+par la suite sur leur repository personnel (Developer Public).
+-Par la suite ils vont faire une pull request que l' integration manager validera ou pas, suivant si celui-ci valide les modifications faites dans le Repository Proteger (Blessed).
 
+Workflow :
 Repository Proteger (Blessed) -> Developer Private -> Developer Public -> Integration manager -> Repository Proteger (Blessed)
 
 ============================================================================================================================================================
@@ -27,6 +29,7 @@ WORKFLOW-Dictateur et Lieutenants (Unix)
 -Le Lieutenant recupere le repository et test les modifications.
 -Le Lieutenant demande au Dictator de valider les modifications
 
+Workflow :
 Repository Proteger (Blessed) -> Developer Public -> Lieutenant -> Dictator -> Repository Proteger (Blessed)
              |---------------------------->|             |
              |------------------------------------------>|
