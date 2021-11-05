@@ -1,0 +1,3 @@
+DOCKER-Introduction-IAC
+Docker propose Docker-compose comme solution qui permettra aux Developpeurs de deployer rapidement une infrastructure de test et de pouvoir executer leur application.
+Docker-compose est le module interne qui permet de codifier l' infrastructure de microservice (conteneur) que l' on souhaite deployer ainsi que ses reseaux et stockages.
