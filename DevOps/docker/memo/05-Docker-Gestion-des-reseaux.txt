@@ -22,6 +22,6 @@ Si on veut que notre conteneur ne soit pas accessible depuis l'exterieur ou qu'i
 Dans ce cas de figure on utilisera un reseau de type "NONE".
 
 -Cas d'usage 5 - OVERLAY
-Pour faire communiquer par exemple 2 conteneurs qui son stocker sur 2 hosts differents ensemble.
+Pour faire communiquer par exemple 2 conteneurs qui sont stocker sur 2 hosts differents ensemble.
 Une couche appeler "reseau transversale"(Overlay) permet ce type de communication.
 Dans ce cas de figure on utilisera un reseau de type "OVERLAY".
