@@ -8,7 +8,16 @@ ADD...........: Pour copier un script et/ou un fichier dans notre image
 VOLUME........: Permet de dire que l'on veut utiliser un volume persistant
 EXPOSE........: Ici on parametre les ports ouvert de notre image
 ENV...........: Creation de variable d'environnement
-CMD...........: Ici on determine la commande qui va demarrer le conteneur [ "python", "./script.py" ]
+CMD...........: Ici on determine la commande qui va demarrer le conteneur [ "python", "./script.py" ] ou [ "systemctl status sshd" ] CMD = Commande que l'on souhaite executer [ "/usr/bin/sshd" ]
+ENTRYPOINT....: [ "/usr/bin/sshd", "-d", "-p" ]  ENTRYPOINT = CMD + ENTRYPOINT
+E.............: E= E+CMD Permet de surcharger une image
+
+Cas pratique, 
+-Par defaut avec la commande E= ansible => la commande ansible prendra par defaut le chemin /etc/ansible.cfg
+E= ansible => /etc/ansible.cfg
+
+-Pour definir un autre fichier de configuration que l' on a dans son $HOME on va utiliser CMD
+CMD= /home/christophe/ansible.cfg => ansible /home/christophe/ansible.cfg
 
 > REGISTRE
 Le registre publique de Docker et Docker-hub.

@@ -8,7 +8,7 @@ Fichier ---------------------------------------------------> Master
                      |--------Commit 2------->|
                      Dev2
 
--La commande "merge" au contraire n'affichera qu'uniquement le dernier commit fait par vous meme (Dev2).
+-La commande "merge" au contraire n'affichera qu'uniquement le dernier commit fait par moi-meme (Dev2).
 
 Cas pratique :
 Dev1

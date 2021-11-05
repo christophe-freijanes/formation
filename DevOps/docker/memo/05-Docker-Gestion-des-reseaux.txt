@@ -7,13 +7,13 @@ Mais depuis l'exterieur on ne veut pas donnee acces a cette application, donc le
 Dans ce cas de figure on va creer un reseau de type "Bridge".
 
 -Cas d'usage 2 - HOST
-On souhaite exposer directement depuis l' exterieur notre conteneur via l'adresse IP de la machine qu'il heberge
+On souhaite exposer directement depuis l' exterieur notre conteneur via l'adresse IP de la machine qu'il heberge.
 Pour cela le conteneur doit s'approprier les interfaces physique de la machine qu'il heberge.
 Dans ce cas de figure on va creer un reseau de type "Host".
 
 -Cas d'usage 3 - MAC/VLAN
-Pour que notre conteneur est une interface visible depuis un reseau
-Pour cela on va donner une adresse mac au conteneur
+Pour que notre conteneur est une interface visible depuis un reseau.
+Pour cela on va donner une adresse mac au conteneur.
 Puis celui-ci obtiendra une adresse IP de la part du serveur DHCP.
 Dans ce cas de figure on utilisera un reseau de type "MAC/VLAN".
 
@@ -23,5 +23,5 @@ Dans ce cas de figure on utilisera un reseau de type "NONE".
 
 -Cas d'usage 5 - OVERLAY
 Pour faire communiquer par exemple 2 conteneurs qui son stocker sur 2 hosts differents ensemble.
-Une couche appeler "reseau transversale"(Overlay) permet ce type de communication.   
+Une couche appeler "reseau transversale"(Overlay) permet ce type de communication.
 Dans ce cas de figure on utilisera un reseau de type "OVERLAY".
