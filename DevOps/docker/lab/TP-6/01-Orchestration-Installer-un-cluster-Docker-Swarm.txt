@@ -1,0 +1,9 @@
+DOCKER-TP-6-Orchestration-DOCKER-SWARM
+Objectif du TP :
+-Installer un cluster swarm compose d'un master et d'un node 
+-Utiliser la plateforme de labs pour deployer deux instances (1 master et 1 worker)
+-Deployer une application : https://github.com/dockersamples/example-voting-app.git
+-Test de l'application
+
+-Creation vagrantfile
+-
