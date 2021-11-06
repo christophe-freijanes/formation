@@ -5,5 +5,5 @@ Objectif du TP :
 -Deployer une application : https://github.com/dockersamples/example-voting-app.git
 -Test de l'application
 
--Creation vagrantfile
+-Creation vagrantfile 
 -
