@@ -1,0 +1,20 @@
+DOCKER-TP-5-IaC-DOCKER COMPOSE
+Objectif du TP :
+-Deployer le logiciel odoo
+-Documentation https://hub.docker.com/ /odoo
+-Modifier le docker-compose afin d'exposer le port 80 du conteneur odoo a l'exterieur et pas le port 8069
+-Modification du docker-compose afin que le conteneur odoo et db soit dans le meme reseau qui ce nommera oddo_network et de type bridge
+-Test de l'application odoo.
+
+-Creation avec Vagrant d'une VM specfique a Docker-compose
+
+-Installation de docker-compose 
+Derniere release : https://docs.docker.com/compose/install/
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+
+-Verification de la version
+$ docker-compose -v
+docker-compose version 1.29.2, build 5becea4c
+
+
