@@ -10,17 +10,17 @@ Objectif du TP :
 $ service  --status-all
 
 -Depuis le "master" on va initialiser et preciser notre configuration 
-$ docker swarm init --advertise-addr 10.0.0.1
+$ docker swarm init --advertise-addr 10.100.199.200
 Swarm initialized: current node (opx20n0t5r5sq0bvja60sy2fc) is now a manager.
 
 To add a worker to this swarm, run the following command:
 
-    docker swarm join --token SWMTKN-1-1rmcr0l7xi50r9ojtwq24mefb9gnuvijgseipta28ky84xjard-c2srvmjof5w6spvuqubshrh7b 10.0.0.1:2377
+    docker swarm join --token SWMTKN-1-1rmcr0l7xi50r9ojtwq24mefb9gnuvijgseipta28ky84xjard-c2srvmjof5w6spvuqubshrh7b 10.100.199.200:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 
 -Depuis le "worker1"
-$ docker swarm join --token SWMTKN-1-1rmcr0l7xi50r9ojtwq24mefb9gnuvijgseipta28ky84xjard-c2srvmjof5w6spvuqubshrh7b 10.0.0.1:2377
+$ docker swarm join --token SWMTKN-1-1rmcr0l7xi50r9ojtwq24mefb9gnuvijgseipta28ky84xjard-c2srvmjof5w6spvuqubshrh7b 10.100.199.200:2377
 This node joined a swarm as a worker.
 
 -Lister les nodes 
