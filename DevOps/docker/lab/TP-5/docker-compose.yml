@@ -33,7 +33,7 @@ services:
 volumes:
   odoo-web-data:
   odoo-db-data:
-# Reminder creation in current file the secret postgresql_password => odoo_pg_pass
+# Reminder creation in current folder the secret postgresql_password file => /home/user/odoo_pg_pass
 secrets:
   postgresql_password:
     file: odoo_pg_pass
