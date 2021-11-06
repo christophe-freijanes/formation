@@ -1,0 +1,55 @@
+DOCKER-TP-5-IaC-DEPLOY APPLICATION WITH DOCKER-COMPOSE
+> Creation du docker-compose
+-Go to : https://hub.docker.com/_/odoo
+-Prodre l'example qiui ce rapproche le plus de nos objectifs et modifier en consequence :
+
+version: '3.1'
+services:
+  web:
+    image: odoo:14.0
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - PASSWORD_FILE=/run/secrets/postgresql_password
+    secrets:
+      - postgresql_password
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    secrets:
+      - postgresql_password
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+
+secrets:
+  postgresql_password:
+    file: odoo_pg_pass
+
+-Creation du docker-compose.yml 
+$ vi docker-compose.yml
+
+-Executer le docker-compose.yml en background
+$ docker-compose up -d
+
+-Verification des conteneurs actifs
+$ docker ps
+
+-Voir l'ensemble des conteneurs 
+$ docker-compose ps
+
+-Voir les logs
+/!\ WARNING : Il faut etre dans le repertoire courant de nos conteneurs $HOME par exemple
+$ docker-compose logs

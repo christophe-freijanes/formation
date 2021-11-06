@@ -1,0 +1,41 @@
+version: '3.1'
+services:
+  web:
+    image: odoo:14.0
+    depends_on:
+      - db
+# External port -> 80:8069 <- Internal port
+    ports:
+      - "80:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - PASSWORD_FILE=/run/secrets/postgresql_password
+    secrets:
+      - postgresql_password
+    networks:
+      - odoo_network
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    secrets:
+      - postgresql_password
+    networks:
+      - odoo_network
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+# Reminder creation in current file the secret postgresql_password => odoo_pg_pass
+secrets:
+  postgresql_password:
+    file: odoo_pg_pass
+networks:
+  odoo_network:

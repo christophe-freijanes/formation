@@ -1,0 +1,10 @@
+DOCKER-TP-5-IaC-TEST APPLICATION ODDO 
+> TEST
+-Identification de l' adresse ip de sa machine qui heberge nos conteneurs
+$ ip a
+
+-Depuis le navigateur
+http://172.28.128.8/
+
+-Parametrage de la base de donnee en mode "Demo data"
+-Installation d' un ou des modules disponibles 

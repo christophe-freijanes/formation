@@ -1,4 +1,4 @@
-DOCKER-TP-5-IaC-DOCKER COMPOSE
+DOCKER-TP-5-IaC-DOCKER-COMPOSE
 Objectif du TP :
 -Deployer le logiciel odoo
 -Documentation https://hub.docker.com/ /odoo
@@ -16,5 +16,3 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 -Verification de la version
 $ docker-compose -v
 docker-compose version 1.29.2, build 5becea4c
-
-
