@@ -5,7 +5,7 @@ Objectif du TP :
 -Deployer une application : https://github.com/dockersamples/example-voting-app.git
 -Test de l'application
 
--Creation d'un vagrantfile + Edition script install_dockerswarm.sh
+-Creation d'un vagrantfile avec 1 master et 3 worker
 -Lister les services du systeme
 $ service  --status-all
 
@@ -20,4 +20,11 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 
 -Depuis le "worker1"
-$ docker swarm join --token SWMTKN-1-5gibbkntjnlvblsxpx661je5dt4cb65zwvulfhd0flvi1f8z4k-euuslaiflsx2usr30wc4eyt6j 10.0.0.1:2377
+$ docker swarm join --token SWMTKN-1-1rmcr0l7xi50r9ojtwq24mefb9gnuvijgseipta28ky84xjard-c2srvmjof5w6spvuqubshrh7b 10.0.0.1:2377
+This node joined a swarm as a worker.
+
+-Lister les nodes 
+$ docker node ls                                                                                                                                                       
+ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+opx20n0t5r5sq0bvja60sy2fc *   masterswarm    Ready     Active         Leader           20.10.7       
+w0ycv1bt4296vx1ywvhw7wvno     workerswarm1   Ready     Active                          20.10.7 

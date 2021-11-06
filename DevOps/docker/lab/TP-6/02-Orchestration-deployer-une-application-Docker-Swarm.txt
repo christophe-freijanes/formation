@@ -1,0 +1,41 @@
+DOCKER-TP-6-Deployer-DOCKER-SWARM
+-Deployer l'application repo: https://github.com/dockersamples/example-voting-app.git
+-Depuis le repo on peut observer le docker-stack.yml
+docker-stack.yml = docker-swarm
+docker-compose.yml = docker-compose
+
+-Clone du repository depuis Master 
+$ git clone https://github.com/dockersamples/example-voting-app.git
+
+-Creation de la stack depuis le Master
+$ cd example-voting-app/
+$ sudo docker stack deploy -c docker-stack.yml vote-stack
+
+-Verification de la stack depuis le Master
+$ sudo docker stack ls
+NAME         SERVICES   ORCHESTRATOR
+vote-stack   6          Swarm
+
+$ sudo docker stack ps vote-stack
+ID             NAME                      IMAGE                                          NODE           DESIRED STATE   CURRENT STATE           ERROR     PORTS
+xctq0rxhyo6n   vote-stack_db.1           postgres:9.4                                   masterswarm    Running         Running 2 minutes ago
+v3lvie2g8ry3   vote-stack_redis.1        redis:alpine                                   workerswarm1   Running         Running 3 minutes ago
+v8uqhatfvlwm   vote-stack_result.1       dockersamples/examplevotingapp_result:before   masterswarm    Running         Running 3 minutes ago
+jtlew9zh6ncy   vote-stack_visualizer.1   dockersamples/visualizer:stable                masterswarm    Running         Running 2 minutes ago
+ojno9okefo8p   vote-stack_vote.1         dockersamples/examplevotingapp_vote:before     workerswarm1   Running         Running 3 minutes ago
+zht8ps7v2pfx   vote-stack_vote.2         dockersamples/examplevotingapp_vote:before     masterswarm    Running         Running 2 minutes ago
+wa1pw6tg76ih   vote-stack_worker.1       dockersamples/examplevotingapp_worker:latest   masterswarm    Running         Running 2 minutes ago
+
+Details
+.1=replica 1
+.2=replica 2
+
+-Verification de la stack depuis le Worker
+$ docker ps
+CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS      NAMES
+1713bd3751bd   dockersamples/examplevotingapp_vote:before   "gunicorn app:app -b…"   42 seconds ago   Up 41 seconds   80/tcp     vote-stack_vote.1.ojno9okefo8plffkde9k7mnqk
+a754f67432c3   redis:alpine                                 "docker-entrypoint.s…"   57 seconds ago   Up 56 seconds   6379/tcp   vote-stack_redis.1.v3lvie2g8ry398squm9s0firt
+
+-Verification de l'application vote
+http://10.100.199.200:5000/
+http://10.100.199.200:5001/
