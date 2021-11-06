@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   # Configure Manager Docker-Swarm
   config.vm.define "masterswarm" do |masterswarm|
     masterswarm.vm.box = "ubuntu/xenial64"
-    masterswarm.vm.network "private_network", ip: IP1
+    masterswarm.vm.network "public_network", ip: IP1
 	  masterswarm.vm.hostname = "masterswarm"
     masterswarm.vm.provider "virtualbox" do |v|
 	  v.name = "masterswarm"
@@ -18,13 +18,13 @@ Vagrant.configure("2") do |config|
   	  v.cpus = CPU
 	end
     masterswarm.vm.provision :shell do |shell|
-	  shell.path = "install_docker.sh"
+	  shell.path = "install_dockerswarm.sh"
 	end
   end
   # Configure Worker Docker-Swarm
   config.vm.define "workerswarm1" do |workerswarm1|
     workerswarm1.vm.box = "ubuntu/xenial64"
-    workerswarm1.vm.network "private_network", ip: IP2
+    workerswarm1.vm.network "public_network", ip: IP2
 	  workerswarm1.vm.hostname = "workerswarm1"
     workerswarm1.vm.provider "virtualbox" do |v|
 	  v.name = "workerswarm1"
@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
       v.cpus = CPU
     end
     workerswarm1.vm.provision :shell do |shell|
-	  shell.path = "install_docker.sh"
+	  shell.path = "install_dockerswarm.sh"
     end 
   end
 end
