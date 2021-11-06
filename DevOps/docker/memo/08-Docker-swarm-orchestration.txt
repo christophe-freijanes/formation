@@ -1,0 +1,26 @@
+DOCKER-ORCHESTRATION-DOCKER-SWARM
+-Orchestration est indispensable pour la gestion des microservices d'une DSI.
+-Le clustering permet de mettre en place plusieurs serveurs pour permettre d'offrir aux clients un service.
+-Les noeuds principale (Manager) permettent de piloter d'autres noeuds (slave ou Worker) 
+-Le role des Managers est de recuperer les demandes, les analysees et planifier l'execution des Workers (Slave)
+-Cela permettra de gerer :
+    -Fail-Over
+    -Scalabilite
+    -Loadbalacing
+
+-Worker peut avoir un ou plusieurs conteneurs
+
+-Un admin souhaite construire 3 conteneurs, comme ce schema l'indique le Manager va dispatcher 2 conteneurs vers le Worker_B et 1 conteneur vers le Worker_A
+                                                                                                    /--- Worker_A-1
+Admin -> Build 3 Containers -> Internal distribued state store -> Manager (dispatch de la charge)--|
+                                                                                                    \--- Worker_B-2
+-Un reseau OVERLAY (transversale) sera configurer sur les MANAGERS et WORKERS
+
+> On peut comme avec Docker-Compose faire une IaC mais avec Docker-Swarm
+Docker-Swarm permet de deployer des ressources sur plusieurs noeuds.
+Docker-compose permettra en codifiant de deployer l'infrastructure avec 2 nouveaux principes:
+    > Replica
+        -Definition du nombre de fois que l'on souhaite repliquer un service
+    > Update strategy
+        -Definir la configuration des mises a jours (ex : update_config: parallelism: 2)
+                                                                                                  
