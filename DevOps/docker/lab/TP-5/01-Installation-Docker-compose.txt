@@ -12,7 +12,11 @@ Objectif du TP :
 Derniere release : https://docs.docker.com/compose/install/
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
+# Si ne fonctionne pas
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 -Verification de la version
 $ docker-compose -v
 docker-compose version 1.29.2, build 5becea4c
+# Si ne fonctionne pas
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose

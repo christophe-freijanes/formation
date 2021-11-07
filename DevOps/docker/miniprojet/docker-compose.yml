@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  api:
+    build: /student-list/simple_api/
+    volumes:
+      - ./simple_api/student_age.json:/data/student_age.json
+    ports:
+      - "5000:5000"
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    networks:
+      - study-net
+    restart: always
+  web:
+    image: php:apache
+    volumes:
+      - ./website:/var/www/html/
+    restart: always
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+      - APIHOST=api
+    ports:
+      - "8080:80"
+    networks:
+      - study-net
+    depends_on:
+      - api
+networks:
+  study-net:
