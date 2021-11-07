@@ -13,7 +13,7 @@ https://get.docker.com/
 #   $ sh get-docker.sh
 
 -Il faut creer votre utilisateur dans le groupe docker:
-$ sudo usermod -aG docker centos
+$ sudo usermod -aG docker vagrant
 
 -Activer le service docker
 $ sudo systemctl enable docker
