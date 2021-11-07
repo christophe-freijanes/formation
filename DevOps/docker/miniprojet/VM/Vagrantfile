@@ -28,6 +28,5 @@ Vagrant.configure('2') do |config|
       vb.memory = RAM
   	  vb.cpus = CPU
     end
-  config.vm.box_check_update = false
   end
 end
