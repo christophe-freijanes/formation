@@ -43,15 +43,19 @@ echo Installing Development Tools...
 sudo yum groups mark install "Development Tools"
 sudo yum groups mark convert "Development Tools"
 sudo yum groupinstall "Development Tools" -y
+sudo yum install -y yum-utils
 sleep 5
 SCRIPT
 $install_docker_script = <<SCRIPT
 echo Installing Docker...
 curl -sSL https://get.docker.com/ | sh
 usermod -aG docker "$USER"
-sudo systemctl start docker
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
 echo "For this Stack, you will use $(ip -f inet addr show eth1 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p') IP Address"
 sleep 5
+echo "The VM installation will be complete after this last reboot !"
+sudo reboot
 SCRIPT
 
 Vagrant.configure('2') do |config|
