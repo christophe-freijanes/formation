@@ -1,7 +1,8 @@
 > Prendre toujours l'image officiel Docker-Registry
 https://hub.docker.com/_/registry
 
-Schema            |===========================|
+Schema
+                  |===========================|
     Host          |  Conteneur1  Conteneur2   |
   |------|        |  FRONTEND    BACKEND      |
   |______|---------->(WebGui)-->(Registry)    | 
@@ -9,7 +10,40 @@ Schema            |===========================|
                   |     Port:5000             |
                   |              Images       |
                   |===========================|
-                
-        
 
-> Creation du reseau
+> Depuis notre host creation du reseau
+$ docker network create study-net
+
+> Creation du conteneur BACKEND
+$ docker run -d -p 5000:5000 -e REGISTRY_STORAGE_DELETE_ENABLED=true --net study-net --name registry-study-net registry:2
+
+> Creation du conteneur FRONTEND
+$ docker run -d -p 8090:80 --net study-net -e REGISTRY_URL=http://registry-study-net:5000 -e DELETE_IMAGES=true -e REGISTRY_TITLE=study-net --name fontend-study-net joxit/docker-registry-ui:1.5-static
+
+> Pull d'une image depuis le Docker-hub
+$ docker pull nginx:latest
+
+> Verification des images presentes sur notre host
+$ docker images
+REPOSITORY                 TAG          IMAGE ID       CREATED        SIZE
+nginx                      latest       87a94228f133   3 weeks ago    133MB
+registry                   2            b2cb11db9d3d   2 months ago   26.2MB
+joxit/docker-registry-ui   1.5-static   74416e0cd8ba   8 months ago   24.2MB
+
+> Tag de l'image "nginx"
+$ docker tag 87a94228f133 localhost:5000/nginx:local <-Nom de l'image : son Tag (v1 ou local = localhost)
+                                 |
+                        Adresse pour joindre l'image
+
+> Check des modifications de notre image "nginx"
+$ docker images
+REPOSITORY                 TAG          IMAGE ID       CREATED        SIZE
+nginx                      latest       87a94228f133   3 weeks ago    133MB
+localhost:5000/nginx       local        87a94228f133   3 weeks ago    133MB
+registry                   2            b2cb11db9d3d   2 months ago   26.2MB
+joxit/docker-registry-ui   1.5-static   74416e0cd8ba   8 months ago   24.2MB
+
+> Push image en local depuis notre host
+$ docker push localhost:5000/nginx:local
+
+
