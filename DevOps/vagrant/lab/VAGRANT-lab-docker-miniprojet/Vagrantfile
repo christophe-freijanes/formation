@@ -49,9 +49,15 @@ SCRIPT
 $install_docker_script = <<SCRIPT
 echo Installing Docker...
 curl -sSL https://get.docker.com/ | sh
-usermod -aG docker "$USER"
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo newgrp docker
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
 echo "For this Stack, you will use $(ip -f inet addr show eth1 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p') IP Address"
 sleep 5
 echo "The VM installation will be complete after this last reboot !"
