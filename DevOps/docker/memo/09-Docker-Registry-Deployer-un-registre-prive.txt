@@ -1,0 +1,15 @@
+> Prendre toujours l'image officiel Docker-Registry
+https://hub.docker.com/_/registry
+
+Schema            |===========================|
+    Host          |  Conteneur1  Conteneur2   |
+  |------|        |  FRONTEND    BACKEND      |
+  |______|---------->(WebGui)-->(Registry)    | 
+ /______ /        |         |                 |
+                  |     Port:5000             |
+                  |              Images       |
+                  |===========================|
+                
+        
+
+> Creation du reseau
