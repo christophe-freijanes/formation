@@ -6,9 +6,11 @@ services:
       - ./simple_api/student_age.json:/data/student_age.json
     ports:
       - "5000:5000"
+    env_file:
+      - .env_prod
     environment:
-      - USERNAME=toto
-      - PASSWORD=python
+      - $USERNAME
+      - $PASSWORD
     networks:
       - study-net
     restart: always
@@ -17,10 +19,12 @@ services:
     volumes:
       - ./website:/var/www/html/
     restart: always
+    env_file:
+      - .env_prod
     environment:
-      - USERNAME=toto
-      - PASSWORD=python
-      - APIHOST=api
+      - $USERNAME
+      - $PASSWORD
+      - $APIHOST
     ports:
       - "8080:80"
     networks:
