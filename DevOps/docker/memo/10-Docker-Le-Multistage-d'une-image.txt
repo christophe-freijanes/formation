@@ -5,7 +5,7 @@ Dockerfile
 -->(image)BASE ---->|- Image de base par exemple : nginx, ubuntu...
                     |  RUN pip3 install -r requirements.txt
                     |
-CODE----------------|- Copier le code source vers l'image de BASE-------------->|             
+CODE----------------|- Copier le code source vers l'image de BASE ------------->|             
                     |                                                           |
                     |                                                           |
 Test----------------|- RUN pip3 install -r requirements.dev.txt                 | Job de build de l'image de PROD (une fois la step test est valider)
