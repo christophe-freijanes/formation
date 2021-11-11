@@ -1,2 +1,16 @@
 Le Multistage (Multistading) d'une image 
 Permet de produire un artefac sur une image et de le recuperer est le mettre dans une autre image.
+
+Dockerfile
+-> (image)BASE -----| Image de base par exemple : nginx, ubuntu...
+                    | RUN pip3 install -r requirements.txt
+                    |
+CODE----------------| Copier le code source vers l'image de BASE-------------->|             
+                    |                                                          |
+                    |                                                          |
+Test----------------| RUN pip3 install -r requirements.dev.txt                 | Job de build de l'image de PROD (une fois la step test est valider)
+                    | Tester l'image avec son code (pytest)                    |
+                    |                                                          |
+-> PROD-------------| Une fois valider on produit l'image de production <------|
+                      Une fois les tests valider on part directement du
+                      CODE, c'est a dire de la source
