@@ -12,13 +12,13 @@ Schema
                   |===========================|
 
 > Depuis notre host creation du reseau
-$ docker network create study-net
+$ docker network create reg-study-net
 
 > Creation du conteneur BACKEND
-$ docker run -d -p 5000:5000 -e REGISTRY_STORAGE_DELETE_ENABLED=true --net study-net --name registry-study-net registry:2
+$ sudo docker run -d -p 5000:5000 -e REGISTRY_STORAGE_DELETE_ENABLED=true --net reg-study-net --name reg-study-net registry:2
 
 > Creation du conteneur FRONTEND
-$ docker run -d -p 8090:80 --net study-net -e REGISTRY_URL=http://registry-study-net:5000 -e DELETE_IMAGES=true -e REGISTRY_TITLE=study-net --name fontend-study-net joxit/docker-registry-ui:1.5-static
+$ sudo docker run -d -p 8090:80 --net reg-study-net -e REGISTRY_URL=http://registry-study-net:5000 -e DELETE_IMAGES=true -e REGISTRY_TITLE=study-net --name fontend-study-net joxit/docker-registry-ui:1.5-static
 
 > Pull d'une image depuis le Docker-hub
 $ docker pull nginx:latest
@@ -31,7 +31,7 @@ registry                   2            b2cb11db9d3d   2 months ago   26.2MB
 joxit/docker-registry-ui   1.5-static   74416e0cd8ba   8 months ago   24.2MB
 
 > Tag de l'image "nginx"
-$ docker tag 87a94228f133 localhost:5000/nginx:local <-Nom de l'image : son Tag (v1 ou local = localhost)
+$ docker tag 87a94228f133 10.0.0.200:5000/nginx:private-registry <-Nom de l'image : son Tag (v1 ou local = localhost)
                                  |
                         Adresse pour joindre l'image
 
@@ -44,6 +44,31 @@ registry                   2            b2cb11db9d3d   2 months ago   26.2MB
 joxit/docker-registry-ui   1.5-static   74416e0cd8ba   8 months ago   24.2MB
 
 > Push image en local depuis notre host
-$ docker push localhost:5000/nginx:local
+$ docker push 10.0.0.200:5000/nginx:private-registry
+======================================================================================================================================
+> Push image depuis une machine distante depuis une autre host vers la host qui heberge notre private registry
+$ sudo docker pull cfreijanes/student-list_api:latest
+$ sudo docker images
+$ sudo docker tag 87a94228f133 10.0.0.201:5000/apache:private-remote
+
+Permettre le push en http
+$ sudo vi /usr/lib/systemd/system/docker.service
+
+[Service]
+Type=notify
+# the default is not to use systemd for cgroups because the delegate issues still
+# exists and systemd currently does not support the cgroup feature set required
+# for containers run by docker
+ExecStart=/usr/bin/dockerd --insecure-registry 10.0.0.201:5000
+ExecReload=/bin/kill -s HUP $MAINPID
+TimeoutSec=0
+RestartSec=2
+Restart=always
+
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+$ sudo systemctl status docker
+
+$ docker push 10.0.0.201:5000/apache:private-remote
 
 
