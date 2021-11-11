@@ -1,0 +1,2 @@
+Le Multistage (Multistading) d'une image 
+Permet de produire un artefac sur une image et de le recuperer est le mettre dans une autre image.
