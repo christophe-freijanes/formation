@@ -1,0 +1,81 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+RAM = 2048
+CPU = 2
+IP = "10.0.0.200"
+
+# Check Vagrant plugins
+# If you want to ensure that vagrant-winnfsd is installed and enabled every time you run your vagrant box, just add the following to your vagrant file, just before the code block
+if Vagrant::Util::Platform.windows? then
+  unless Vagrant.has_plugin?("vagrant-winnfsd")
+    raise  Vagrant::Errors::VagrantError.new, "vagrant-winnfsd plugin is missing. Please install it using 'vagrant plugin install vagrant-winnfsd' and rerun 'vagrant up'"
+  end
+end
+# If you want to ensure that vagrant-vbguest is installed and enabled every time you run your vagrant box, just add the following to your vagrant file, just before the code block
+if Vagrant::Util::Platform.windows? then
+  unless Vagrant.has_plugin?("vagrant-vbguest")
+    raise  Vagrant::Errors::VagrantError.new, "vagrant-vbguest plugin is missing. Please install it using 'vagrant plugin install vagrant-vbguest' and rerun 'vagrant up'"
+  end
+end
+# If you want to ensure that vagrant-share is installed and enabled every time you run your vagrant box, just add the following to your vagrant file, just before the code block
+if Vagrant::Util::Platform.windows? then
+  unless Vagrant.has_plugin?("vagrant-share")
+    raise  Vagrant::Errors::VagrantError.new, "vagrant-share plugin is missing. Please install it using 'vagrant plugin install vagrant-share' and rerun 'vagrant up'"
+  end
+end
+# SCRIPT for provisioning the magic system :)
+$no_update_system = <<SCRIPT
+echo Stop Update System...
+sudo systemctl stop packagekit.service && sudo systemctl disable packagekit.service
+echo "For this virtual machine, no update will be made the version Centos 7.6 will remain fixed"
+SCRIPT
+
+$install_git = <<SCRIPT
+sudo yum install -y yum-utils
+echo Install and configure git...
+sudo yum install git -y
+git config --global user.name "christophe-freijanes"
+git config --global user.email "cfreijanes@gmx.fr"
+git config --global core.editor vi
+sleep 5
+SCRIPT
+
+$install_docker_script = <<SCRIPT
+echo Installing Docker...
+curl -sSL https://get.docker.com/ | sh
+sudo usermod -aG docker $USER
+sudo systemctl enable docker
+sudo systemctl start docker
+echo Docker has been installed...
+echo Installing Docker-compose...
+sudo mkdir -p /opt/bin/
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+echo Docker-Compose has been installed...
+echo "For this Stack, you will use $(ip -f inet addr show eth1 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p') IP Address"
+sleep 5
+echo "The Virtual machine Centos 7.6 has been installed >>> Last reboot !!!"
+sudo reboot
+SCRIPT
+
+# The vagrant config for virtual machine named mpdocker
+Vagrant.configure('2') do |config|
+  config.vm.define :mpdocker, primary: true  do |mpdocker|
+    mpdocker.vm.box = "komlevv/centos-7.6"
+    mpdocker.vm.box_version = "1.0.0"
+    mpdocker.vbguest.auto_update = false
+    mpdocker.vm.network :private_network, ip: IP
+    mpdocker.vm.network :forwarded_port, guest: 5000, host: 5000
+    mpdocker.vm.network :forwarded_port, guest: 80, host: 8080
+    mpdocker.vm.hostname = "mpdocker"
+    mpdocker.vm.synced_folder ".", "/vagrant"
+    mpdocker.vm.provision "shell", inline: $install_git, privileged: true
+    mpdocker.vm.provision "shell", inline: $install_docker_script, privileged: true
+    mpdocker.vm.provider "virtualbox" do |vb|
+      vb.name = "mpdocker"
+      vb.memory = RAM
+  	  vb.cpus = CPU
+    end
+  end
+end

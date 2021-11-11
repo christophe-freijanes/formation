@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+RAM = 2048
+CPU = 2
+
+Vagrant.configure("2") do |config|
+  config.vm.define "dockerubuntu" do |dockerubuntu|
+    dockerubuntu.vm.box = "ubuntu/xenial64"
+    dockerubuntu.vm.network "private_network", type: "dhcp"
+	  dockerubuntu.vm.hostname = "dockerubuntu"
+    dockerubuntu.vm.provider "virtualbox" do |v|
+  	  v.name = "dockerubuntu"
+  	  v.memory = RAM
+  	  v.cpus = CPU
+  	end
+  	dockerubuntu.vm.provision :shell do |shell|
+  	  shell.path = "install_docker.sh"
+    end 
+  end
+end
