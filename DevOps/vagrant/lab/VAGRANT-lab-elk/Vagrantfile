@@ -14,9 +14,11 @@ NODE3 = "node-kibana"
 
 Vagrant.configure("2") do |config|
   # port forwarding
-  config.vm.network "forwarded_port", guest: 9200, host: 9200 # ES
-  config.vm.network "forwarded_port", guest: 5601, host: 5601 # Kibana
-  config.vm.network "forwarded_port", guest: 8111, host: 8111 # HTTP server
+  config.vm.network "forwarded_port", guest: 9100, host: 9100, id: "node-elk1", auto_correct: true
+  config.vm.network "forwarded_port", guest: 9200, host: 9200, id: "node-elk2", auto_correct: true
+  config.vm.network "forwarded_port", guest: 9300, host: 9300, id: "node-kibana", auto_correct: true
+  config.vm.network "forwarded_port", guest: 5601, host: 5601, id: "node-kibana", auto_correct: true
+  config.vm.network "forwarded_port", guest: 80, host: 8080, id: "node-kibana", auto_correct: true
   config.vm.define NODE1 do |subconfig|
     subconfig.vm.box = BOX_IMAGE
 	subconfig.vm.box_version = BOX_VERSION
@@ -28,7 +30,7 @@ Vagrant.configure("2") do |config|
 	subconfig.vm.provision "shell",
       inline: <<-SHELL
 	    sudo echo "[*] Installing Elastic Search"
-        sudo sed -i 's/#cluster.name: my-application/cluster.name: ElasticserchCluster/g' /etc/elasticsearch/elasticsearch.yml
+        sudo sed -i 's/#cluster.name: my-application/cluster.name: ELK-Cluster/g' /etc/elasticsearch/elasticsearch.yml
 		sudo sed -i 's/#node.name: node-1/node.name: node-elk1/g' /etc/elasticsearch/elasticsearch.yml
 		sudo sed -i 's/#network.host: 192.168.0.1/network.host: ["10.0.5.11", "localhost"]/g' /etc/elasticsearch/elasticsearch.yml
 		sudo echo 'discovery.seed_hosts: ["10.0.5.11", "10.0.5.12", "10.0.5.13"]' >>  /etc/elasticsearch/elasticsearch.yml
@@ -53,13 +55,12 @@ Vagrant.configure("2") do |config|
 	subconfig.vbguest.auto_update = false
     subconfig.vm.hostname = NODE2
 	subconfig.vm.network :private_network, ip: IP_NODE2
-	subconfig.vm.network "forwarded_port", guest: 9300, host: 9300 # ES
 	subconfig.vm.synced_folder "./", "/vagrant"
 	#Make some changes to the elasticsearch.yml file and start the service
 	subconfig.vm.provision "shell",
       inline: <<-SHELL
 	    sudo echo "[*] Installing Elastic Search"
-		sudo sed -i 's/#cluster.name: my-application/cluster.name: ElasticserchCluster/g' /etc/elasticsearch/elasticsearch.yml
+		sudo sed -i 's/#cluster.name: my-application/cluster.name: ELK-Cluster/g' /etc/elasticsearch/elasticsearch.yml
 		sudo sed -i 's/#node.name: node-1/node.name: node-elk2/g' /etc/elasticsearch/elasticsearch.yml
 		sudo sed -i 's/#network.host: 192.168.0.1/network.host: ["10.0.5.12", "localhost"]/g' /etc/elasticsearch/elasticsearch.yml
 		sudo echo 'discovery.seed_hosts: ["10.0.5.11", "10.0.5.12", "10.0.5.13"]' >>  /etc/elasticsearch/elasticsearch.yml
@@ -87,7 +88,7 @@ Vagrant.configure("2") do |config|
 	subconfig.vm.provision "shell",
       inline: <<-SHELL
 	    sudo echo "[*] Installing Kibana"
-		sudo sed -i 's/#cluster.name: my-application/cluster.name: ElasticserchCluster/g' /etc/elasticsearch/elasticsearch.yml
+		sudo sed -i 's/#cluster.name: my-application/cluster.name: ELK-Cluster/g' /etc/elasticsearch/elasticsearch.yml
 		sudo sed -i 's/#node.name: node-1/node.name: node-kibana/g' /etc/elasticsearch/elasticsearch.yml
 		sudo sed -i 's/#network.host: 192.168.0.1/network.host: ["10.0.5.13", "localhost"]/g' /etc/elasticsearch/elasticsearch.yml
 		sudo echo 'discovery.seed_hosts: ["10.0.5.11", "10.0.5.12", "10.0.5.13"]' >>  /etc/elasticsearch/elasticsearch.yml
