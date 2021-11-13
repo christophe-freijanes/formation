@@ -1,6 +1,5 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
 BOX_IMAGE = "geerlingguy/centos7"
 BOX_VERSION = "1.2.25"
 MEMORY = "2048"
@@ -14,7 +13,6 @@ NODE2 = "node-elk2"
 NODE3 = "node-kibana"
 
 Vagrant.configure("2") do |config|
-  
   config.vm.define NODE1 do |subconfig|
     subconfig.vm.box = BOX_IMAGE
 	subconfig.vm.box_version = BOX_VERSION
