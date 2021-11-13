@@ -13,13 +13,16 @@ NODE2 = "node-elk2"
 NODE3 = "node-kibana"
 
 Vagrant.configure("2") do |config|
+  # port forwarding
+  config.vm.network "forwarded_port", guest: 9200, host: 9200 # ES
+  config.vm.network "forwarded_port", guest: 5601, host: 5601 # Kibana
+  config.vm.network "forwarded_port", guest: 8111, host: 8111 # HTTP server
   config.vm.define NODE1 do |subconfig|
     subconfig.vm.box = BOX_IMAGE
 	subconfig.vm.box_version = BOX_VERSION
 	subconfig.vbguest.auto_update = false
     subconfig.vm.hostname = NODE1
 	subconfig.vm.network :private_network, ip: IP_NODE1
-	subconfig.vm.network "forwarded_port", guest: 9200, host: 9200 # ES
 	subconfig.vm.synced_folder "./", "/vagrant"
 	#Make some changes to the elasticsearch.yml file and start the service
 	subconfig.vm.provision "shell",
@@ -79,8 +82,6 @@ Vagrant.configure("2") do |config|
 	subconfig.vbguest.auto_update = false
     subconfig.vm.hostname = NODE3
 	subconfig.vm.network :private_network, ip: IP_NODE3
-	subconfig.vm.network "forwarded_port", guest: 5601, host: 5601 # Kibana
-	subconfig.vm.network "forwarded_port", guest: 8111, host: 8111 # HTTP server
 	subconfig.vm.synced_folder "./", "/vagrant"
 	#Make some changes to the elasticsearch.yml file and start the service
 	subconfig.vm.provision "shell",
