@@ -6,7 +6,7 @@ CPU = 2
 
 Vagrant.configure("2") do |config|
   config.vm.define "dockercompose" do |dockercompose|
-    dockercompose.vm.box = "ubuntu/xenial64"
+    dockercompose.vm.box = "v0rtex/xenial64"
     dockercompose.vm.network "private_network", type: "dhcp"
 	  dockercompose.vm.hostname = "dockercompose"
     dockercompose.vm.provider "virtualbox" do |v|

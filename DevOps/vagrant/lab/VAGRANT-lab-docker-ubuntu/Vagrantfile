@@ -1,20 +1,22 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-RAM = 2048
+RAM = 4096
 CPU = 2
+IP = "172.28.128.7"
 
 Vagrant.configure("2") do |config|
-  config.vm.define "dockerubuntu" do |dockerubuntu|
-    dockerubuntu.vm.box = "ubuntu/xenial64"
-    dockerubuntu.vm.network "private_network", type: "dhcp"
-	  dockerubuntu.vm.hostname = "dockerubuntu"
-    dockerubuntu.vm.provider "virtualbox" do |v|
-  	  v.name = "dockerubuntu"
+  config.vm.define "ubdocker" do |ubdocker|
+    ubdocker.vm.box = "v0rtex/xenial64"
+    ubdocker.vm.network "private_network", ip: IP
+	  ubdocker.vm.hostname = "ubdocker"
+    ubdocker.vm.provider "virtualbox" do |v|
+  	  v.name = "ubdocker"
   	  v.memory = RAM
   	  v.cpus = CPU
+	    v.gui = false
   	end
-  	dockerubuntu.vm.provision :shell do |shell|
+  	ubdocker.vm.provision :shell do |shell|
   	  shell.path = "install_docker.sh"
     end 
   end
