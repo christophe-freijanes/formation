@@ -1,0 +1,44 @@
+DOCKER-BUILD-MULTISTAGE
+
+1-Recuperation du code source
+git clone https://github.com/eazytrainingfr/docker-multistage-build.git
+$ cd /docker-multistage-build/app/
+
+2-On construit a partir de l'image "test" de notre Dockerfile
+$ docker build --target test --tag test .
+
+3-Apres validation du test (script python) il va lancer le build de notre image "test"
+Exemple output :
+Step 19/19 : RUN python3 -m pytest
+ ---> Running in 69a4bcc6737d
+============================= test session starts ==============================
+platform linux -- Python 3.6.13, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: /opt
+collected 1 item
+
+tests/test_works.py .                                                    [100%]
+
+============================== 1 passed in 0.01s ===============================
+Removing intermediate container 69a4bcc6737d
+ ---> a3c01e3afc0a
+Successfully built a3c01e3afc0a
+Successfully tagged test:latest
+
+4-Build de l'image de Prod
+$ docker build --target prod --tag prod .
+
+5-Verification des images 
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+prod         latest    297f6b073b21   20 seconds ago   571MB
+test         latest    a3c01e3afc0a   5 minutes ago    576MB
+ubuntu       16.04     b6f507652425   2 months ago     135MB
+
+6-Build avec docker-compose
+$ docker-compose -f docker-compose.dev.yml up -d
+
+7-Verification du build
+$ docker ps -a
+CONTAINER ID   IMAGE                         COMMAND                  CREATED              STATUS                     PORTS                                       NAMES
+62f6444d2ffc   docker-multistage-build_web   "/bin/sh -c 'FLASK_A…"   About a minute ago   Up About a minute          0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   docker-multistage-build_web_1
+
