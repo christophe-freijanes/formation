@@ -16,6 +16,8 @@ k8s.gcr.io/coredns                        1.7.0      bfe3a36ebd25   17 months ag
 k8s.gcr.io/pause                          3.2        80d28bedfe5d   21 months ago   683kB
 
 3. Check des pods
+$ kubectl get pods
+ou
 $ minikube kubectl -- get pods -A
 NAMESPACE     NAME                                            READY   STATUS    RESTARTS   AGE
 kube-system   coredns-74ff55c5b-fs5jr                         1/1     Running   5          293d
@@ -27,6 +29,11 @@ kube-system   kube-scheduler-localhost.localdomain            1/1     Running   
 kube-system   storage-provisioner                             1/1     Running   8          293d
 
 4. Check des nodes
-minikube kubectl -- get nodes -A
+$ kubectl get nodes
+ou
+$ minikube kubectl -- get nodes -A
 NAME                    STATUS     ROLES                  AGE    VERSION
 localhost.localdomain   NotReady   control-plane,master   293d   v1.20.2
+
+5. Verification de tous les conteneurs actif
+$ docker ps
