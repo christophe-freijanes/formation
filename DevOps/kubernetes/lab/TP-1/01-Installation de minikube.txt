@@ -1,0 +1,32 @@
+Installation de minikube
+
+1. Initialisation de Minikube
+$ minikube start --vm-driver=none
+
+2. Check des images
+$ docker images
+REPOSITORY                                TAG        IMAGE ID       CREATED         SIZE
+k8s.gcr.io/kube-proxy                     v1.20.2    43154ddb57a8   10 months ago   118MB
+k8s.gcr.io/kube-controller-manager        v1.20.2    a27166429d98   10 months ago   116MB
+k8s.gcr.io/kube-apiserver                 v1.20.2    a8c2fdb8bf76   10 months ago   122MB
+k8s.gcr.io/kube-scheduler                 v1.20.2    ed2c44fbdd78   10 months ago   46.4MB
+gcr.io/k8s-minikube/storage-provisioner   v4         85069258b98a   11 months ago   29.7MB
+k8s.gcr.io/etcd                           3.4.13-0   0369cf4303ff   14 months ago   253MB
+k8s.gcr.io/coredns                        1.7.0      bfe3a36ebd25   17 months ago   45.2MB
+k8s.gcr.io/pause                          3.2        80d28bedfe5d   21 months ago   683kB
+
+3. Check des pods
+$ minikube kubectl -- get pods -A
+NAMESPACE     NAME                                            READY   STATUS    RESTARTS   AGE
+kube-system   coredns-74ff55c5b-fs5jr                         1/1     Running   5          293d
+kube-system   etcd-localhost.localdomain                      1/1     Running   5          293d
+kube-system   kube-apiserver-localhost.localdomain            1/1     Running   5          293d
+kube-system   kube-controller-manager-localhost.localdomain   1/1     Running   5          293d
+kube-system   kube-proxy-k9pln                                1/1     Running   5          293d
+kube-system   kube-scheduler-localhost.localdomain            1/1     Running   5          293d
+kube-system   storage-provisioner                             1/1     Running   8          293d
+
+4. Check des nodes
+minikube kubectl -- get nodes -A
+NAME                    STATUS     ROLES                  AGE    VERSION
+localhost.localdomain   NotReady   control-plane,master   293d   v1.20.2
