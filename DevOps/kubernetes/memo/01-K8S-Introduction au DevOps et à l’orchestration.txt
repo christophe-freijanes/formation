@@ -1,0 +1,33 @@
+K8S-Introduction au DevOps et à l’orchestration
+
+Workflow
+-Intergration en continu -> Test en continu -> Deploiement en continu -> Orchestration
+
+Pourquoi ?
+-Etat des applications / conteneurs
+-Auto-discovery
+-Rolling Update /Blue-Green / Roll-back / Deployement
+-Saclabiliter des services
+-Load Balacing
+-Secret Management
+-Fail-over app
+ ___
+|_C_| => conteneur
+
+                        |-------------------------|
+                        |                         |
+                        |      ORCHESTRATOR       |   
+                        |                         |          
+                        |-------------------------|     
+                       /              |            \                                                                         
+                      /               |             \          
+                     /                |              \                    
+                    /                 |               \  
+|-------------------|       |-------------------|      |-------------------|
+|     ___           |       |    ___            |      |    ___            |
+|    |_C_|  ___     |       |   |_C_|   ___     |      |   |_C_|   ___     |
+|          |_C_|    |       |          |_C_|    |      |          |_C_|    |
+|    NODE 1         |       |    NODE 2         |      |    NODE 3         |
+|           ___     |       |           ___     |      |           ___     |
+|          |_C_|    |       |          |_C_|    |      |          |_C_|    |
+|-------------------|       |-------------------|      |-------------------|

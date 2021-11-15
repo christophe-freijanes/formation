@@ -1,0 +1,18 @@
+DOCKER-DANS-LE-CLOUD
+
+Liens et commandes utilisés dans la suite
+Liens importants:
+https://support.snyk.io/hc/en-us/sections/360001087857-Language-package-manager-support
+https://hub.docker.com/r/snyk/snyk
+https://github.com/eazytrainingfr/simple-webapp-docker
+
+Commandes utilisées:
+
+git clone https://github.com/eazytrainingfr/simple-webapp-docker.git
+cd simple-webapp-docker/
+ls
+cd app/
+export SNYK_TOKEN=<mettez le votre>
+docker run –rm -it –env SNYK_TOKEN -v $(pwd):/app snyk/snyk:python-2.7
+docker build -t simple-webapp-docker .
+docker run –rm -it –env SNYK_TOKEN -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/app snyk/snyk:docker snyk test –docker simple-webapp-docker –file=Dockerfile

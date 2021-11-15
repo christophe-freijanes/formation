@@ -3,3 +3,4 @@
 *.log 
 .config
 *.env_prod
+*.ssh
