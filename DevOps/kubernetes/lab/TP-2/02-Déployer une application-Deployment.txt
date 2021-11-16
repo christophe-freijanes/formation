@@ -33,3 +33,4 @@ deployment.apps "nginx-deployment" deleted
 
 $ sudo kubectl get pod
 No resources found in default namespace.
+

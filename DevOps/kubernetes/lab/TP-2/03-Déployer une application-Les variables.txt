@@ -55,4 +55,13 @@ NAME                          DESIRED   CURRENT   READY   AGE
 nginx-deployment-6d85675949   2         2         2       64s
 nginx-deployment-6fcdb8cc74   0         0         0       7m47s
 
+9- Suppression du deployment
+$ sudo kubectl delete -f nginx-deployment.yml
+deployment.apps "nginx-deployment" deleted
+
+$ sudo kubectl get pod
+No resources found in default namespace.
+
+$ sudo kubectl get deployment
+No resources found in default namespace.
 
