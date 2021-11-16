@@ -17,6 +17,7 @@ sudo chmod +x kubectl
 sudo mv kubectl /usr/bin/
 sudo yum -y install bash-completion
 sudo systemctl enable docker.service
+sudo minikube start –driver=none
 sudo systemctl enable kubelet.service
 sudo -s
 sudo echo 'source <(kubectl completion bash)' >>~/.bashrc

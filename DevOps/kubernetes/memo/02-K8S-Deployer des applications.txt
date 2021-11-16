@@ -1,0 +1,58 @@
+K8S-Deployer des applications
+
+# C'est KOI ?!
+-Un POD est la plus petite unite d' execution de K8S
+-C'est un objet, qui contiendra plusieurs conteneurs.
+-Il a un environnement qui permettra d'executer un ou plusieurs conteneurs.
+-Par exemple si on executer un POD "Nginx" il y aura : 1X adresse IP, plusieurs conteneurs, plusieurs volumes.
+
+# REPLICA SET
+-Un replica permet de la scalibilite et la resilience d' une application.
+-Le replica permet de mettre en place une redondance de PODs.
+
+# DEPLOYMENT (Conseiller)
+-C' est un objet qui permet la gestion de plusieurs differents replica set
+-Il permet de federer des replicat set, des pods.
+-Il permettra d' executer plusieurs version d' une application.
+
+# METHODE DE DECLARATION
+-Imperative (ligne de commande kubectl)
+-Declarative (manifest, Ingress)
+
+$ kubectl <action> <type> <objet>
+             |        |    nginx
+           delete     |
+           run...     |
+                     pod
+                 replicaset
+                   deploy
+
+# MANIFEST 
+-C'est un fichier de type YAML
+-La premiere ligne sera tjs le type = kind:Deployment par exemple puis les metadata: nom, spec, matchlabel et les specificites
+
+# VARIABLES
+-Elle se determine dans le manifest dans la partie spec:
+-Il existe 3 types de variables d' environnement :
+
+-Plain Key Value:
+env:
+  - name: APP_COLOR
+    value: pink
+
+-Plain ConfigMap: 
+env:
+  - name: APP_COLOR
+    valueForm:
+       configMapKeyRef:
+
+-Plain Secret:
+env:
+  - name: APP_COLOR
+    valueForm:
+       secretKeyRef:
+
+
+
+
+
