@@ -1,0 +1,58 @@
+Déployer une application - Les variables
+
+# Utilisation des variables d’environnement
+# POD
+1- Creation du pod en specifiant les variables 
+$ sudo kubectl run --image=mmumshad/simple-webapp-color --env="APP_COLOR=blue" --restart=Never simple-webapp-color
+pod/simple-webapp-color created
+
+2- Verification de la creation du pod
+$ sudo kubectl get po
+NAME                  READY   STATUS    RESTARTS   AGE
+simple-webapp-color   1/1     Running   0          98s
+
+3- Exposer le port du pod vers le port 8080
+$ kubectl port-forward simple-webapp-color 8080:8080 --address 0.0.0.0
+
+4- Suppression du pod
+$ sudo kubectl delete -f pod simple-webapp-color
+
+# DEPLOYMENT 
+5- Mettre à jour la version de notre application à chaud
+$ kubectl create deployment --image=nginx:1.18.0 nginx-deployment
+
+6- Verification de notre deployment
+$ sudo kubectl get deploy
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   1/1     1            1           22s
+
+NB: On constate qu'il n'y a qu'un replica
+
+7- Parametrages a 2 replica
+$ sudo kubectl scale --replicas=2 deployment/nginx-deployment
+deployment.apps/nginx-deployment scaled
+
+$  sudo kubectl get deploy
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   2/2     2            2           3m44s
+
+NB: On constate qu'il y a 2 replica
+
+8- Mise a jour de notre application vers la version latest
+$  sudo kubectl get deployment.apps -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
+nginx-deployment   2/2     2            2           5m21s   nginx        nginx:1.18.0   app=nginx-deployment
+
+$ kubectl set image deployment/nginx-deployment nginx=nginx:latest
+deployment.apps/nginx-deployment image updated
+
+$  sudo kubectl get deployment.apps -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
+nginx-deployment   2/2     2            2           7m15s   nginx        nginx:latest   app=nginx-deployment
+
+$ sudo kubectl get replicasets.apps
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-6d85675949   2         2         2       64s
+nginx-deployment-6fcdb8cc74   0         0         0       7m47s
+
+

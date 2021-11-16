@@ -1,0 +1,35 @@
+Déployer une application - Deployment
+
+1- Creation du manifest Deployment
+$ vi nginx-deployment.yml
+
+$ kubectl apply -f nginx-deployment.yml
+
+2- Verifier du replicaset
+$ sudo kubectl get replicaset -o wide
+NAME                          DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES         SELECTOR
+nginx-deployment-67dfd6c8f9   2         2         2       2m59s   nginx        nginx:1.18.0   app=nginx,pod-template-hash=67dfd6c8f9
+
+3- Pour mettre a jour son application depuis son fichier de deployment
+$ vi nginx-deployment.yml
+
+4- Verification apres mise a jour de notre application nginx 
+$ sudo kubectl apply -f nginx-deployment.yml
+deployment.apps/nginx-deployment configured
+
+5- Verifier des replicasets
+$ sudo kubectl get replicaset -o wide
+NAME                          DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES         SELECTOR
+nginx-deployment-67dfd6c8f9   0         0         0       7m58s   nginx        nginx:1.18.0   app=nginx,pod-template-hash=67dfd6c8f9
+nginx-deployment-75b69bd684   2         2         2       96s     nginx        nginx:latest   app=nginx,pod-template-hash=75b69bd684
+
+6- Supprimer un deployment 
+$ sudo kubectl get deploy
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   2/2     2            2           12m
+
+$ sudo kubectl delete -f nginx-deployment.yml
+deployment.apps "nginx-deployment" deleted
+
+$ sudo kubectl get pod
+No resources found in default namespace.

@@ -1,0 +1,26 @@
+Déployer une application - POD
+
+1- Creation de son pod
+$ vi pod.yml 
+
+$ kubectl apply -f pod.yml
+
+2- Verification de la Creation du pod
+$ kubectl get pods
+
+3- Details de notre pod
+$ kubectl describe pod simple-webapp-color
+
+4- Une fois puller
+$ sudo kubectl get pods
+NAME                  READY   STATUS    RESTARTS   AGE
+simple-webapp-color   1/1     Running   0          65s
+
+5- Exposer le port du pod vers le port 8080
+$ kubectl port-forward simple-webapp-color 8080:8080 --address 0.0.0.0
+
+6- Test 
+http://192.168.99.10:8080/
+
+7- Suppression du pod
+$ kubectl delete -f pod.yml
