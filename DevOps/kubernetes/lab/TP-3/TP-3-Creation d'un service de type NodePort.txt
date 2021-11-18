@@ -1,0 +1,19 @@
+TP-3-Creation d'un service de type NodePort
+
+# CREATION NAMESPACE
+1- Creation du pod-red
+$ vi pod-red.yml
+
+2- Creation du namespace
+$ vi namespace.yml
+
+$ sudo kubectl apply -f namespace.yml
+namespace/production created
+
+$ sudo kubectl get all -n kube-node-lease
+No resources found in kube-node-lease namespace.
+
+3- Definir le namespace d' un pod
+$ sudo kubectl apply -f pod-red.yml -n production
+pod/simple-webapp-color-red created
+
