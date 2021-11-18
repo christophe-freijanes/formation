@@ -1,6 +1,6 @@
 TP-3-Creation d'un service de type NodePort
 
-# CREATION NAMESPACE
+### CREATION NAMESPACE ################################################
 1- Creation du pod-red
 $ vi pod-red.yml
 
@@ -16,4 +16,65 @@ No resources found in kube-node-lease namespace.
 3- Definir le namespace d' un pod
 $ sudo kubectl apply -f pod-red.yml -n production
 pod/simple-webapp-color-red created
+
+4- Tests de notre namespace "production"
+$ sudo kubectl get po
+No resources found in default namespace.
+
+$ sudo kubectl get po -n production
+NAME                      READY   STATUS    RESTARTS   AGE
+simple-webapp-color-red   1/1     Running   0          2m12s
+
+### CREATION DU SECOND POD #############################################
+1- Creation a l' identique de pod-red en pod-blue
+$ vi pod-blue.yml
+
+2- Definition du namespace
+$ sudo kubectl apply -f pod-blue.yml -n production
+pod/simple-webapp-color-blue created
+
+3- Verification 
+$ sudo kubectl get po -n production
+NAME                       READY   STATUS    RESTARTS   AGE
+simple-webapp-color-blue   1/1     Running   0          47s
+simple-webapp-color-red    1/1     Running   0          8m24s
+
+### CREATION DU SERVICE #############################################
+1- Creation du manifest
+$ vi service-nodeport-web.yml
+
+2- Creation de la ressource
+$ sudo kubectl apply -f service-nodeport-web.yml -n production
+service/service-nodeport-web created
+
+3- Lister tous les services contenant des pods
+$ sudo kubectl -n production get svc
+NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service-nodeport-web   NodePort   10.103.205.210   <none>        8080:30008/TCP   98s
+
+4- Voir le detail de notre service
+$ sudo kubectl -n production describe svc service-nodeport-web
+Name:                     service-nodeport-web
+Namespace:                production
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=web
+Type:                     NodePort
+IP Families:              <none>
+IP:                       10.103.205.210
+IPs:                      10.103.205.210
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30008/TCP
+Endpoints:                10.44.0.1:8080,10.44.0.2:8080 ==> Cela correspond a nos 2 pods (red & blue)
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+### LOADBALANCING A L'AIDE DU SERVICE NODEPORT #############################################
+1- Test du load balancing
+http://192.168.99.10:30008/
+NB: Il doit changer couleur a chaque refresh du navigateur
+
+
 
