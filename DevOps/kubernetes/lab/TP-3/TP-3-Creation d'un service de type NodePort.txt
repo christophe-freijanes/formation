@@ -75,6 +75,3 @@ Events:                   <none>
 1- Test du load balancing
 http://192.168.99.10:30008/
 NB: Il doit changer couleur a chaque refresh du navigateur
-
-
-
