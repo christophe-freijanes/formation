@@ -1,0 +1,77 @@
+K8S-Gestion du réseau
+
+# Label et Selecteur
+- Le label est comme un tag qui permet d' identifier le POD
+- Le selecteur lui permet de determiner que ressource a ce service.
+Par exemple si on a 3 PODS 2X label:app:nginx et 1X label:app:apache et que l'on veut faire communiquer que les 2 PODS nginx alors :
+Selector:app:nginx
+
+- Pour identifier le label d' un POD
+$ kubectl get po --show-labels
+
+- Filtrer un POD par rapport au label
+$ kubectl get pods -l app=nginx --namespace=production
+$ kubectl get pods -l env!=production --namespace=production
+$ kubectl get pods -l 'env in (production)' --namespace=production
+$ kubectl get pods -l 'app notin (nginx)' --namespace=production
+
+# Les services 
+- Le service est l' objet federateur permettant d' exposer un ensemble de PODs via un seul point d'entree.
+- Il existe differents services :
+    
+* NodePort
+    Permettra d'exposer directement un ensemble de pods via un port vers l'exterieur.
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: myapp-service
+spec:
+    type: NodePort
+    ports:
+      - targetPort: 80 
+        Port: 80
+        nodePort: 30008
+    selector:
+        app: myapp 
+
+* ClusterIP
+    Permettra d'exposer une application a l'interieur du cluster uniquement.
+    Il ne sera atteignable cas l'interieur du cluster.
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: back-end
+spec:
+    type: ClusterIP
+    ports:
+      - targetPort: 80 
+        Port: 80
+    selector:
+        app: myapp
+
+* Service Loadbalancer (NodeBalancer)
+    Permettre de fournir un service d'attacher a un cloud provider nos pods.
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: NodeBalancer
+spec:
+    type: ClusterIP
+    ports:
+      - targetPort: 80 
+        Port: 80
+    selector:
+        app: myapp
+        type: front-end
+
+# NAMESPACE 
+DEV -> PPD -> PROD 
+Ensemble d' environnement ou l' on peut securiser et parametrer les droits d' access a ses differents environnements.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: Production
