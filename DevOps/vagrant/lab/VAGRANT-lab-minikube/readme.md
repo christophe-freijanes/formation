@@ -128,5 +128,5 @@ crontab -e
 ```
 
 Sources :
-https://www.techbeatly.com/2020/08/deploy-minikube-using-vagrant-and-ansible-on-virtualbox-infrastructure-as-code.html
-https://upcloud.com/community/tutorials/deploy-kubernetes-dashboard/
+* [Techbeatly](https://www.techbeatly.com/2020/08/deploy-minikube-using-vagrant-and-ansible-on-virtualbox-infrastructure-as-code.html)
+* [Upcloud](https://upcloud.com/community/tutorials/deploy-kubernetes-dashboard/)
