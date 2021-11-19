@@ -1,0 +1,15 @@
+K8S-Ingress
+
+# DEFINITION
+Pour rendre accessible depuis l'exterieur a notre api depuis une url coherente on va utiliser l'ingress.
+On va donc creer un Ingress controller qui est un service de pilotage de traffic venant de l'exterieur.
+Il a besoin de regle "Ingress rules" pour permettre l'acces au service par exemple : app:web
+
+Serveur web permettant de faire proxy
+-Nginx
+-Traefik
+
+Liens utiles :
+https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps

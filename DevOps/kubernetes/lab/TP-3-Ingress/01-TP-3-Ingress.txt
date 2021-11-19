@@ -1,0 +1,66 @@
+TP-3-Ingress
+
+Depuis une machine "Minikube"
+Source : https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+
+# 1ER DEPLOYMENT AVEC UNE REGLE INGRESS
+1- Activer le ingress controller de nginx
+$ minikube addons enable ingress
+
+2- Verification que NGINX Ingress controller est actif
+$ kubectl get pods -n ingress-nginx
+
+3- Creation d'une application de type Deployment
+$ kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
+
+4- Expose de type NodePort
+$ kubectl expose deployment web --type=NodePort --port=8080
+
+5- Start de notre service nommee "web"
+$ kubectl get service web
+NAME   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+web    NodePort   10.100.184.180   <none>        8080:30940/TCP   88s
+
+6- Test 
+$ minikube service web --url
+
+7- Creation d' un fichier contenant une regle permettant la connexion a notre api "web" en http://
+http://hello-world.info/
+
+$ vi example-ingress.yaml
+
+8- Creation de l'objet
+$ kubectl apply -f example-ingress.yaml
+
+9- Verification des rules (regles) ingress
+$ kubectl get ingress
+
+10- Pour faire connaitre notre api sur notre host
+$ vi /etc/hosts
+172.17.0.14 hello-world.info
+
+11- Test de notre application
+$ curl hello-world.info
+
+# 2EME DEPLOYMENT AVEC UNE REGLE INGRESS
+
+1- Creation d' un nouveau deployment
+$ kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0
+
+2- Permettre de federer notre application
+$ kubectl expose deployment web2 --port=8080 --type=NodePort
+
+3- Edition de notre fichier contenant les regles ingress
+$ vi example-ingress.yaml
+
+4- Creation de l'objet
+$ kubectl apply -f example-ingress.yaml
+
+5- Verification des rules (regles) ingress
+$ kubectl get ingress
+
+6- Test de notre application
+$ curl hello-world.info/v2
+
+7- Verification des services (svc)
+$ kubectl get svc
