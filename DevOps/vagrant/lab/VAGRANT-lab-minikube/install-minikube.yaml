@@ -97,6 +97,22 @@
       file:
         path: /home/vagrant/dashboard
         state: directory
+
+    - name: copy dashboard-admin.yaml
+      copy:
+        src: dashboard-admin.yaml
+        dest: /home/vagrant/dashboard
+        remote_src: yes
+        owner: vagrant
+        group: vagrant
+
+    - name: copy dashboard-read-only.yml
+      copy:
+        src: dashboard-read-only.yml
+        dest: /home/vagrant/dashboard
+        remote_src: yes
+        owner: vagrant
+        group: vagrant
     
     - name: create dir /home/vagrant/bin
       file:
@@ -192,14 +208,14 @@
 #      shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
 #      shell: sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
 
-#    - name: Install Kubernetes Ingress components
-#      shell: sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
-          
-    - name: Create dashboard admin user
-      shell: kubectl apply -f /vagrant/dashboard-admin.yaml
-  
-    - name: Create dashboard read-only user
-      shell: kubectl apply -f dashboard-read-only.yml
+#   - name: Create dashboard admin user
+#     shell: kubectl apply -f /home/vagrant/dashboard/dashboard-admin.yaml
+
+#   - name: Create dashboard read-only user
+#     shell: kubectl apply -f /home/vagrant/dashboard/dashboard-read-only.yml
+
+    - name: Install Kubernetes Ingress components
+      shell: "minikube addons enable ingress"
 
     - name: Create Directory for basic Start page
       file:
@@ -242,3 +258,10 @@
     - name: Use below token to authenticate in kubernetes dashboard"
       debug:
         msg: "{{ get_token_value.stdout }}"
+
+    - name: Ensure a job that runs at 2 and 5 exists. Creates an entry like "0 5,2 * * ls -alh > /dev/null"
+      cron:
+        name: "Start Web GUI"
+        special_time: reboot
+        job: "sudo kubectl proxy --address='0.0.0.0' –port=8001 --www=/home/vagrant/minikube --www-prefix=/minikube/"
+        state: present
