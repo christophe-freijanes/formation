@@ -93,6 +93,11 @@
         enabled: yes
         state: started
     
+    - name: create dir /home/vagrant/dashboard
+      file:
+        path: /home/vagrant/dashboard
+        state: directory
+    
     - name: create dir /home/vagrant/bin
       file:
         path: /home/vagrant/bin
@@ -191,7 +196,10 @@
 #      shell: sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
           
     - name: Create dashboard admin user
-      shell: kubectl apply -f /vagrant/dashboard-adminuser.yaml
+      shell: kubectl apply -f /vagrant/dashboard-admin.yaml
+  
+    - name: Create dashboard read-only user
+      shell: kubectl apply -f dashboard-read-only.yml
 
     - name: Create Directory for basic Start page
       file:
