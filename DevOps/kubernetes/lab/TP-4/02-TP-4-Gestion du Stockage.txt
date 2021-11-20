@@ -1,0 +1,138 @@
+TP-4-Gestion du Stockage
+Objectif : Creation d' un stockage de type cluster qui pourra etre consommer par des pods au travers d'un volume persistant
+
+:::: CREATION DU PV
+1- Creation du pv.yml
+$ vi pv.yml
+$ kubectl apply -f pv.yml
+persistentvolume/pv created
+
+2- Verification de la creation de notre persistent volume "pv"
+$ kubectl get pv pv
+NAME   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+pv     1Gi        RWO            Retain           Available           manual                  22s
+
+$ kubectl describe pv
+Name:            pv
+Labels:          type=local
+Annotations:     <none>
+Finalizers:      [kubernetes.io/pv-protection]
+StorageClass:    manual
+Status:          Available
+Claim:
+Reclaim Policy:  Retain
+Access Modes:    RWO
+VolumeMode:      Filesystem
+Capacity:        1Gi
+Node Affinity:   <none>
+Message:
+Source:
+    Type:          HostPath (bare host directory volume)
+    Path:          /data-pv
+    HostPathType:
+Events:            <none>
+
+:::: CREATION DU PVC
+1- Creation du pvc.yml
+$ vi pvc.yml
+NB: StorageClassName doit correspondre au meme que celui du pv (manual) ainsi que accessModes.
+
+$ kubectl apply -f pvc.yml
+persistentvolumeclaim/pvc created
+
+2- Verification de la creation de notre persistent volume claim "pvc"
+$ kubectl get pvc
+NAME   STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+pvc    Bound    pv       1Gi        RWO            manual         61s
+
+$ kubectl describe pv
+Name:            pv
+Labels:          type=local
+Annotations:     pv.kubernetes.io/bound-by-controller: yes
+Finalizers:      [kubernetes.io/pv-protection]
+StorageClass:    manual
+Status:          Bound
+Claim:           default/pvc <---- le pv est bien ratachee au pvc
+Reclaim Policy:  Retain
+Access Modes:    RWO
+VolumeMode:      Filesystem
+Capacity:        1Gi
+Node Affinity:   <none>
+Message:
+Source:
+    Type:          HostPath (bare host directory volume)
+    Path:          /data-pv
+    HostPathType:
+Events:            <none>
+
+:::: CREATION DU POD CONSOMMATEUR DU PV 
+1- Creation du pod mysql
+$ vi mysql-pv.yml
+$ kubectl apply -f mysql-pv.yml
+pod/mysql-pv created
+
+2- Verification de notre pod mysql
+$ kubectl get po
+NAME       READY   STATUS    RESTARTS   AGE
+mysql-pv   1/1     Running   0          13s
+
+$ kubectl describe po mysql-pv
+Name:         mysql-pv
+Namespace:    default
+Priority:     0
+Node:         centos-minikube/10.0.2.15
+Start Time:   Sat, 20 Nov 2021 19:39:39 +0000
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.6
+IPs:
+  IP:  172.17.0.6
+Containers:
+  mysql:
+    Container ID:   docker://0e6527ea5d1456d28eca56a43d87da8e073ff7ab1b69fe046afd4b5464520684
+    Image:          mysql
+    Image ID:       docker-pullable://mysql@sha256:aeecae58035f3868bf4f00e5fc623630d8b438db9d05f4d8c6538deb14d4c31b
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 20 Nov 2021 19:39:42 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      MYSQL_ROOT_PASSWORD:  password
+      MYSQL_DATABASE:       eazytraining
+      MYSQL_USER:           eazy
+      MYSQL_PASSWORD:       eazy
+    Mounts:
+      /var/lib/mysql from mysql-data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-p5n5z (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  mysql-data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  pvc
+    ReadOnly:   false
+  kube-api-access-p5n5z:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  88s   default-scheduler  Successfully assigned default/mysql-pv to centos-minikube
+  Normal  Pulling    87s   kubelet            Pulling image "mysql"
+  Normal  Pulled     85s   kubelet            Successfully pulled image "mysql" in 1.766808478s
+  Normal  Created    85s   kubelet            Created container mysql
+  Normal  Started    85s   kubelet            Started container mysql
