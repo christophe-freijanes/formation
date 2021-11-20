@@ -105,6 +105,7 @@
         remote_src: yes
         owner: vagrant
         group: vagrant
+        mode: 0755
 
     - name: copy dashboard-read-only.yml
       copy:
@@ -113,6 +114,7 @@
         remote_src: yes
         owner: vagrant
         group: vagrant
+        mode: 0755
     
     - name: create dir /home/vagrant/bin
       file:
@@ -204,16 +206,6 @@
         owner: vagrant
         group: vagrant
 
-#    - name: Install and enable kubernetes dashboard components
-#      shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
-#      shell: sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
-
-#   - name: Create dashboard admin user
-#     shell: kubectl apply -f /home/vagrant/dashboard/dashboard-admin.yaml
-
-#   - name: Create dashboard read-only user
-#     shell: kubectl apply -f /home/vagrant/dashboard/dashboard-read-only.yml
-
     - name: Install Kubernetes Ingress components
       shell: "minikube addons enable ingress"
 
@@ -240,7 +232,7 @@
         msg: "{{ start_kube_proxy }}"
 
     - name: Get Secret to Authenticate to kubernetes dashboard
-      shell: "kubectl -n kube-system get secret | grep default-token | awk '{print $1}'"
+      shell: "kubectl -n kubernetes-dashboard get secret | grep default-token | awk '{print $1}'"
       register: get_token
 
     - name: Extract secret name
@@ -248,7 +240,7 @@
         KUBE_TOKEN: "{{ get_token.stdout }}"
 
     - name: Get Token to Authenticate to kubernetes dashboard
-      shell: "kubectl -n kube-system describe secret {{ KUBE_TOKEN }} | grep token: | awk '{print $2}'"
+      shell: "kubectl -n kubernetes-dashboard describe secret {{ KUBE_TOKEN }} | grep token: | awk '{print $2}'"
       register: get_token_value
     
     - name: Access Below URL from your Host machine browser
@@ -263,5 +255,5 @@
       cron:
         name: "Start Web GUI"
         special_time: reboot
-        job: "sudo kubectl proxy --address='0.0.0.0' –port=8001 --www=/home/vagrant/minikube --www-prefix=/minikube/"
+        job: kubectl proxy --address='0.0.0.0' –port=8001 --www=/home/vagrant/minikube --www-prefix=/minikube/
         state: present

@@ -45,5 +45,9 @@ Vagrant.configure("2") do |config|
                 node_ip: IP,
             }
         end
+        master.vm.provision :shell do |shell|
+            shell.path = "install_dashboard.sh"
+            shell.args = ["master", IP]
+        end
     end
 end
