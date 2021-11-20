@@ -136,3 +136,37 @@ Events:
   Normal  Pulled     85s   kubelet            Successfully pulled image "mysql" in 1.766808478s
   Normal  Created    85s   kubelet            Created container mysql
   Normal  Started    85s   kubelet            Started container mysql
+
+3- Verification des donnees du data-pv
+$ ls -alh /data-pv
+total 194M
+drwxr-xr-x   7 polkitd root  4.0K Nov 20 19:39 .
+dr-xr-xr-x. 20 root    root  4.0K Nov 20 19:39 ..
+-rw-r-----   1 polkitd input   56 Nov 20 19:39 auto.cnf
+-rw-r-----   1 polkitd input 3.0M Nov 20 19:39 binlog.000001
+-rw-r-----   1 polkitd input  156 Nov 20 19:39 binlog.000002
+-rw-r-----   1 polkitd input   32 Nov 20 19:39 binlog.index
+-rw-------   1 polkitd input 1.7K Nov 20 19:39 ca-key.pem
+-rw-r--r--   1 polkitd input 1.1K Nov 20 19:39 ca.pem
+-rw-r--r--   1 polkitd input 1.1K Nov 20 19:39 client-cert.pem
+-rw-------   1 polkitd input 1.7K Nov 20 19:39 client-key.pem
+drwxr-x---   2 polkitd input    6 Nov 20 19:39 eazytraining
+-rw-r-----   1 polkitd input 192K Nov 20 19:41 #ib_16384_0.dblwr
+-rw-r-----   1 polkitd input 8.2M Nov 20 19:39 #ib_16384_1.dblwr
+-rw-r-----   1 polkitd input 5.6K Nov 20 19:39 ib_buffer_pool
+-rw-r-----   1 polkitd input  12M Nov 20 19:39 ibdata1
+-rw-r-----   1 polkitd input  48M Nov 20 19:41 ib_logfile0
+-rw-r-----   1 polkitd input  48M Nov 20 19:39 ib_logfile1
+-rw-r-----   1 polkitd input  12M Nov 20 19:39 ibtmp1
+drwxr-x---   2 polkitd input  187 Nov 20 19:39 #innodb_temp
+drwxr-x---   2 polkitd input  143 Nov 20 19:39 mysql
+-rw-r-----   1 polkitd input  30M Nov 20 19:39 mysql.ibd
+drwxr-x---   2 polkitd input 8.0K Nov 20 19:39 performance_schema
+-rw-------   1 polkitd input 1.7K Nov 20 19:39 private_key.pem
+-rw-r--r--   1 polkitd input  452 Nov 20 19:39 public_key.pem
+-rw-r--r--   1 polkitd input 1.1K Nov 20 19:39 server-cert.pem
+-rw-------   1 polkitd input 1.7K Nov 20 19:39 server-key.pem
+drwxr-x---   2 polkitd input   28 Nov 20 19:39 sys
+-rw-r-----   1 polkitd input  16M Nov 20 19:41 undo_001
+-rw-r-----   1 polkitd input  16M Nov 20 19:41 undo_002
+
