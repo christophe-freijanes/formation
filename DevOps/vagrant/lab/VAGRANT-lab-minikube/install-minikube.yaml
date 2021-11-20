@@ -259,7 +259,7 @@
       debug:
         msg: "{{ get_token_value.stdout }}"
 
-    - name: Ensure a job that runs at 2 and 5 exists. Creates an entry like "0 5,2 * * ls -alh > /dev/null"
+    - name: Ensure a job "Start Web GUI" has been created
       cron:
         name: "Start Web GUI"
         special_time: reboot
