@@ -1,0 +1,42 @@
+TP-4-Gestion du Stockage
+Objectif : Creation d' un pod mysql qui doit consommer du volume local
+
+:::: Utilisation de volume pour les données de notre pod mysql
+1- Creation de notre pod
+$ vi mysql-volume.yml
+$ sudo mkdir /data-volume
+$ kubectl apply -f mysql-volume.yml
+pod/mysql-volume created
+
+2- Verification de notre pod
+$ kubectl get po
+NAME           READY   STATUS              RESTARTS   AGE
+mysql-volume   0/1     ContainerCreating   0          101s
+
+$ kubectl describe po mysql-volume
+...
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  21s   default-scheduler  Successfully assigned default/mysql-volume to centos-minikube
+  Normal  Pulling    21s   kubelet            Pulling image "mysql"
+
+$ watch -n 30 kubectl get po
+Every 30.0s: kubectl get po           Sat Nov 20 17:42:41 2021
+
+NAME           READY   STATUS    RESTARTS   AGE
+mysql-volume   1/1     Running   0          73s
+
+:::: Validation de la création du volume
+$ ls -alh /data-volume/
+auto.cnf         #ib_16384_0.dblwr  mysql.ibd
+binlog.000001    #ib_16384_1.dblwr  performance_schema
+binlog.000002    ib_buffer_pool     private_key.pem
+binlog.index     ibdata1            public_key.pem
+ca-key.pem       ib_logfile0        server-cert.pem
+ca.pem           ib_logfile1        server-key.pem
+client-cert.pem  ibtmp1             sys
+client-key.pem   #innodb_temp       undo_001
+eazytraining     mysql              undo_002
+
+NB: Des fichiers doivent etre lisible.

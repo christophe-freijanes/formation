@@ -1,0 +1,47 @@
+K8S-Gestion du stockage
+- Nous allons permettre aux conteneurs d' un pod de rendre persistant les donnees.
+- Il possible de monter un volume sur plusieurs gestionnaire de volume : Ceph, NFS, Amazon, Azure, Google cloud, GlusterFS...
+- Kubernetes propose une solution pour permettre a tous les nodes de piocher les donnees dans un meme volume persistant.
+
+- Ordre de consommation des donnees d'un volume persistant
+POD -> PVC -> PV
+
+- Ordre de creation d'un volume persistant
+PV -> PVC 
+
+:::: CREATION PV
+$ vi pv-definition.yaml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-vol1
+spec:
+  accessModes:
+      - ReadWriteOnce # ReadOnlyMany / ReadWriteMany
+  capacity:
+      storage: 1Gi
+  awsElasticBlockStore:
+    volumeID: <volume-id>
+    fsType: ext4
+
+$ kubectl create -f pv-definition.yaml
+$ kubectl get persistentvolume
+
+:::: CREATION PVC
+Pour permettre la creation du volume persistant
+$ vi pvc-definition.yaml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+      - ReadWriteOnce # ReadOnlyMany / ReadWriteMany
+  ressources:
+     requests:
+       storage: 500Mi
+
+$ kubectl create -f pvc-definition.yaml
+$ kubectl get persistentvolumeclaim
