@@ -2,11 +2,18 @@ K8S-HELM
 -Helm permet de variabiliser une application se constituant de POD, DEPLOYMENT, SVC, PVC en CHART (Package)
 -Helm est le gestionnaire de Chart
 
-:::: Workflow
+:::: Architecture Helm V2
                                                            |--------------> Local stockage
                                      Creation chart        |                   |         Install chart
 CHART FILES (Wordpress, Nginx...) <--------------------- HELM ------------> TILLER ------------------------> KUBERNETES
-        |------------------------------------------------->|                 (daemon)
+        |------------------------------------------------->|               (daemon)
+                         Package Chart files
+
+:::: Architecture Helm V3
+                                                           |--------------> Local stockage
+                                     Creation chart        |                   |         Install chart
+CHART FILES (Wordpress, Nginx...) <--------------------- HELM ---------------------------------------------> KUBERNETES
+        |------------------------------------------------->|                
                          Package Chart files
 
 
