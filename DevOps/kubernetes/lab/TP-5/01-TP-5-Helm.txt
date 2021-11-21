@@ -18,7 +18,7 @@ Pour editer par exemple sa surcharge des variables pour un chart Wordpress
 $ vi values.yml
 
 - Installation:
-$ helm install mywordpress stable/wordpress -f values.yml
+$ helm install mywordpress bitnami/wordpress -f https://raw.githubusercontent.com/christophe-freijanes/formation/formation/DevOps/kubernetes/lab/TP-5/values.yml
 
 - Verification de la creation de nos pods et service
 $ kubectl get po
@@ -32,11 +32,14 @@ kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP        
 mywordpress           NodePort    10.108.205.246   <none>        80:30008/TCP,443:23963/TCP   78s
 mywordpress-mariadb   ClusterIP   10.108.17.152    <none>        3306/TCP                     78s
 
-- Une fois installer les 2 pods doivent etre running
+- Une fois installer les 2 pods doivent etre "Running"
 $ kubectl get po
 NAME                           READY   STATUS    RESTARTS   AGE
 mywordpress-758d7fc7ff-tb9lp   1/1     Running   0          3m7s
 mywordpress-mariadb-0          1/1     Running   0          3m7s
+
+- Lister les charts helm
+$ helm ls
 
 - Test depuis son browser
 http://<IP_MINIKUBE>:30008/
