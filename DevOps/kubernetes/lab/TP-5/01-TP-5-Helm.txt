@@ -1,0 +1,41 @@
+TP-5-HELM
+:::: INSTALLATION
+Helm V3 guide command line
+$ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+
+$ helm repo add stable https://charts.helm.sh/stable
+"stable" has been added to your repositories
+
+$ helm repo update
+---------------------------------------------------------------------------------------------------
+:::: TP CHART WORDPRESS
+Pour editer par exemple sa surcharge des variables pour un chart Wordpress
+-On va ce rendre sur https://github.com/bitnami/charts/blob/master/bitnami/wordpress/values.yaml
+-Puis on va editer notre values.yaml 
+$ vi values.yml
+
+- Installation:
+$ helm install mywordpress stable/wordpress -f values.yml
+
+- Verification de la creation de nos pods et service
+$ kubectl get po
+NAME                           READY   STATUS    RESTARTS   AGE
+mywordpress-758d7fc7ff-tb9lp   0/1     Running   0          67s
+mywordpress-mariadb-0          0/1     Running   0          67s
+
+$ kubectl get svc
+NAME                  TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP                      24h
+mywordpress           NodePort    10.108.205.246   <none>        80:30008/TCP,443:23963/TCP   78s
+mywordpress-mariadb   ClusterIP   10.108.17.152    <none>        3306/TCP                     78s
+
+- Une fois installer les 2 pods doivent etre running
+$ kubectl get po
+NAME                           READY   STATUS    RESTARTS   AGE
+mywordpress-758d7fc7ff-tb9lp   1/1     Running   0          3m7s
+mywordpress-mariadb-0          1/1     Running   0          3m7s
+
+- Test depuis son browser
+http://<IP_MINIKUBE>:30008/

@@ -1,0 +1,16 @@
+K8S-HELM
+-Helm permet de variabiliser une application se constituant de POD, DEPLOYMENT, SVC, PVC en CHART (Package)
+-Helm est le gestionnaire de Chart
+
+:::: Workflow
+                                                           |--------------> Local stockage
+                                     Creation chart        |                   |         Install chart
+CHART FILES (Wordpress, Nginx...) <--------------------- HELM ------------> TILLER ------------------------> KUBERNETES
+        |------------------------------------------------->|                 (daemon)
+                         Package Chart files
+
+
+:::: CHART
+Le chart sera constituer de l' ensemble des variables
+Exemple
+https://github.com/bitnami/charts/tree/master/bitnami/
