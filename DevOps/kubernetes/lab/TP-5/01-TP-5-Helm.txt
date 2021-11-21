@@ -43,3 +43,6 @@ $ helm ls
 
 - Test depuis son browser
 http://<IP_MINIKUBE>:30008/
+
+Source : 
+https://devopscube.com/install-configure-helm-kubernetes/
