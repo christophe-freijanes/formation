@@ -45,3 +45,13 @@ spec:
 
 $ kubectl create -f pvc-definition.yaml
 $ kubectl get persistentvolumeclaim
+
+# Clean up
+kubectl delete pod task-pv-pod
+kubectl delete pvc myclaim
+kubectl delete pv pv-vol1
+
+Summarize 
+(1) Create a PersistentVolume
+(2) Create a PersistentVolumeClaim
+(3) Create a Pod
