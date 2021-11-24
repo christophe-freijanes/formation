@@ -1,7 +1,5 @@
 ##
-
-![alt text](https://github.com/christophe-freijanes/student-list/blob/master/images/dockerhub/flask.jpg)
-
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
 ##
 
 ## 1. OBJECTIF
