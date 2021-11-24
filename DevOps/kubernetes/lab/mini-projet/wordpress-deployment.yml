@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  type: NodePort
+  selector:
+    app: wordpress
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30008
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wp-pvc-01
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: frontend
+    spec:
+      containers:
+      - image: wordpress:4.8-apache
+        name: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: wp-mysql
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+        - containerPort: 8090
+          name: wordpress
+        volumeMounts:
+        - name: wp-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: wp-persistent-storage
+        persistentVolumeClaim:
+          claimName: wp-pvc-01
