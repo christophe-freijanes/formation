@@ -433,7 +433,7 @@ drwx------   2 polkitd input 4.0K Nov 24 22:40 wordpress
 ```sh
 http://<LOCALHOST>:30008/
 ```
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/index.png)
 
-![alt text](https://github.com/christophe-freijanes/student-list/blob/master/images/dockerhub/index.png)
-
+#
 Sources : [AVENIR](https:///repositories)
