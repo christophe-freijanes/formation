@@ -238,7 +238,7 @@ spec:
 
 ##
 
-## 4. CREATION DU SECRET - KUSTOMIZATION
+## 5. CREATION DU SECRET - KUSTOMIZATION
 
 ##
 
@@ -272,7 +272,7 @@ secretGenerator:
 
 ##
 
-## 5. CREATION DU MINI-PROJET
+## 6. CREATION DU MINI-PROJET
 
 ##
 
@@ -295,7 +295,7 @@ deployment.apps/wp-mysql created
 
 ##
 
-## 6. VALIDATION DU MINI-PROJET
+## 7. VALIDATION DU MINI-PROJET
 
 ##
 
@@ -432,6 +432,6 @@ drwx------   2 polkitd input 4.0K Nov 24 22:40 wordpress
 http://<LOCALHOST>:30008/
 ```
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/index.png)
-
 #
+
 Sources : [AVENIR](https:///repositories)
