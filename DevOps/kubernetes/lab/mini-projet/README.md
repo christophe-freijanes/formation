@@ -18,7 +18,7 @@
 
 ##
 
-## **2. CREATION DES VOLUMES PERSISTANTS - PV**
+## **2. CREATION DU VOLUME PERSISTANT - PV**
 
 ##
 
@@ -303,7 +303,7 @@ deployment.apps/wp-mysql created
 
 1. Verification de nos services (svc)
 
-### SERVICES
+### *SERVICES*
 
 ```sh
 kubectl describe svc
@@ -350,7 +350,7 @@ Events:            <none>
 
 2. Verification de nos volumes pv et pvc
 
-### PV
+### *PV*
 
 ```sh
 kubectl describe pv local-pv-1
@@ -377,7 +377,7 @@ Source:
 Events:            <none>
 ```
 
-### PVC
+### *PVC*
 
 ```sh
 kubectl get pvc
@@ -401,7 +401,7 @@ pvc-9c727544-6171-4509-8bb0-d611e00fa627   5Gi        RWO            Delete     
 
 3. Verification de la creation des pods
 
-### PODS
+### *PODS*
 
 ```sh
 kubectl get pods
@@ -413,9 +413,9 @@ wordpress-54b85f6578-mb5qk   1/1     Running   0          10m
 wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 ```
 
-### AUTRES VERIF
+### *AUTRES VERIFICATION*
 
-1. Verification de la persistance des donnees
+1. Verification de la persistance des donnees depuis le stockage local
 
 ```sh
 ls -alh /mini-data/
