@@ -409,7 +409,7 @@ wordpress-54b85f6578-mb5qk   1/1     Running   0          10m
 wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 ```
 
-## ***Verifications du Data***
+## ***Verifications du Stockage local***
 
 
 ```sh
