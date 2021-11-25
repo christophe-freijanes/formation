@@ -434,4 +434,9 @@ http://<LOCALHOST>:30008/
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/index.png)
 #
 
-Sources : [AVENIR](https:///repositories)
+Sources :
+- [Medium.com - how-to-deploy-wordpress-and-mysql-on-kubernetes](https://medium.com/@containerum/how-to-deploy-wordpress-and-mysql-on-kubernetes-bda9a3fdd2d5)
+- [Github - Example: WordPress and MySQL on Kubernetes](https://github.com/kubernetes/examples/tree/master/mysql-wordpress-pd)
+- [Devopsec - Fonctionnement-manipulation-volumes-kubernetes](https://devopssec.fr/article/fonctionnement-manipulation-volumes-kubernetes)
+- [Kubernetes - Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class)
+- [Sean Wingert - Video - Understanding Persistent Volume (PV) and Persistent Volume Claim (PVC)](https://www.youtube.com/watch?v=OulmwTYTauI)
