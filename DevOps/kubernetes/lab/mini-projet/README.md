@@ -1,5 +1,5 @@
 ##
-![center](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
+![center](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/02.png)
 ##
 
 # **1. OBJECTIF**
@@ -17,7 +17,7 @@
 * Validation du mini-projet K8S.
 
 ##
-![center](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/02.png)
+![center](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
 #
 # **2. CREATION DU VOLUME PERSISTANT - PV**
 
