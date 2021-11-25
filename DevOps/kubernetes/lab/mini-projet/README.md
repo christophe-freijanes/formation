@@ -301,9 +301,9 @@ deployment.apps/wp-mysql created
 
 ##
 
-1. Verification de nos services (svc)
-
 ## ***Check des Services***
+
+1. Verification de nos services (svc)
 
 ```sh
 kubectl describe svc
@@ -347,10 +347,9 @@ Events:            <none>
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```
+## ***PV - Persistant Volume***
 
 2. Verification de nos volumes pv et pvc
-
-## ***PV - Persistant Volume***
 
 ```sh
 kubectl describe pv local-pv-1
@@ -398,10 +397,9 @@ NAME                                       CAPACITY   ACCESS MODES   RECLAIM POL
 local-pv-1                                 20Gi       RWO            Retain           Bound    default/mysql-pvc-01   standard                10m
 pvc-9c727544-6171-4509-8bb0-d611e00fa627   5Gi        RWO            Delete           Bound    default/wp-pvc-01      standard                10m
 ```
+## ***PODS***
 
 3. Verification de la creation des pods
-
-## ***PODS***
 
 ```sh
 kubectl get pods
