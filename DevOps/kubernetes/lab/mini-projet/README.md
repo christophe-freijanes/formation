@@ -1,6 +1,6 @@
 ##
 <p align="center">
-<img src="https://prograide.com/pregunta/22304/comment-centrer-une-image-dans-le-fichier-readmemd-de-github(https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png" />
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
 </p>
 ##
 
