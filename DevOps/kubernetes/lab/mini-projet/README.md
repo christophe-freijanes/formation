@@ -433,6 +433,12 @@ http://<LOCALHOST>:30008/
 ```
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/index.png)
 #
+# BONUS
+Apercu dashboard Kubernetes
+#
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/apercu1.png)
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/apercu2.png)
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/apercu3.png)
 
 Sources :
 - [Medium.com - how-to-deploy-wordpress-and-mysql-on-kubernetes](https://medium.com/@containerum/how-to-deploy-wordpress-and-mysql-on-kubernetes-bda9a3fdd2d5)
