@@ -412,7 +412,7 @@ wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 
 ### AUTRES VERIF
 
-1. Verification de la persistante des donnees
+1. Verification de la persistance des donnees
 ```sh
 $ ls -alh /mini-data/
 total 173M
