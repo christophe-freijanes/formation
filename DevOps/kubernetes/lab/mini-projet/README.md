@@ -415,6 +415,8 @@ wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 1. Verification de la persistance des donnees
 ```sh
 $ ls -alh /mini-data/
+```
+```sh
 total 173M
 drwxr-xr-x   5 polkitd root   131 Nov 24 22:37 .
 dr-xr-xr-x. 22 root    root  4.0K Nov 24 22:37 ..
