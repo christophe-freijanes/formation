@@ -1,5 +1,6 @@
 ##
-<center>![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)</center>
+
+![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
 ##
 
 ## 1. OBJECTIF
@@ -21,11 +22,13 @@
 ## 2. CREATION DES VOLUMES PERSISTANTS - PV
 
 ##
+
 1. Identification de la StorageClass
 
 ```sh
 kubectl get storageclass
 ```
+
 ```sh
 NAME                 PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 standard (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  4d8h
@@ -374,6 +377,7 @@ Source:
     HostPathType:
 Events:            <none>
 ```
+
 ### PVC
 
 ```sh
@@ -413,9 +417,11 @@ wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 ### AUTRES VERIF
 
 1. Verification de la persistance des donnees
+
 ```sh
-$ ls -alh /mini-data/
+ls -alh /mini-data/
 ```
+
 ```sh
 total 173M
 drwxr-xr-x   5 polkitd root   131 Nov 24 22:37 .
@@ -428,23 +434,30 @@ drwx------   2 polkitd input 4.0K Nov 24 22:37 mysql
 drwx------   2 polkitd input 4.0K Nov 24 22:37 performance_schema
 drwx------   2 polkitd input 4.0K Nov 24 22:40 wordpress
 ```
+
 2. Test depuis votre navigateur
 
 ```sh
 http://<LOCALHOST>:30008/
 ```
+
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/index.png)
+
 #
+
 # BONUS
+
 Apercu dashboard Kubernetes
+
 #
+
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/apercu1.png)
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/apercu2.png)
 ![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/apercu3.png)
 
 Sources :
-- [Medium.com - how-to-deploy-wordpress-and-mysql-on-kubernetes](https://medium.com/@containerum/how-to-deploy-wordpress-and-mysql-on-kubernetes-bda9a3fdd2d5)
-- [Github - Example: WordPress and MySQL on Kubernetes](https://github.com/kubernetes/examples/tree/master/mysql-wordpress-pd)
-- [Devopsec - Fonctionnement-manipulation-volumes-kubernetes](https://devopssec.fr/article/fonctionnement-manipulation-volumes-kubernetes)
-- [Kubernetes - Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class)
-- [Sean Wingert - Video - Understanding Persistent Volume (PV) and Persistent Volume Claim (PVC)](https://www.youtube.com/watch?v=OulmwTYTauI)
+* [Medium.com - how-to-deploy-wordpress-and-mysql-on-kubernetes](https://medium.com/@containerum/how-to-deploy-wordpress-and-mysql-on-kubernetes-bda9a3fdd2d5)
+* [Github - Example: WordPress and MySQL on Kubernetes](https://github.com/kubernetes/examples/tree/master/mysql-wordpress-pd)
+* [Devopsec - Fonctionnement-manipulation-volumes-kubernetes](https://devopssec.fr/article/fonctionnement-manipulation-volumes-kubernetes)
+* [Kubernetes - Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class)
+* [Sean Wingert - Video - Understanding Persistent Volume (PV) and Persistent Volume Claim (PVC)](https://www.youtube.com/watch?v=OulmwTYTauI)
