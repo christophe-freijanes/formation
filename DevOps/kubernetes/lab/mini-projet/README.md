@@ -1,5 +1,5 @@
 ##
-![alt text](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
+![A cute kitten](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png=centerme)
 ##
 
 ## 1. OBJECTIF
