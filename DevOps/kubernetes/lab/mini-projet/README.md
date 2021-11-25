@@ -142,7 +142,7 @@ spec:
               name: mysql-pass
               key: password
         ports:
-        - containerPort: 8090
+        - containerPort: 80
           name: wordpress
         volumeMounts:
         - name: wp-persistent-storage
@@ -303,7 +303,6 @@ deployment.apps/wp-mysql created
 
 ## ***Check des Services***
 
-1. Verification de nos services (svc)
 
 ```sh
 kubectl describe svc
@@ -349,7 +348,6 @@ Events:            <none>
 ```
 ## ***PV - Persistant Volume***
 
-2. Verification de nos volumes pv et pvc
 
 ```sh
 kubectl describe pv local-pv-1
@@ -399,7 +397,7 @@ pvc-9c727544-6171-4509-8bb0-d611e00fa627   5Gi        RWO            Delete     
 ```
 ## ***PODS***
 
-3. Verification de la creation des pods
+
 
 ```sh
 kubectl get pods
@@ -413,7 +411,6 @@ wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 
 ## ***Verifications du Data***
 
-1. Verification de la persistance des donnees depuis le stockage local
 
 ```sh
 ls -alh /mini-data/
@@ -432,7 +429,7 @@ drwx------   2 polkitd input 4.0K Nov 24 22:37 performance_schema
 drwx------   2 polkitd input 4.0K Nov 24 22:40 wordpress
 ```
 
-2. Test depuis votre navigateur
+## ***Verifications du Site***
 
 ```sh
 http://<LOCALHOST>:30008/
