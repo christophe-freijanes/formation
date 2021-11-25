@@ -2,7 +2,7 @@
 ![center](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
 ##
 
-## 1. OBJECTIF
+## **1. OBJECTIF**
 
 ##
 
@@ -18,7 +18,7 @@
 
 ##
 
-## 2. CREATION DES VOLUMES PERSISTANTS - PV
+## **2. CREATION DES VOLUMES PERSISTANTS - PV**
 
 ##
 
@@ -68,7 +68,7 @@ persistentvolume/local-pv-1 created
 
 ##
 
-## 3. CREATION DU DEPLOIEMENT - WORDPRESS
+## **3. CREATION DU DEPLOIEMENT - WORDPRESS**
 
 ##
 
@@ -155,7 +155,7 @@ spec:
 
 ##
 
-## 4. CREATION DU DEPLOIEMENT - MYSQL
+## **4. CREATION DU DEPLOIEMENT - MYSQL**
 
 ##
 
@@ -240,7 +240,7 @@ spec:
 
 ##
 
-## 5. CREATION DU SECRET - KUSTOMIZATION
+## **5. CREATION DU SECRET - KUSTOMIZATION**
 
 ##
 
@@ -274,7 +274,7 @@ secretGenerator:
 
 ##
 
-## 6. CREATION DU MINI-PROJET
+## **6. CREATION DU MINI-PROJET**
 
 ##
 
@@ -297,7 +297,7 @@ deployment.apps/wp-mysql created
 
 ##
 
-## 7. VALIDATION DU MINI-PROJET
+## **7. VALIDATION DU MINI-PROJET**
 
 ##
 
