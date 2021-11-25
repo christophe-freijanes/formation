@@ -2,7 +2,7 @@
 ![center](https://github.com/christophe-freijanes/formation/blob/formation/DevOps/kubernetes/lab/mini-projet/images/01.png)
 ##
 
-## **1. OBJECTIF**
+# **1. OBJECTIF**
 
 ##
 
@@ -18,7 +18,7 @@
 
 ##
 
-## **2. CREATION DU VOLUME PERSISTANT - PV**
+# **2. CREATION DU VOLUME PERSISTANT - PV**
 
 ##
 
@@ -68,7 +68,7 @@ persistentvolume/local-pv-1 created
 
 ##
 
-## **3. CREATION DU DEPLOIEMENT - WORDPRESS**
+# **3. CREATION DU DEPLOIEMENT - WORDPRESS**
 
 ##
 
@@ -155,7 +155,7 @@ spec:
 
 ##
 
-## **4. CREATION DU DEPLOIEMENT - MYSQL**
+# **4. CREATION DU DEPLOIEMENT - MYSQL**
 
 ##
 
@@ -240,7 +240,7 @@ spec:
 
 ##
 
-## **5. CREATION DU SECRET - KUSTOMIZATION**
+# **5. CREATION DU SECRET - KUSTOMIZATION**
 
 ##
 
@@ -274,7 +274,7 @@ secretGenerator:
 
 ##
 
-## **6. CREATION DU MINI-PROJET**
+# **6. CREATION DU MINI-PROJET**
 
 ##
 
@@ -297,13 +297,13 @@ deployment.apps/wp-mysql created
 
 ##
 
-## **7. VALIDATION DU MINI-PROJET**
+# **7. VALIDATION DU MINI-PROJET**
 
 ##
 
 1. Verification de nos services (svc)
 
-### *SERVICES*
+## ***Check des Services***
 
 ```sh
 kubectl describe svc
@@ -350,7 +350,7 @@ Events:            <none>
 
 2. Verification de nos volumes pv et pvc
 
-### *PV*
+## ***PV - Persistant Volume***
 
 ```sh
 kubectl describe pv local-pv-1
@@ -377,7 +377,7 @@ Source:
 Events:            <none>
 ```
 
-### *PVC*
+## ***PVC - Persistant Volume Claim***
 
 ```sh
 kubectl get pvc
@@ -401,7 +401,7 @@ pvc-9c727544-6171-4509-8bb0-d611e00fa627   5Gi        RWO            Delete     
 
 3. Verification de la creation des pods
 
-### *PODS*
+## ***PODS***
 
 ```sh
 kubectl get pods
@@ -413,7 +413,7 @@ wordpress-54b85f6578-mb5qk   1/1     Running   0          10m
 wp-mysql-754fb6cff7-4bbkk    1/1     Running   0          10m
 ```
 
-### *AUTRES VERIFICATION*
+## ***Verifications du Data***
 
 1. Verification de la persistance des donnees depuis le stockage local
 
@@ -444,7 +444,7 @@ http://<LOCALHOST>:30008/
 
 #
 
-# BONUS
+## ***BONUS***
 
 Apercu dashboard Kubernetes
 
