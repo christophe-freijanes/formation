@@ -1,0 +1,16 @@
+TP-1-ANSIBLE-INSTALLATION
+
+- Mise à jour du système
+  sudo yum update -y
+
+- installer les release epel
+  sudo yum install epel-release -y
+
+- Installer Ansible
+  sudo yum install ansible -y 
+
+- Vérifier la Version de ansible
+  ansible --version
+
+- Avec python3, installation de pip3
+  sudo yum install python3
