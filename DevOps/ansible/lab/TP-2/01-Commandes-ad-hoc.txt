@@ -15,10 +15,13 @@ $ vi hosts
 192.168.99.12 ansible_user=admin ansible_password=admin123 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 - Ping avec une commande ad-hoc
+$ ansible -i hosts all -m ping ou $ ansible -i hosts clients -m ping
 
 - Depuis le client ansible creation d'un fichier /home/admin/toto.txt contenant "Bonjour Eazytraining" 
+$ vi toto.txt
 
-- Rajout d'un client et modifier le fichier inventaire afin de rajouter le nouveau client
+- Deploiement du fichier toto.txt sur les deux clients
+$ ansible -i hosts clients -m copy -a "dest=~/toto.txt content='Hello EazyTraining'"
 
-- Ping et creation du fichier sur les deux clients
-
+Le module setup permet de connaitre sa machine distante
+$ ansible -i hosts clients -m setup

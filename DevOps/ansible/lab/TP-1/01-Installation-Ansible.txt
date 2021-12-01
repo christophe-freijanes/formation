@@ -13,4 +13,5 @@ TP-1-ANSIBLE-INSTALLATION
   ansible --version
 
 - Avec python3, installation de pip3
-  sudo yum install python3
+  curl "https://bootstrap.pypa.io/pip/2.7/get-pip.py" -o "get-pip.py"
+  sudo python get-pip.py
