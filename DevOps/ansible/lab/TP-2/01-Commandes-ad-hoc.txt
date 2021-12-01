@@ -1,0 +1,19 @@
+TP-2-ANSIBLE-AD-HOC
+
+Exemple de commandes ad-hoc 
+
+         Host Group  Module  Argument du Module
+              |        |            |
+ansible webserver   -m yum  -a "name=httpd state=latest"
+
+- Creation de 2 machines clients
+- Creation d'un inventaire
+
+- Ping avec une commande ad-hoc 
+
+- Depuis le client ansible creation d'un fichier /home/admin/toto.txt contenant "Bonjour Eazytraining" 
+
+- Rajout d'un client et modifier le fichier inventaire afin de rajouter le nouveau client
+
+- Ping et creation du fichier sur les deux clients
+
