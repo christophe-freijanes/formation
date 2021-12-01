@@ -7,9 +7,14 @@ Exemple de commandes ad-hoc
 ansible webserver   -m yum  -a "name=httpd state=latest"
 
 - Creation de 2 machines clients
-- Creation d'un inventaire
+- Creation d'un inventaire avec l'utilisateur admin
+$ sudo su admin -
+$ vi hosts
+[clients]
+192.168.99.11 ansible_user=admin ansible_password=admin123 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+192.168.99.12 ansible_user=admin ansible_password=admin123 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
-- Ping avec une commande ad-hoc 
+- Ping avec une commande ad-hoc
 
 - Depuis le client ansible creation d'un fichier /home/admin/toto.txt contenant "Bonjour Eazytraining" 
 
