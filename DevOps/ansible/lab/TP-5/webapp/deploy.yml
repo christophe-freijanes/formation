@@ -2,8 +2,8 @@
 - name: "Apache installation using Docker"
   hosts: prod
   become: true
-  vars:
-    ansible_sudo_pass: admin123
+#  vars:
+#    ansible_sudo_pass: admin123
   pre_tasks:
     - name: install Epel repo
       package:
