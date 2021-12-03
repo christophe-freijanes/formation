@@ -14,6 +14,9 @@ Vagrant.configure("2") do |config|
     ansible.vm.provision :shell do |shell|
       shell.path = "install_ansible.sh"
       shell.args = ["master", "192.168.99.10"]
+    ansible.vm.provision :shell do |shell|
+      shell.path = "install_docker.sh"
+      shell.args = ["master", "192.168.99.10"]
     end
   end
   clients=2
@@ -31,6 +34,9 @@ Vagrant.configure("2") do |config|
       end
       client.vm.provision :shell do |shell|
         shell.path = "install_ansible.sh"
+        shell.args = ["node", "192.168.99.10"]
+      client.vm.provision :shell do |shell|
+        shell.path = "install_docker.sh"
         shell.args = ["node", "192.168.99.10"]
       end
     end
