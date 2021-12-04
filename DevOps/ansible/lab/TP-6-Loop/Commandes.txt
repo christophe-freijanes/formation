@@ -1,0 +1,9 @@
+Creation du templates
+$ mkdir templates/
+$ vi templates/index.html.j2
+
+Checker l'indentation du playbook
+$ ansible-lint deploy.yml
+
+Lancement du playbook
+$ ansible-playbook -i hosts.yml -vvv deploy.yml
