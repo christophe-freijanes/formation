@@ -2,16 +2,19 @@
 - name: "Installation d'un conteneur apache"
   hosts: prod
   become: true
+  vars_files:
+    - files/secrets/credentials.yml
   pre_tasks:
     - name: install some package
-      package:
+      package: 
         name:  '{{ item }}'
         state: present
       when: ansible_distribution == "CentOS"
-      loop:
+      loop: 
         - epel-release
         - wget
         - git
+      
     - name: download pip script
       get_url:
         url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
@@ -21,6 +24,7 @@
     - name: Install docker python
       pip:
         name: docker-py
+      
   tasks:
     - name: copy website file template
       template:
@@ -32,5 +36,5 @@
         image: httpd
         ports:
           - "80:80"
-        volumes:
+        volumes: 
           - /home/admin/index.html:/usr/local/apache2/htdocs/index.html

@@ -1,9 +1,17 @@
-Creation du templates
-$ mkdir templates/
-$ vi templates/index.html.j2
+- Creation des dossiers files/secrets/ puis creation du credential
+$ vi files/secrets/credentials.yml
 
-Checker l'indentation du playbook
-$ ansible-lint deploy.yml
+- Encrypter un fichier (On utilisera comme password de chiffrement qwerty2021)
+$ ansible-vault encrypt files/secrets/credentials.yml
 
-Lancement du playbook
-$ ansible-playbook -i hosts.yml -vvv deploy.yml
+- Decrypter un fichier
+$ ansible-vault decrypt files/secrets/credentials.yml
+
+- Lancer ansible en lui passant le mots de passe de décryptage
+$ ansible-playbook -i hosts.yml --ask-vault-pass deploy.yml
+
+- créer un couple ssh de clés publique/privées
+$ ssh-keygen -t rsa
+
+- copier la clés publique sur le serveur distant
+$ ssh-copy-id admin@192.168.99.10
