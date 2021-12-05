@@ -13,5 +13,10 @@ $ ansible-playbook -i hosts.yml --ask-vault-pass deploy.yml
 - créer un couple ssh de clés publique/privées
 $ ssh-keygen -t rsa
 
-- copier la clés publique sur le serveur distant
-$ ssh-copy-id admin@192.168.99.10
+- copier la clés publique du master vers les serveurs distants
+$ ssh-copy-id admin@192.168.99.11
+$ ssh-copy-id admin@192.168.99.12
+
+- Verification de l'existance de la cle depuis un client distant
+$ cat ~/.ssh/authorized_keys
+
