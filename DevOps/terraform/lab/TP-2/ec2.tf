@@ -3,7 +3,6 @@ provider "aws" {
   access_key = "AKIA...............VTA"
   secret_key = "sAqLGGoICW..................../R/2cT"
 }
-
 resource "aws_instance" "testec2" {
   ami           = "ami-0ed9277fb7eb570c9"
   instance_type = "t2.micro"
