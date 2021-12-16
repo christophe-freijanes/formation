@@ -21,22 +21,26 @@ resource "aws_instance" "myec2" {
 }
 
 resource "aws_security_group" "allow_http_https" {
-  name        = "freijac-security-grp"
+  name        = "allow http/https"
   description = "Allow http and https traffic"
-  ingress {
-    description      = "http from VPC"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-  ingress {
-    description      = "https from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
+}
+resource "aws_security_group_rule" "permit_80" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  ipv6_cidr_blocks  = ["::/0"]
+  security_group_id = aws_security_group.allow_http_https.id
+}
+resource "aws_security_group_rule" "permit_443" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  ipv6_cidr_blocks  = ["::/0"]
+  security_group_id = aws_security_group.allow_http_https.id
 }
 resource "aws_eip" "lb" {
   instance = aws_instance.myec2.id
