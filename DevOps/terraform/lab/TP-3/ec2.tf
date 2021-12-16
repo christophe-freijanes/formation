@@ -9,21 +9,20 @@ data "aws_ami" "app_ami" {
 
   filter {
     name = "name"
-    values = "amzn2-ami-hvm*"
+    values = ["amzn2-ami-hvm*"]
   } 
 }
-resource "aws_instance" "ec2" {
+resource "aws_instance" "myec2" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instancetype
   key_name      = "devops-freijac"
   tags = var.aws_common_tag
-  security_group = ["$(aws_security_group.allow_http_https.id)"]
+  security_groups = [aws_security_group.allow_http_https.id]
 }
 
 resource "aws_security_group" "allow_http_https" {
   name        = "freijac-security-grp"
   description = "Allow http and https traffic"
-
   ingress {
     description      = "http from VPC"
     from_port        = 80
@@ -31,20 +30,15 @@ resource "aws_security_group" "allow_http_https" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-    ingress {
-    description      = "TLS from VPC"
+  ingress {
+    description      = "https from VPC"
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
 }
-
 resource "aws_eip" "lb" {
-  instance = aws_instance.ec2.id
+  instance = aws_instance.myec2.id
   vpc      = true
 }
-
-root_block_device {
-  delete_on_termination = true
-  }
