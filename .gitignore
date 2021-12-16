@@ -4,3 +4,12 @@
 .config
 *.env_prod
 *.ssh
+**/.terraform/*
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.tfstate
+*.tfstate.*
+.terraformrc
+terraform.rc
