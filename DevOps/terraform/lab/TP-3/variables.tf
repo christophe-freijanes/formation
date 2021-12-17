@@ -4,7 +4,7 @@ variable "instancetype" {
   default     = "t2.nano"
 }
 variable "aws_common_tag" {
-  type        = map(any)
+  type        = map
   description = "Set aws tag"
   default = {
     Name = "ec2-freijac"
