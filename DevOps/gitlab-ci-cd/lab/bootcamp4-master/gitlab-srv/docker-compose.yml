@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  gitlab-ce:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://<IP-PUBLIC-SRV>'
+        GITLAB_ROOT_PASSWORD='root'
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '80:80'
+      - '443:443'
+      - '6622:22'
+    volumes:
+      - '/srv/gitlab/config:/etc/gitlab'
+      - '/srv/gitlab/logs:/var/log/gitlab'
+      - '/srv/gitlab/data:/var/opt/gitlab'

@@ -1,0 +1,28 @@
+Creation de notre CI
+GITLAB -> RUNNER
+Le moyen de communication entre Gitlab est son agent nommee Runner communique avec le protocole http. Chaque Runner doit s'executer avec une url et un token.
+
+GITLAB <- REGISTER RUNNER <- RUNNER
+                 ^
+                 |
+               Token
+
+1-BUILD -> Jobs
+Creation d'un fichier yaml (.gitlab-ci.yaml)
+job1:
+  stage: build
+  script:
+    - execute-script-for-job1
+
+2-BUILD -> Stages
+Les stages determine les ordres d'execution du  build
+
+stages:
+  - build <------------| 
+  - test               |
+  - deploy             |
+                       |
+job1:                  |
+  stage: build <-------|
+  script:
+    - execute-script-for-job1

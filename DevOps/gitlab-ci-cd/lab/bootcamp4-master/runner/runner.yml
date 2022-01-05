@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  register-runner:
+    restart: 'no'
+    image: gitlab/gitlab-runner:latest
+    volumes:
+    - ./gitlab-runner-config:/etc/gitlab-runner:Z
+    command:
+    - register
+    - --non-interactive
+    - --locked=false
+    - --docker-privileged
+    - --name=Runner Bootcamp4
+    - --executor=docker
+    - --docker-image=docker:20.10.5
+    - --docker-volumes=/var/run/docker.sock:/var/run/docker.sock
+    environment:
+    - CI_SERVER_URL=${gitlab_url}
+    - REGISTRATION_TOKEN=${gitlab_token}
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    restart: always
+    container_name: gitlab-runner
+    depends_on:
+      - register-runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./gitlab-runner-config:/etc/gitlab-runner:Z
+    environment:
+      - CONFIG_FILE=/etc/gitlab-runner/config.toml

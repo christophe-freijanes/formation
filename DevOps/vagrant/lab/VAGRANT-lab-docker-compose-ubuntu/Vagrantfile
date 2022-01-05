@@ -3,19 +3,69 @@
 
 RAM = 2048
 CPU = 2
+IP = "10.0.0.210"
 
-Vagrant.configure("2") do |config|
-  config.vm.define "dockercompose" do |dockercompose|
-    dockercompose.vm.box = "v0rtex/xenial64"
-    dockercompose.vm.network "private_network", type: "dhcp"
-	  dockercompose.vm.hostname = "dockercompose"
-    dockercompose.vm.provider "virtualbox" do |v|
-  	  v.name = "dockercompose"
-  	  v.memory = RAM
-  	  v.cpus = CPU
-  	end
-  	dockercompose.vm.provision :shell do |shell|
-  	  shell.path = "install_docker.sh"
-    end 
+# Check Vagrant plugins
+# If you want to ensure that vagrant-winnfsd is installed and enabled every time you run your vagrant box, just add the following to your vagrant file, just before the code block
+if Vagrant::Util::Platform.windows? then
+  unless Vagrant.has_plugin?("vagrant-winnfsd")
+    raise  Vagrant::Errors::VagrantError.new, "vagrant-winnfsd plugin is missing. Please install it using 'vagrant plugin install vagrant-winnfsd' and rerun 'vagrant up'"
+  end
+end
+# If you want to ensure that vagrant-vbguest is installed and enabled every time you run your vagrant box, just add the following to your vagrant file, just before the code block
+if Vagrant::Util::Platform.windows? then
+  unless Vagrant.has_plugin?("vagrant-vbguest")
+    raise  Vagrant::Errors::VagrantError.new, "vagrant-vbguest plugin is missing. Please install it using 'vagrant plugin install vagrant-vbguest' and rerun 'vagrant up'"
+  end
+end
+# If you want to ensure that vagrant-share is installed and enabled every time you run your vagrant box, just add the following to your vagrant file, just before the code block
+if Vagrant::Util::Platform.windows? then
+  unless Vagrant.has_plugin?("vagrant-share")
+    raise  Vagrant::Errors::VagrantError.new, "vagrant-share plugin is missing. Please install it using 'vagrant plugin install vagrant-share' and rerun 'vagrant up'"
+  end
+end
+$install_git = <<SCRIPT
+sudo apt-get install -y
+echo Install and configure git...
+sudo apt-get install git -y
+git config --global user.name "christophe-freijanes"
+git config --global user.email "cfreijanes@gmx.fr"
+git config --global core.editor vi
+sleep 5
+SCRIPT
+
+$install_docker_script = <<SCRIPT
+echo Installing Docker...
+curl -sSL https://get.docker.com/ | sh
+sudo usermod -aG docker $USER
+sudo systemctl enable docker
+sudo systemctl start docker
+echo Docker has been installed...
+echo Installing Docker-compose...
+sudo mkdir -p /opt/bin/
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+echo Docker-Compose has been installed...
+sleep 5
+echo "The Virtual machine Ubuntu Xenial 64 has been installed"
+echo "For this Stack, you will use $(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p') IP Address"
+SCRIPT
+
+# The vagrant config for virtual machine named dockercompose
+Vagrant.configure('2') do |config|
+  config.vm.define :dockercompose, primary: true  do |dockercompose|
+    dockercompose.vm.box = "ubuntu/trusty64"
+    dockercompose.vbguest.auto_update = false
+    dockercompose.vm.network :private_network, ip: IP
+    dockercompose.vm.hostname = "dockercompose"
+    dockercompose.vm.synced_folder ".", "/vagrant"
+    dockercompose.vm.provision "shell", inline: $install_git, privileged: true
+    dockercompose.vm.provision "shell", inline: $install_docker_script, privileged: true
+    dockercompose.vm.provider "virtualbox" do |vb|
+      vb.name = "dockercompose"
+      vb.memory = RAM
+  	  vb.cpus = CPU
+    end
   end
 end
