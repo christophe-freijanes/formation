@@ -34,6 +34,11 @@ job1:                  |
 4-PIPELINE
 - On peut executer nos pipelines a l'instanté ou en la planifiant une fois ou de maniere recurrente.
 
-5-ARTIFACTS
+5-ARTIFACTS (mise en cache)
 - Gitlab envoi le job de build vers le runner une fois par exemple l'image construite, le runner renvoi l'image vers le serveur Gitlab.
+
+GITLAB SRV --> JOB --> RUNNER
+     |                    |
+     |<-------------------|
+
 - L'artifacts sera stocker dans un registry.
