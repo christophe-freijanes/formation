@@ -26,3 +26,14 @@ job1:                  |
   stage: build <-------|
   script:
     - execute-script-for-job1
+
+3-RUNNER
+- Afin d'optimiser le versionnage des versions par exemple de JAVA, il faut privilegier l'agilité de la gestion de la version de ses images avec Docker.
+- On pourras gérer la release de nos artefacts en poussant nos images vers le registry Gitlab, le docker hub ou encore le private registry de l'entreprise.
+
+4-PIPELINE
+- On peut executer nos pipelines a l'instanté ou en la planifiant une fois ou de maniere recurrente.
+
+5-ARTIFACTS
+- Gitlab envoi le job de build vers le runner une fois par exemple l'image construite, le runner renvoi l'image vers le serveur Gitlab.
+- L'artifacts sera stocker dans un registry.
