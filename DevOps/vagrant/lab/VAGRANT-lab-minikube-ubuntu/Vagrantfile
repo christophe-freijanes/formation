@@ -1,0 +1,53 @@
+IMAGE_NAME = "geerlingguy/centos7"
+NODE_NAME = "centos-minikube"
+IP = "172.28.128.13"
+
+Vagrant.configure("2") do |config|
+    #config.ssh.insert_key = false
+    config.vbguest.auto_update = false
+    config.vbguest.no_remote = true
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 4096
+        v.cpus = 2
+    end
+    
+    config.ssh.insert_key = true
+    config.ssh.forward_agent = true
+
+    config.vm.network "forwarded_port",
+    guest: 8001,
+    host:  8001,
+    auto_correct: true
+
+    config.vm.network "forwarded_port",
+    guest: 30000,
+    host:  30000,
+    auto_correct: true
+
+    config.vm.network "forwarded_port",
+    guest: 8443,
+    host:  8443,
+    auto_correct: true
+
+    config.vm.define NODE_NAME do |master|     
+
+        master.vm.box = IMAGE_NAME
+        master.vm.network "private_network", ip: IP
+        master.vm.hostname = NODE_NAME
+        master.vm.provision :shell do |shell|
+            shell.path = "install_ansible.sh"
+            shell.args = ["master", IP]
+        end  
+        master.vm.provision "ansible_local" do |ansible|
+            ansible.compatibility_mode = "2.0"
+            ansible.playbook = "install-minikube.yaml"
+            ansible.extra_vars = {
+                node_ip: IP,
+            }
+        end
+        master.vm.provision :shell do |shell|
+            shell.path = "install_dashboard.sh"
+            shell.args = ["master", IP]
+        end
+    end
+end
