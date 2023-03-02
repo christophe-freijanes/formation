@@ -1,1 +1,0 @@
-The PUBLIC IP: 52.1.222.90 ; ID: i-0fdc9b0353e7ca129 ; AZ: us-east-1b ; 
